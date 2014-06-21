@@ -2,6 +2,7 @@ SharpKit
 ========
 
 C# to JavaScript Compiler
+Website: http://sharpkit.net
 
 ### License
 SharpKit is licensed under GPL, for commercial licenses please refer to http://sharpkit.net.

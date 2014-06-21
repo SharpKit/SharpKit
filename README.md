@@ -16,7 +16,7 @@ Compiler/
 Installer/
     Packager/
     Installer/
-libs/
+lib/
 *** From here TBD
 Defs/
   Defs.sln

@@ -150,13 +150,7 @@
       <SubType>Designer</SubType>
     </None>
     <Compile Include="JavaScript\Ast\JsModel.Clone.cs" />
-    <None Include="RunAsConsoleService.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="SharpKit.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="prms.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

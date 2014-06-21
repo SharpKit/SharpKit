@@ -53,7 +53,6 @@
     <Compile Include="Skc.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SharpKit.Build.debug.Tasks" />
     <None Include="SharpKit.CSharp.targets" />
     <None Include="SharpKit.CSharp.Tasks" />
   </ItemGroup>

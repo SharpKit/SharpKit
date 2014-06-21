@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6307BDF9-19E4-4925-99DC-29773D8F0AF1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharpKit</RootNamespace>
+    <AssemblyName>skc5</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ReferencePath>$(MSBuildProjectDirectory)..\..\lib\</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxMin" />
+    <Reference Include="corex" />
+    <Reference Include="ICSharpCode.NRefactory" />
+    <Reference Include="ICSharpCode.NRefactory.Cecil" />
+    <Reference Include="ICSharpCode.NRefactory.CSharp" />
+    <Reference Include="Mono.Cecil" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compiler\ClrResolveVisitor.cs" />
+    <Compile Include="Compiler\CsToJs\TsMemberConverter.cs" />
+    <Compile Include="JavaScript\Ast\JsModel.Visitor.generated.cs" />
+    <Compile Include="JavaScript\JsCodeInliner.cs" />
+    <Compile Include="Compiler\Extensions_Collections.cs" />
+    <Compile Include="Compiler\CommentsExporter.cs" />
+    <Compile Include="Compiler\CompilerConfiguration.cs" />
+    <Compile Include="Compiler\CompilerLogger.cs" />
+    <Compile Include="Compiler\CompilerService.cs" />
+    <Compile Include="Compiler\CompilerTool.cs" />
+    <Compile Include="Compiler\CompilerToolArgs.cs" />
+    <Compile Include="Compiler\CompilerToolCommon.cs" />
+    <Compile Include="Compiler\Console.cs" />
+    <Compile Include="Compiler\CsToJs\Extensions.cs" />
+    <Compile Include="Compiler\CsToJs\ResolveResultConverter_Invocation.cs" />
+    <Compile Include="Compiler\Cs2.cs" />
+    <Compile Include="Compiler\CsEntityExt.cs" />
+    <Compile Include="Compiler\CsExternalMetadata.cs" />
+    <Compile Include="Compiler\CssCompressor.cs" />
+    <Compile Include="Compiler\CssCompressorExtensions.cs" />
+    <Compile Include="Compiler\Extensions_Metadata.cs" />
+    <Compile Include="Compiler\FileMerger.cs" />
+    <Compile Include="Compiler\FileUtils.cs" />
+    <Compile Include="Compiler\CsToJs\AstNodeConverter.cs" />
+    <Compile Include="Compiler\CsToJs\ResolveResultConverter.cs" />
+    <Compile Include="Compiler\CsToJs\ResolveResultConverter_Operator.cs" />
+    <Compile Include="Compiler\JsMinifier.cs" />
+    <Compile Include="Compiler\CsToJs\TypeConverter.cs" />
+    <Compile Include="Compiler\CsToJs\MemberConverter.cs" />
+    <Compile Include="Compiler\CsToJs\MemberConverter_Clr.cs" />
+    <Compile Include="Compiler\CsToJs\MemberConverter_ExtJs.cs" />
+    <Compile Include="Compiler\CsToJs\MemberConverter_Global.cs" />
+    <Compile Include="Compiler\CsToJs\MemberConverter_Native.cs" />
+    <Compile Include="Compiler\Manifest.cs" />
+    <Compile Include="Compiler\NotifyNavigator.cs" />
+    <Compile Include="Compiler\Plugin\ICompiler.cs" />
+    <Compile Include="Compiler\Plugin\ICompilerPlugin.cs" />
+    <Compile Include="Compiler\Plugin\ICSharpModel.cs" />
+    <Compile Include="Compiler\Program.cs" />
+    <Compile Include="Compiler\WindowsService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Compiler\SharpKitVersionInfo.cs" />
+    <Compile Include="Compiler\Sk.cs" />
+    <Compile Include="Compiler\SkJs.cs" />
+    <Compile Include="Compiler\SkJsFile.cs" />
+    <Compile Include="Compiler\SkProject.cs" />
+    <Compile Include="Compiler\SourceMapping\Base64.cs" />
+    <Compile Include="Compiler\SourceMapping\Base64VLQ.cs" />
+    <Compile Include="Compiler\SourceMapping\SkSourceMappingGenerator.cs" />
+    <Compile Include="Compiler\SourceMapping\SourceMapping.cs" />
+    <Compile Include="Compiler\SourceMapping\SourceMappingHelper.cs" />
+    <Compile Include="Compiler\SourceMapping\SourceMappingV3.cs" />
+    <Compile Include="Compiler\YieldRefactorer.cs" />
+    <Compile Include="JavaScript\Ast\Extensions.cs" />
+    <Compile Include="JavaScript\Ast\JsFormatter_Minified.cs" />
+    <Compile Include="JavaScript\Ast\JsFormatter_CSharp.cs" />
+    <Compile Include="JavaScript\Ast\IAnnotatable.cs" />
+    <Compile Include="JavaScript\Ast\Js.cs" />
+    <Compile Include="JavaScript\Ast\JsFile.cs" />
+    <Compile Include="JavaScript\Ast\JsFormatter_Default.cs" />
+    <Compile Include="JavaScript\Ast\JsModel.cs" />
+    <Compile Include="JavaScript\Ast\JsModel.generated.cs" />
+    <Compile Include="JavaScript\Ast\JsModel.Linq.cs" />
+    <Compile Include="JavaScript\Ast\JsModel.Clone.generated.cs" />
+    <Compile Include="JavaScript\Ast\JsModelExtensions.cs" />
+    <Compile Include="JavaScript\Ast\JsToken.cs" />
+    <Compile Include="JavaScript\Ast\JsWriter.cs" />
+    <Compile Include="JavaScript\JsAttributes.cs" />
+    <Compile Include="JavaScript\JsAttributesEx.cs" />
+    <Compile Include="JavaScript\Ast\JsFormatter.cs" />
+    <Compile Include="JavaScript\Ast\JsTokenWriter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeScript\TsEntity.cs" />
+    <Compile Include="TypeScript\TsWriter.cs" />
+    <Compile Include="TypeScript\VisitableWriter.cs" />
+    <Compile Include="Utils\Analytics\Mp2.cs" />
+    <Compile Include="Utils\Misc\CSharpHelper.cs" />
+    <Compile Include="Utils\Misc\EnumerableHelper.cs" />
+    <Compile Include="Utils\Misc\JavaScriptHelper.cs" />
+    <Compile Include="Utils\Misc\JsonServer.cs" />
+    <Compile Include="Utils\Misc\ProcessHelper.cs" />
+    <Compile Include="Utils\Misc\StopwatchHelper.cs" />
+    <Compile Include="Utils\Misc\XExtensions.cs" />
+    <Compile Include="Utils\Misc\XmlHelper.cs" />
+    <Compile Include="Utils\Misc\XSerializer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="JavaScript\Ast\JsModel.Clone.cs" />
+    <None Include="RunAsConsoleService.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SharpKit.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="prms.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rem xcopy $(TargetDir)*.* C:\Windows\Microsoft.NET\Framework\v4.0.30319\SharpKit\5\ /C /Y /d</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

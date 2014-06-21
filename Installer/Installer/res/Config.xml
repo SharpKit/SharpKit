@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <param key="ProductVersion" value="5.4.4" />
+  <param key="InstallerNeedsMinVersion" value="5.4.4" />
+</config>

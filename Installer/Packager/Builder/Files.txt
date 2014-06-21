@@ -1,0 +1,12 @@
+﻿SharpKit.AspNetAjax
+SharpKit.ExtJs
+SharpKit.Html
+SharpKit.Html4
+SharpKit.JavaScript
+SharpKit.jQTouch
+SharpKit.jQuery
+SharpKit.jQueryUI
+SharpKit.JsClr
+SharpKit.KnockoutJs
+SharpKit.SenchaTouch-2.0.0
+SharpKit.Web

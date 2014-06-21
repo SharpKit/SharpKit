@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <param key="SkRootDir" value="D:\sharpkit" />
+  <param key="SkTrunkDir" value="D:\sharpkit\compiler\src" />
+  <param key="SdkTrunkDir" value="D:\sharpkit\sdk\src" />
+</config>

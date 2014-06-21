@@ -10,6 +10,7 @@ Compiler/
   skc5/
   Packager/
   Installer/
+  MSBuild/
 Defs/
   Defs.sln
   JavaScript/

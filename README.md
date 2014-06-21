@@ -14,7 +14,6 @@ Compiler/
   Compiler.sln
   skc5/
   MSBuild/
-  libs/
 Installer/
     Packager/
     Installer/

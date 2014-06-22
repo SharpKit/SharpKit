@@ -7,3 +7,6 @@
 [submodule "external/AjaxMin"]
 	path = external/AjaxMin
 	url = https://github.com/Arakis/AjaxMin.git
+[submodule "external/cecil"]
+	path = external/cecil
+	url = https://github.com/jbevain/cecil

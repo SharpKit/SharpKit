@@ -1,0 +1,2 @@
+compile:
+	xbuild MSBuild.csproj

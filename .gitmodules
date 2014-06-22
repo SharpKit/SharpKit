@@ -4,3 +4,6 @@
 [submodule "external/corex"]
 	path = external/corex
 	url = https://github.com/danelkhen/corex.git
+[submodule "external/AjaxMin"]
+	path = external/AjaxMin
+	url = https://github.com/Arakis/AjaxMin.git

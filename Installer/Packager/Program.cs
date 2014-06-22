@@ -594,11 +594,6 @@ namespace SharpKit.Release
             var s3Url = "http://download.sharpkit.net/" + SetupFilename.ToFileInfo().Name;
             var cloudFrontUrl = SetupCloudFrontUrl;
             Console.WriteLine("Uploading to " + s3Url);
-            var pairs = Process.GetCurrentProcess().MainModuleFilename().ToFileInfo().GetParent().Parent.GetFile("config.ini.user").Lines().Select(t=>t.Split('=')).ToList();
-            var ack = pairs.Where(t => t[0] == "AwsAccessKey").First()[1];
-            var asak = pairs.Where(t => t[0] == "AwsSecretAccessKey").First()[1];
-            var s3 = AWSClientFactory.CreateAmazonS3Client(ack, asak);
-            ServicePointManager.ServerCertificateValidationCallback += delegate { return true; };
             S3Upload(filepath, s3Url);
             //s3.PutObject(new PutObjectRequest { BucketName = "download.sharpkit.net", Key = filename, FilePath = filepath, CannedACL = S3CannedACL.PublicRead, Timeout = (int)TimeSpan.FromMinutes(5).TotalMilliseconds });
 

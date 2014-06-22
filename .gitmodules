@@ -1,0 +1,6 @@
+[submodule "external/NRefactory"]
+	path = external/NRefactory
+	url = https://github.com/danelkhen/NRefactory.git
+[submodule "external/corex"]
+	path = external/corex
+	url = https://github.com/danelkhen/corex.git

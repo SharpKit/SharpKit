@@ -166,7 +166,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem xcopy $(TargetDir)*.* C:\Windows\Microsoft.NET\Framework\v4.0.30319\SharpKit\5\ /C /Y /d</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">rem xcopy $(TargetDir)*.* C:\Windows\Microsoft.NET\Framework\v4.0.30319\SharpKit\5\ /C /Y /d</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

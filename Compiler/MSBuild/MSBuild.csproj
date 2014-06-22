@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ReferencePath>$(MSBuildProjectDirectory)..\..\lib\</ReferencePath>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build" />
-    <Reference Include="Microsoft.Build.Conversion.v4.0" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
@@ -58,7 +59,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem copy $(ProjectDir)*.targets $(ProjectDir)..\skc5\bin\
+    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">rem copy $(ProjectDir)*.targets $(ProjectDir)..\skc5\bin\
 rem copy $(ProjectDir)*.Tasks $(ProjectDir)..\skc5\bin\
 rem copy $(ProjectDir)..\skc5\bin\SharpKit.CSharp.targets $(ProjectDir)..\skc5\bin\SharpKit.Build.targets
 rem copy $(TargetDir)*.Tasks.dll $(ProjectDir)..\skc5\bin\</PostBuildEvent>

@@ -10,3 +10,6 @@
 [submodule "external/cecil"]
 	path = external/cecil
 	url = https://github.com/jbevain/cecil
+[submodule "external/aws-sdk-net"]
+	path = external/aws-sdk-net
+	url = https://github.com/aws/aws-sdk-net.git

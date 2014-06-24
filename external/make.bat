@@ -1,4 +1,5 @@
-call ../scripts/set-variables.bat
+@cd /D %~dp0
+@call ../scripts/set-variables
 
 %msbuild% NRefactory/ICSharpCode.NRefactory.CSharp/ICSharpCode.NRefactory.CSharp.csproj
 %msbuild% corex/src/corex/corex.csproj

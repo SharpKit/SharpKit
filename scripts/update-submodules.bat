@@ -1,8 +1,9 @@
-call set-variables.bat
+@cd /D %~dp0
+@call set-variables.bat
 
-cd ../external
+@cd ../external
 %git% submodule foreach git pull origin master
-cd ../scripts
+@cd ../scripts
 
 @echo.
 @echo submodules are now updated.

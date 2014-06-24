@@ -39,10 +39,24 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.NRefactory.Cecil">
-      <HintPath>..\..\lib\ICSharpCode.NRefactory.Cecil.dll</HintPath>
+    <Reference Include="AjaxMin">
+      <HintPath>..\..\external\AjaxMin\AjaxMinDll\bin\Debug\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil" />
+    <Reference Include="corex">
+      <HintPath>..\..\external\corex\src\corex\bin\corex.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.Cecil">
+      <HintPath>..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory.CSharp">
+      <HintPath>..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\..\external\NRefactory\bin\Debug\Mono.Cecil.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -56,18 +70,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="AjaxMin">
-      <HintPath>..\..\lib\AjaxMin.dll</HintPath>
-    </Reference>
-    <Reference Include="corex">
-      <HintPath>..\..\lib\corex.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory">
-      <HintPath>..\..\lib\ICSharpCode.NRefactory.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory.CSharp">
-      <HintPath>..\..\lib\ICSharpCode.NRefactory.CSharp.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compiler\ClrResolveVisitor.cs" />

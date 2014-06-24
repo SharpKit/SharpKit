@@ -1,0 +1,42 @@
+<Addin namespace   = "MonoDevelop"
+       id          = "SharpKit"
+       name        = "Mono for SharpKit"
+       author      = "Andrew Witte"
+       copyright   = "BSD-2"
+       url         = "http://www.reign-studios.com"
+       description = "Support for developing SharpKit applications."
+       category    = "SharpKit Development"
+       version     = "1.0.0">
+       
+	<Dependencies>
+		<Addin id="Ide" version="4.0" />
+		<Addin id="Core" version="4.0" />
+	</Dependencies> 
+	
+	<!-- Template Types -->
+	<Extension path = "/MonoDevelop/Ide/ProjectTemplates">
+		<ProjectTemplate id = "SharpKitProject" resource = "SharpKitProject.xpt.xml"/>
+	</Extension>
+	
+<!--	
+<Extension path="/MonoDevelop/Ide/Commands">  
+    <Command id="MonoDevelop.SharpKit.Commands.SayHello"  
+             _label="Say Hello1" />  
+</Extension> 
+
+<Extension path="/MonoDevelop/Ide/MainMenu/Tools">  
+    <CommandItem id="MonoDevelop.SharpKit.Commands.SayHello" />  
+</Extension> 
+
+<Command id="MonoDevelop.SharpKit.Commands.SayHello"  
+    _label="Say Hello2"  
+    defaultHandler="MonoDevelop.SharpKit.SayHelloHandler" />  
+    
+-->    
+<!--	<Extension path="/MonoDevelop/Ide/MainMenu/View">
+		<CommandItem id="MonoDevelop.WelcomePage.WelcomePageCommands.ShowWelcomePage" 
+			insertafter="ViewItemsSeparator2"
+			insertbefore="MonoDevelop.Ide.Commands.ViewCommands.FullScreen" />
+	</Extension>-->
+	
+</Addin>

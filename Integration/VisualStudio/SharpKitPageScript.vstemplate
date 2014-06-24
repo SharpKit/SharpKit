@@ -1,0 +1,25 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>SharpKitPageScript.cs</DefaultName>
+    <Name>SharpKitPageScript</Name>
+    <Description>
+    </Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>SharpKit.JavaScript</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>SharpKit.Html4</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>SharpKit.jQuery</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem SubType="Code" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">SharpKitPageScript.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

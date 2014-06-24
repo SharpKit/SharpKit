@@ -13,3 +13,7 @@ cd ../..
 cd Compiler/MSBuild
 call make
 cd ../..
+
+cd Integration/MonoDevelop
+call make
+cd ../..

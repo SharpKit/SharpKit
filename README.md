@@ -5,10 +5,17 @@ C# to JavaScript Compiler
 
 Website: http://sharpkit.net
 
-### License
+##### License
 SharpKit is licensed under GPL, for commercial licenses please refer to http://sharpkit.net.
 
-### Folder Structure
+##### Building
+
+    git clone https://github.com/SharpKit/SharpKit.git
+    cd SharpKit
+    ./configure     (on windows, skip "./" and type only "configure")
+    make
+
+##### Folder Structure
 ```
 Compiler/
   Compiler.sln

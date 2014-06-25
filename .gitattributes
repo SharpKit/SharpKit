@@ -1,0 +1,11 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Custom for Visual Studio
+*.cs     diff=csharp
+*.sln    merge=union
+*.csproj merge=union
+
+# Standard to msysgit
+*.pdf  diff=astextplain
+*.PDF	 diff=astextplain

@@ -14,6 +14,10 @@ cd Compiler/MSBuild
 call make
 cd ../..
 
+cd SDK
+call make
+cd ..
+
 cd Integration/MonoDevelop
 call make
 cd ../..

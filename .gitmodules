@@ -21,3 +21,6 @@
 [submodule "SDK"]
 	path = SDK
 	url = https://github.com/SharpKit/SharpKit-SDK.git
+[submodule "external/SharpZipLib"]
+	path = external/SharpZipLib
+	url = https://github.com/icsharpcode/SharpZipLib.git

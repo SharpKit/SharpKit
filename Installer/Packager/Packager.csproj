@@ -36,10 +36,10 @@
       <HintPath>..\..\lib\AWSSDK.dll</HintPath>
     </Reference>
     <Reference Include="corex">
-      <HintPath>..\..\lib\corex.dll</HintPath>
+      <HintPath>..\..\external\corex\src\corex\bin\corex.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\external\SharpZipLib\bin\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

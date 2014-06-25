@@ -21,6 +21,8 @@
 [submodule "SDK"]
 	path = SDK
 	url = https://github.com/SharpKit/SharpKit-SDK.git
+	ignore = dirty
 [submodule "external/SharpZipLib"]
 	path = external/SharpZipLib
 	url = https://github.com/icsharpcode/SharpZipLib.git
+	ignore = dirty

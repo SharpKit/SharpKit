@@ -28,16 +28,4 @@ Installer/
     Packager/
     Installer/
 lib/
-*** From here TBD
-Defs/
-  Defs.sln
-  JavaScript/
-  Html/
-  jQuery/
-JsClr/
-  JsClr.sln
-Tests/
-  Tests.sln
-Samples/
-  Samples.sln
 ```

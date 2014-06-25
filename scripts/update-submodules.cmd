@@ -5,6 +5,10 @@
 %git% submodule foreach git pull origin master
 @cd ../scripts
 
+@cd ..
+%git% submodule foreach git pull origin master
+@cd scripts
+
 @echo.
 @echo submodules are now updated.
 @echo please use "-am" option, when commiting.

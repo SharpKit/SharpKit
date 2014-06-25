@@ -3,7 +3,7 @@
        name        = "Mono for SharpKit"
        author      = "Andrew Witte"
        copyright   = "BSD-2"
-       url         = "http://www.reign-studios.com"
+       url         = "http://sharpkit.net"
        description = "Support for developing SharpKit applications."
        category    = "SharpKit Development"
        version     = "1.0.0">

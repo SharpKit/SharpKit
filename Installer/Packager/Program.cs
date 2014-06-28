@@ -22,11 +22,11 @@ namespace SharpKit.Release
     class Program
     {
         bool TestOnly = false;
-        bool UseGit = false;
-
+        bool UseGit = true;
+        bool SkipLog = true;
+        bool BuildSdk35 = false;
         static string Vs2013Exe = @"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.com";
-        //static string Vs2012Exe = @"C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\devenv.com";
-        static string Vs2010Exe = @"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\devenv.com";
+        //static string Vs2010Exe = @"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\devenv.com";
         public string SkRootDir { get { return Config.SkRootDir; } }
         public string SkTrunkDir { get { return Config.SkTrunkDir; } }
         public string OldWebsite = @"C:\Projects\SharpKit_Prev\SharpKit\trunk\src\SharpKit.Website\";
@@ -43,7 +43,7 @@ namespace SharpKit.Release
             //"Mono.Cecil",
             //"ICSharpCode.NRefactory",
             //"ICSharpCode.NRefactory.CSharp",
-            "SharpKitActivation",
+            //"SharpKitActivation",
             "SharpKit.CSharp.Tasks",
             "skc5",
             //"SharpKit.NuGet",
@@ -54,66 +54,59 @@ namespace SharpKit.Release
         {
             new Program().Run();
         }
+
+        ReleaseLog LastReleaseLog;
         void Run()
         {
-            return; //Not yet adapted to open source version
             if (TestOnly)
                 Console.WriteLine("TEST MODE!!!");
 
-            SkSlnFilename = SkTrunkDir + "SharpKit.sln";
-            SdkSlnFilename = SdkTrunkDir + "SharpKit_SDK.sln";
+            SkSlnFilename = @"C:\Projects\GitHub\SharpKit\Compiler\Compiler.sln";
+            SdkSlnFilename = @"C:\Projects\GitHub\SharpKit\Defs\Defs.sln";
 
             WebConfigFilename = SkTrunkDir + @"Website\SharpKit.WebSite\Web.config";
             OldWebConfigFilename = OldWebsite + @"Web.config";
             ReleaseLogsDir = SkTrunkDir + @"Compiler\Packager\ReleaseLogs\";
             InstallerProjectDir = SkTrunkDir + @"Compiler\Installer\";
             SetupDir = SkTrunkDir + @"setup\";
-
             try
             {
-                if (!AskBoolean("Did you remember to get latest on SharpKit SDK?"))
-                    return;
-                var logFiles = Directory.GetFiles(ReleaseLogsDir, "*.xml").OrderBy(t => t).ToList();
-                var lastReleaseLogFilename = logFiles.LastOrDefault();
-                var lastReleaseLog = ReleaseLog.Load(lastReleaseLogFilename);
-                SetupVersion = AskString(String.Format("Last version is: {0}, from:{1:dd-MM-yyyy}, enter new version:", lastReleaseLog.Version, lastReleaseLog.Created));
-                if (SetupVersion.IsNullOrEmpty())
-                    throw new Exception();
-                if (SetupVersion == lastReleaseLog.Version)
-                {
-                    if (!AskBoolean("You have selected to create the same version, are you sure?"))
-                        return;
-                }
                 var buildSdk = AskBoolean("Build SDK?");
-
+                if (!SkipLog)
+                {
+                    if (!AskBoolean("Did you remember to get latest on SharpKit SDK?"))
+                        return;
+                    var logFiles = Directory.GetFiles(ReleaseLogsDir, "*.xml").OrderBy(t => t).ToList();
+                    var lastReleaseLogFilename = logFiles.LastOrDefault();
+                    LastReleaseLog = ReleaseLog.Load(lastReleaseLogFilename);
+                    SetupVersion = AskString(String.Format("Last version is: {0}, from:{1:dd-MM-yyyy}, enter new version:", LastReleaseLog.Version, LastReleaseLog.Created));
+                    if (SetupVersion.IsNullOrEmpty())
+                        throw new Exception();
+                    if (SetupVersion == LastReleaseLog.Version)
+                    {
+                        if (!AskBoolean("You have selected to create the same version, are you sure?"))
+                            return;
+                    }
+                }
+                else
+                {
+                    SetupVersion = AskString("enter new version:");
+                }
                 ReleaseLog = new ReleaseLog { Created = DateTime.Now, Filename = Path.Combine(ReleaseLogsDir, SetupVersion + ".xml"), Version = SetupVersion };
-
-                //ShowLogMessages(GetGitLog(@"D:\GitHub\corex", "9062bd2")); //TODO: temp
-
-                if (!TestOnly)
+                if (!SkipLog)
                 {
-                    ////ReleaseLog.SharpKit = CreateSolutionInfo(SharpKitSrcDir, lastReleaseLog.SharpKit);
-                    ////ReleaseLog.Save();
-                    ReleaseLog.SharpKit_Sdk = CreateSolutionInfo(SdkTrunkDir, lastReleaseLog.SharpKit_Sdk);
-                    ReleaseLog.SharpKit5 = CreateSolutionInfo(SkTrunkDir, lastReleaseLog.SharpKit5, UseGit);
-
-                    //ShowLogMessages(ReleaseLog.SharpKit.SvnLogEntries);
-                    ShowLogMessages(ReleaseLog.SharpKit_Sdk.SvnLogEntries);
-                    ShowLogMessages(ReleaseLog.SharpKit5.SvnLogEntries);
-                }
-
-                //return; //TODO: remove
-
-                if (!TestOnly)
-                {
-                    UpdateSharpKitVersionInfoSourceFiles(ReleaseLog);
-                    UpdateAssemblyFileVersions(SetupVersion);
+                    FillLog();
                 }
 
                 if (!TestOnly)
                 {
+                    //UpdateSharpKitVersionInfoSourceFiles(ReleaseLog);
+                    //UpdateAssemblyFileVersions(SetupVersion);
+                }
 
-                    TryBuildProjects(SkSlnFilename, SharpKitCompilerProjectNames);
+                if (!TestOnly)
+                {
+                    BuildSolution(SkSlnFilename, "Release");
                     if (buildSdk)
                         BuildSdk();
                 }
@@ -140,6 +133,16 @@ namespace SharpKit.Release
             }
             Console.WriteLine("Finished....");
             Console.ReadLine();
+        }
+
+        private void FillLog()
+        {
+            var lastReleaseLog = LastReleaseLog;
+            ReleaseLog.SharpKit_Sdk = CreateSolutionInfo(SdkTrunkDir, lastReleaseLog.SharpKit_Sdk);
+            ReleaseLog.SharpKit5 = CreateSolutionInfo(SkTrunkDir, lastReleaseLog.SharpKit5, UseGit);
+
+            ShowLogMessages(ReleaseLog.SharpKit_Sdk.SvnLogEntries);
+            ShowLogMessages(ReleaseLog.SharpKit5.SvnLogEntries);
         }
 
 
@@ -413,8 +416,9 @@ namespace SharpKit.Release
 
         private void BuildSdk()
         {
-            BuildSolution(SdkSlnFilename, "v4.0", false);
-            BuildSolution(SdkSlnFilename, "v3.5", false);
+            BuildSolution(SdkSlnFilename, "v4.0");
+            if (BuildSdk35)
+                BuildSolution(SdkSlnFilename, "v3.5");
         }
 
         void UpdateWebConfig(string version, string downloadUrl, string webConfigFileName)
@@ -518,9 +522,9 @@ namespace SharpKit.Release
 
         }
 
-        public static void BuildSolution(string slnFilename, string configuration, bool useVs2010)
+        public static void BuildSolution(string slnFilename, string configuration)
         {
-            BuildProject(slnFilename, configuration, null, "build", useVs2010);
+            BuildProject(slnFilename, configuration, null, "build");
         }
 
         public static ExecuteResult Execute(string dir, string file, string args)
@@ -549,7 +553,7 @@ namespace SharpKit.Release
             Console.WriteLine("Finished execution. Exit code: {0}", process.ExitCode);
             return res;
         }
-        public static void BuildProject(string slnFilename, string configuration, string projectName, string action = "build", bool useVs2010 = false)
+        public static void BuildProject(string slnFilename, string configuration, string projectName, string action = "build")
         {
             Console.WriteLine("Building: {0} {1} {2}", slnFilename, configuration, projectName);
             var args = String.Format("\"{0}\" /{1} \"{2}\"", Path.GetFileName(slnFilename), action, configuration);
@@ -559,7 +563,7 @@ namespace SharpKit.Release
             var outFile = @"C:\temp\BuildOutput.txt";
             if (File.Exists(outFile)) File.Delete(outFile);
             args += @" /Out " + outFile;
-            var res = Execute(Path.GetDirectoryName(slnFilename), useVs2010 ? Vs2010Exe : Vs2013Exe, args);
+            var res = Execute(Path.GetDirectoryName(slnFilename), Vs2013Exe, args);
             if (res.ExitCode != 0)
                 throw new Exception(String.Format("Error during build, exit code={0}", res.ExitCode));
             Console.WriteLine("Finished build.");

@@ -46,16 +46,20 @@
       <HintPath>..\..\external\corex\src\corex\bin\corex.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory">
-      <HintPath>..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Debug'">..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Release'">..\..\external\NRefactory\bin\net_4_5_Release\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory.Cecil">
-      <HintPath>..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.Cecil.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Debug'">..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.Cecil.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Release'">..\..\external\NRefactory\bin\net_4_5_Release\ICSharpCode.NRefactory.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory.CSharp">
-      <HintPath>..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Debug'">..\..\external\NRefactory\bin\Debug\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Release'">..\..\external\NRefactory\bin\net_4_5_Release\ICSharpCode.NRefactory.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\..\external\NRefactory\bin\Debug\Mono.Cecil.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Debug'">..\..\external\NRefactory\bin\Debug\Mono.Cecil.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Release'">..\..\external\NRefactory\bin\net_4_5_Release\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

@@ -1,0 +1,13 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemDefinitionGroup Condition="'$(DontCopyLocalReferences)' == 'true'">
+	  <Reference>
+		<Private>False</Private>
+	  </Reference>
+	  <ProjectReference>
+		<Private>False</Private>
+	  </ProjectReference>
+	</ItemDefinitionGroup>
+	<PropertyGroup Condition="'$(OutputDir)' != ''">
+	  <OutputPath>$(OutputDir)\$(MSBuildProjectName)\</OutputPath>
+	</PropertyGroup>
+</Project>

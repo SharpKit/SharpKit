@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="AWSSDK">
       <HintPath>..\..\lib\AWSSDK.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="corex">
       <HintPath>..\..\external\corex\src\corex\bin\corex.dll</HintPath>

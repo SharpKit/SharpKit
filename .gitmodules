@@ -24,5 +24,4 @@
 	ignore = dirty
 [submodule "external/SharpZipLib"]
 	path = external/SharpZipLib
-	url = https://github.com/icsharpcode/SharpZipLib.git
-	ignore = dirty
+	url = https://github.com/Arakis/SharpZipLib.git

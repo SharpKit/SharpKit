@@ -27,14 +27,14 @@ namespace SharpKit.Installer
                 return null;
             };
 
-            Program.Main();
+            Program.Main2();
         }
 
     }
 
     static class Program
     {
-        public static void Main()
+        public static void Main2()
         {
             try
             {

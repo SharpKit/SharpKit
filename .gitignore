@@ -4,6 +4,7 @@ obj
 *.suo
 *.user
 lib/*.pdb
+Installer/Installer/res/Files.zip
 
 # Windows image file caches
 Thumbs.db

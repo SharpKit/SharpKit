@@ -23,4 +23,4 @@
 	url = https://github.com/Arakis/SharpZipLib.git
 [submodule "external/AjaxMin"]
 	path = external/AjaxMin
-	url = https://github.com/Arakis/AjaxMin.git
+	url = https://github.com/danelkhen/AjaxMin.git

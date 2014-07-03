@@ -54,8 +54,12 @@
     <Compile Include="Skc.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SharpKit.CSharp.targets" />
-    <None Include="SharpKit.CSharp.Tasks" />
+    <None Include="SharpKit.CSharp.targets">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SharpKit.CSharp.Tasks">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

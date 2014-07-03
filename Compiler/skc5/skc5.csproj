@@ -40,7 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxMin">
-      <HintPath>..\..\external\AjaxMin\AjaxMinDll\bin\Debug\AjaxMin.dll</HintPath>
+      <HintPath>..\..\external\AjaxMin\AjaxMinDll\bin\AjaxMin.dll</HintPath>
     </Reference>
     <Reference Include="corex">
       <HintPath>..\..\external\corex\src\corex\bin\corex.dll</HintPath>

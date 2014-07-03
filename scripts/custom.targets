@@ -7,7 +7,4 @@
 		<Private>False</Private>
 	  </ProjectReference>
 	</ItemDefinitionGroup>
-	<PropertyGroup Condition="'$(OutputDir)' != ''">
-	  <OutputPath>$(OutputDir)\$(MSBuildProjectName)\</OutputPath>
-	</PropertyGroup>
 </Project>

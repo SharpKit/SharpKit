@@ -3,41 +3,62 @@ SET CustomTargetsFile=%CD%\custom.targets
 del %OutputDir%\ /q /s
 rd %OutputDir%\ /q /s
 SET MSBuildExtraParams=/p:CustomBeforeMicrosoftCSharpTargets="%CustomTargetsFile%" /verbosity:minimal
+rem  /p:DebugSymbols=false /p:DebugType=None
 cd ..
+
+cd external
+
+cd AjaxMin\AjaxMinDll
+call msbuild4 AjaxMinDll.sln /p:Configuration=Release /verbosity:minimal /p:DebugSymbols=false /p:DebugType=None
+cd ..\..\
+
+cd Corex
+call msbuild4 Corex.sln /p:Configuration=Release /verbosity:minimal /p:DebugSymbols=false /p:DebugType=None
+cd..
+
+cd NRefactory
+call msbuild4 NRefactory.sln /p:Configuration=net_4_5_release /p:DontCopyLocalReferences=true /p:DebugSymbols=false /p:DebugType=None %MSBuildExtraParams%
+cd..
+
+cd..
 
 @echo Building Compiler
 cd Compiler
-msbuild.lnk Compiler.sln /p:OutputDir="%OutputDir%\Compiler" %MSBuildExtraParams%
+call msbuild4 Compiler.sln /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None %MSBuildExtraParams%
 cd ..
 
-pause
 
 cd SDK
 
 @echo Building SDK\Defs
 cd Defs
-msbuild.lnk Defs.sln /p:OutputDir="%OutputDir%\SDK\Defs" /p:DontCopyLocalReferences=true %MSBuildExtraParams%
+call msbuild4 Defs.sln %MSBuildExtraParams%
 cd ..
 
-pause
 
 @echo Building SDK\Frameworks
 cd Frameworks
-msbuild.lnk Frameworks.sln /p:OutputDir="%OutputDir%\SDK\Frameworks" /p:DontCopyLocalReferences=true %MSBuildExtraParams%
+call msbuild4 Frameworks.sln /p:DontCopyLocalReferences=true %MSBuildExtraParams%
 cd ..
 
 cd ..
 
-
-cd scripts
-pause
 
 @echo Building SDK\Frameworks
-cd %OutputDir%
-md zip\Files\NET
-copy Compiler\skc5\* zip\Files\NET\
-copy Compiler\MSBuild\* zip\Files\NET\
-copy SDK\Defs\* zip\Application\Assemblies\ /s
+md %OutputDir%\zip\Files\NET\
+md %OutputDir%\zip\Files\Application\Assemblies\
+xcopy Compiler\skc5\bin\*         %OutputDir%\zip\Files\NET\
+xcopy Compiler\MSBuild\bin\*      %OutputDir%\zip\Files\NET\
+xcopy SDK\Defs\bin\*              %OutputDir%\zip\Files\Application\Assemblies\ /s
+xcopy SDK\Frameworks\JsClr\bin\*  %OutputDir%\zip\Files\Application\JsClr\bin\ /s
+xcopy SDK\Frameworks\JsClr\res\*  %OutputDir%\zip\Files\Application\JsClr\res\ /s
+del %OutputDir%\zip\*.pdb /q /s
 
-
-pause
+cd scripts
+pushd %OutputDir%
+cd zip
+call 7z a ..\package.zip
+cd..
+rem rd zip /q /s
+rem rd bin /q /s
+popd

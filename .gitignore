@@ -1,5 +1,6 @@
 bin
 obj
+*.ide
 *.suo
 *.user
 lib/*.pdb

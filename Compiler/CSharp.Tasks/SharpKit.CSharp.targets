@@ -2,7 +2,7 @@
 	<!--This is a targets file for Visual Studio-->
 	<Import Project="SharpKit.CSharp.Tasks"/>
 	<PropertyGroup>
-		<SkcToolPath>$(MSBuildThisFileDirectory)</SkcToolPath>
+		<SkcToolPath Condition=" '$(SkcToolPath)' == '' ">$(MSBuildThisFileDirectory)</SkcToolPath>
 		<SkcToolExe>skc5.exe</SkcToolExe>
 		<OutputIntermediateAssembly></OutputIntermediateAssembly>
     <SkcRebuild>false</SkcRebuild>

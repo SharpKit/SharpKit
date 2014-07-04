@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skc5", "skc5\skc5.csproj", "{6307BDF9-19E4-4925-99DC-29773D8F0AF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBuild", "MSBuild\MSBuild.csproj", "{4D31FC05-54E2-48F7-9DEF-4FDB2179A872}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Tasks", "CSharp.Tasks\CSharp.Tasks.csproj", "{4D31FC05-54E2-48F7-9DEF-4FDB2179A872}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution

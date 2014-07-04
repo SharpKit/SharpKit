@@ -1,0 +1,24 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CSharp.Tasks/SharpKit.CSharp.Tasks">
+    <Files>
+      <File FileName="CSharp.Tasks/CSharp.Tasks.csproj" Line="70" Column="58" />
+      <File FileName="skc5/skc5.csproj" Line="178" Column="19" />
+      <File FileName="CSharp.Tasks/SharpKit.CSharp.Tasks" Line="2" Column="57" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="CSharp.Tasks" expanded="True">
+            <Node name="SharpKit.CSharp.Tasks" selected="True" />
+          </Node>
+          <Node name="skc5" expanded="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

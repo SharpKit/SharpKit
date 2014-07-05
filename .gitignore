@@ -3,6 +3,7 @@ obj
 *.ide
 *.suo
 *.user
+*.userprefs
 lib/*.pdb
 Installer/Installer/res/Files.zip
 

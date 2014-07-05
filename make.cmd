@@ -3,21 +3,21 @@ cd /D %~dp0
 call scripts/set-variables
 
 cd external
-call make
+call make %1
 cd ..
 
 cd Compiler/skc5
-call make
+call make %1
 cd ../..
 
-cd Compiler/MSBuild
-call make
+cd Compiler/CSharp.Tasks
+call make %1
 cd ../..
 
 cd SDK
-call make
+call make %1
 cd ..
 
 cd Integration/MonoDevelop
-call make
+call make %1
 cd ../..

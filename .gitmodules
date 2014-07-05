@@ -21,6 +21,8 @@
 [submodule "external/SharpZipLib"]
 	path = external/SharpZipLib
 	url = https://github.com/Arakis/SharpZipLib.git
+	ignore = dirty
 [submodule "external/AjaxMin"]
 	path = external/AjaxMin
 	url = https://github.com/danelkhen/AjaxMin.git
+	ignore = dirty

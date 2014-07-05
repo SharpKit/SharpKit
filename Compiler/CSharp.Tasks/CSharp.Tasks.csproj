@@ -63,16 +63,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">rem copy $(ProjectDir)*.targets $(ProjectDir)..\skc5\bin\
-rem copy $(ProjectDir)*.Tasks $(ProjectDir)..\skc5\bin\
-rem copy $(ProjectDir)..\skc5\bin\SharpKit.CSharp.targets $(ProjectDir)..\skc5\bin\SharpKit.Build.targets
-rem copy $(TargetDir)*.Tasks.dll $(ProjectDir)..\skc5\bin\</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
+copy $(ProjectDir)*.targets $(ProjectDir)..\skc5\bin\
+copy $(ProjectDir)*.Tasks $(ProjectDir)..\skc5\bin\
+copy $(ProjectDir)..\skc5\bin\SharpKit.CSharp.targets $(ProjectDir)..\skc5\bin\SharpKit.Build.targets
+copy $(TargetDir)*.Tasks.dll $(ProjectDir)..\skc5\bin\</PostBuildEvent>
     <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
-    mkdir -p $(ProjectDir)..\skc5\bin
-    cp $(ProjectDir)*.targets $(ProjectDir)..\skc5\bin\
-    cp $(ProjectDir)*.Tasks $(ProjectDir)..\skc5\bin\
-    #cp $(ProjectDir)..\skc5\bin\SharpKit.CSharp.targets $(ProjectDir)..\skc5\bin\SharpKit.Build.targets
-    cp $(TargetDir)*.Tasks.dll $(ProjectDir)..\skc5\bin\
+mkdir -p $(ProjectDir)..\skc5\bin
+cp $(ProjectDir)*.targets $(ProjectDir)..\skc5\bin\
+cp $(ProjectDir)*.Tasks $(ProjectDir)..\skc5\bin\
+#cp $(ProjectDir)..\skc5\bin\SharpKit.CSharp.targets $(ProjectDir)..\skc5\bin\SharpKit.Build.targets
+cp $(TargetDir)*.Tasks.dll $(ProjectDir)..\skc5\bin\
     </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

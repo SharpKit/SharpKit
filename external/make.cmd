@@ -12,11 +12,11 @@ IF not "%1" == "release" (
 
 ) ELSE (
 
-%msbuild% /p:Configuration=net_4_0_Release cecil/Mono.Cecil.csproj
-%msbuild% /p:Configuration=net_4_5_Release NRefactory/NRefactory.sln
-%msbuild% /p:Configuration=Release corex/corex.sln
-%msbuild% /p:Configuration=Release AjaxMin/AjaxMinDll/AjaxMinDll.sln
-%msbuild% /p:Configuration=Release aws-sdk-net/AWSSDK_DotNet45/AWSSDK_DotNet45.sln
-%msbuild% /p:Configuration=Release SharpZipLib/src/ICSharpCode.SharpZLib.csproj
+%msbuild% cecil/Mono.Cecil.csproj                         /p:Configuration=net_4_0_Release /p:DebugSymbols=false /p:DebugType=None
+%msbuild% NRefactory/NRefactory.sln                       /p:Configuration=net_4_5_Release /p:DebugSymbols=false /p:DebugType=None
+%msbuild% corex/corex.sln                                 /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
+%msbuild% AjaxMin/AjaxMinDll/AjaxMinDll.sln               /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
+%msbuild% aws-sdk-net/AWSSDK_DotNet45/AWSSDK_DotNet45.sln /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
+%msbuild% SharpZipLib/src/ICSharpCode.SharpZLib.csproj    /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
 
 )

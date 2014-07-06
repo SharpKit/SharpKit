@@ -203,6 +203,11 @@ namespace SharpKit.Installer
             }
         }
 
+        public static void UIDeleteDirectoryIfEmpty(string dir, bool recursive = true) {
+            if (Directory.GetFiles(dir).Length == 0 && Directory.GetDirectories(dir).Length == 0)
+                UIDeleteDirectory(dir);
+        }
+
         public static SuccessSkip UIDeleteDirectory(string dir, bool recursive = true)
         {
             if (string.IsNullOrEmpty(dir) || !Directory.Exists(dir))

@@ -22,9 +22,18 @@ namespace SharpKit.Installer
     class Installer
     {
 
-        public string ApplicationFolder { get; set; }
-        public string SharpKitNETFolder35 { get; set; }
-        public string SharpKitNETFolder40 { get; set; }
+        public string ApplicationFolder { get; set; } //Program Files (x86)/SharpKit/5
+        public string ApplicationCompilerFolder { get; set; } //Program Files (x86)/SharpKit/5/compiler
+        public string ApplicationDefsFolder { get; set; } //Program Files (x86)/SharpKit/5/defs
+
+        public string MSBuildFolder35 { get; set; }
+        public string MSBuildFolder40 { get; set; }
+        public string MSBuildFolder45 { get; set; }
+
+        public string MSBuildSharpKitFolder35 { get; set; }
+        public string MSBuildSharpKitFolder40 { get; set; }
+        public string MSBuildSharpKitFolder45 { get; set; }
+
         public string DocumentsFolder { get; set; }
         public string ProductVersion { get; set; }
         public string ProductType { get; set; }
@@ -34,8 +43,6 @@ namespace SharpKit.Installer
         public Guid UninstallGUID { get; set; }
         private char dsc = Path.DirectorySeparatorChar;
         private string InstallerNeedsMinVersion;
-        private string VS2013MSBuildPath { get; set; }
-        private string VS2013MSBuildPathSharpKit { get; set; }
 
         public string TemplateDirectoryVS2005 { get; set; }
         public string TemplateDirectoryVS2008 { get; set; }
@@ -49,22 +56,29 @@ namespace SharpKit.Installer
 
         public Installer()
         {
+            ApplicationFolder = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "SharpKit" + dsc + "5";
+            //ApplicationCompilerFolder = ApplicationFolder + dsc + "Compiler";
+            ApplicationCompilerFolder = ApplicationFolder;
+            ApplicationDefsFolder = ApplicationFolder + dsc + "Defs";
+
             if (Utils.IsUnix)
             {
-                SharpKitNETFolder35 = "/usr/lib/mono/3.5/SharpKit/5";
-                SharpKitNETFolder40 = "/usr/lib/mono/4.0/SharpKit/5";
+                MSBuildFolder35 = "/usr/lib/mono/3.5";
+                MSBuildFolder40 = "/usr/lib/mono/4.0";
+                MSBuildFolder45 = "/usr/lib/mono/4.5";
                 MonoDevelopPluginPath = "/usr/lib/monodevelop/AddIns/MonoDevelop.SharpKit";
             }
             else
             {
-                SharpKitNETFolder35 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v3.5\SharpKit\5";
-                SharpKitNETFolder40 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v4.0.30319\SharpKit\5";
+                MSBuildFolder35 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v3.5";
+                MSBuildFolder40 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v4.0.30319";
+                MSBuildFolder45 = @"C:\Program Files (x86)\MSBuild\12.0\bin";
             }
-            ApplicationFolder = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "SharpKit" + dsc + "5";
-            DocumentsFolder = Utils.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            MSBuildSharpKitFolder35 = Path.Combine(MSBuildFolder35, "SharpKit", "5");
+            MSBuildSharpKitFolder40 = Path.Combine(MSBuildFolder40, "SharpKit", "5");
+            MSBuildSharpKitFolder45 = Path.Combine(MSBuildFolder45, "SharpKit", "5");
 
-            VS2013MSBuildPath = @"C:\Program Files (x86)\MSBuild\12.0\bin";
-            VS2013MSBuildPathSharpKit = Path.Combine(VS2013MSBuildPath, @"SharpKit");
+            DocumentsFolder = Utils.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             TemplateDirectoryVS2005 = Path.Combine(DocumentsFolder, @"Visual Studio 2005\Templates\ProjectTemplates\Visual C#\SharpKit");
             TemplateDirectoryVS2008 = Path.Combine(DocumentsFolder, @"Visual Studio 2008\Templates\ProjectTemplates\Visual C#\SharpKit");
@@ -185,6 +199,8 @@ namespace SharpKit.Installer
 
         public void Install()
         {
+            Uninstall();
+
             try
             {
                 Log(".NET Framework detected: " + Corex.Helpers.FrameworkVersion.Current.ToString());
@@ -198,29 +214,12 @@ namespace SharpKit.Installer
                 using (var zip = GetZipArchive())
                 {
                     zip.ExtractDirectory(@"Files/Application", ApplicationFolder, Log);
-                    //zip.ExtractDirectory(@"Files/NET", SharpKitNETFolder35, Log);
-                    zip.ExtractDirectory(@"Files/NET", SharpKitNETFolder40, Log);
                     if (!Utils.IsUnix)
                     {
-                        //MSBuild has moved in VS2013, create symbolic link
-                        if (Directory.Exists(VS2013MSBuildPath))
-                        {
-                            if (Directory.Exists(VS2013MSBuildPathSharpKit))
-                            {
-                                Log("Removing old symbolic link: " + VS2013MSBuildPathSharpKit);
-                                Utils.UIDeleteDirectory(VS2013MSBuildPathSharpKit, false); //target is maybe not correct, so remove it
-                            }
-                            Log("Creating symbolic link: " + VS2013MSBuildPathSharpKit);
-                            if (!CreateSymbolicLink(VS2013MSBuildPathSharpKit, Path.Combine(SharpKitNETFolder40, ".."), 1))
-                            {
-                                Log("Error during creating symbolic link: " + GetLastError().ToString());
-                            }
-                        }
-
                         //zip.ExtractDirectory(@"Files/Templates", TemplateDirectoryVS2008, Log);
-                        zip.ExtractDirectory(@"Files/Templates", TemplateDirectoryVS2010, Log);
-                        zip.ExtractDirectory(@"Files/Templates", TemplateDirectoryVS2012, Log);
-                        zip.ExtractDirectory(@"Files/Templates", TemplateDirectoryVS2013, Log);
+                        //zip.ExtractDirectory(@"Files/Templates", TemplateDirectoryVS2010, Log);
+                        //zip.ExtractDirectory(@"Files/Templates", TemplateDirectoryVS2012, Log);
+                        //zip.ExtractDirectory(@"Files/Templates", TemplateDirectoryVS2013, Log);
                     }
 
                     if (Utils.IsUnix)
@@ -230,24 +229,32 @@ namespace SharpKit.Installer
                         //TODO: zip.ExtractDirectory(@"Files/NET_Unix", SharpKitNETFolder40, Log);
                     }
                 }
+
+                CreateNETSymbolicLink(MSBuildFolder35, MSBuildSharpKitFolder35, ApplicationCompilerFolder);
+                CreateNETSymbolicLink(MSBuildFolder40, MSBuildSharpKitFolder40, ApplicationCompilerFolder);
+                CreateNETSymbolicLink(MSBuildFolder45, MSBuildSharpKitFolder45, ApplicationCompilerFolder);
+
+                CreateNETSymbolicLink(Path.Combine(TemplateDirectoryVS2010, ".."), TemplateDirectoryVS2010, Path.Combine(ApplicationFolder, "Templates"));
+                CreateNETSymbolicLink(Path.Combine(TemplateDirectoryVS2012, ".."), TemplateDirectoryVS2012, Path.Combine(ApplicationFolder, "Templates"));
+                CreateNETSymbolicLink(Path.Combine(TemplateDirectoryVS2013, ".."), TemplateDirectoryVS2013, Path.Combine(ApplicationFolder, "Templates"));
+
                 File.Copy(Utils.CurrentProcessFile, ApplicationFolder + dsc + "SharpKitSetup.exe", true);
 
                 if (Utils.IsUnix)
                 {
 
-                    CreateBashScript("skc", SharpKitNETFolder40 + "/skc5.exe");
+                    CreateBashScript("skc", ApplicationCompilerFolder + "/skc5.exe");
                     CreateBashScript("skc-setup", ApplicationFolder + "/SharpKitSetup.exe");
-                    CreateBashScript("skc-activation", ApplicationFolder + "/SharpKitActivation.exe");
+                    //CreateBashScript("skc-activation", ApplicationFolder + "/SharpKitActivation.exe");
 
                     Log("Set unix read permission");
                     Utils.GiveUnixDirectoryReadPermission(ApplicationFolder);
-                    Utils.GiveUnixDirectoryReadPermission(SharpKitNETFolder40);
                     Utils.GiveUnixDirectoryReadPermission(MonoDevelopPluginPath);
 
                     Log("Set unix execution permission");
-                    Process.Start("chmod", "+x " + SharpKitNETFolder40 + "/skc5.exe").WaitForExit();
+                    Process.Start("chmod", "+x " + ApplicationCompilerFolder + "/skc5.exe").WaitForExit();
                     Process.Start("chmod", "+x " + ApplicationFolder + "/SharpKitSetup.exe").WaitForExit();
-                    Process.Start("chmod", "+x " + ApplicationFolder + "/SharpKitActivation.exe").WaitForExit();
+                    //Process.Start("chmod", "+x " + ApplicationFolder + "/SharpKitActivation.exe").WaitForExit();
                 }
 
                 Log("Writing registry entries");
@@ -258,23 +265,22 @@ namespace SharpKit.Installer
                     key.SetValue("ProductType", ProductType);
                 }
 
-                SetMachineKeyRegistryValue(@"Software\Microsoft\.NETFramework\AssemblyFolders\SharpKit5", "", Path.Combine(ApplicationFolder, @"Assemblies\v3.5"));
-                SetMachineKeyRegistryValue(@"Software\Microsoft\.NETFramework\v3.5\AssemblyFoldersEx\SharpKit5", "", Path.Combine(ApplicationFolder, @"Assemblies\v3.5"));
-                SetMachineKeyRegistryValue(@"Software\Microsoft\.NETFramework\v4.0.30319\AssemblyFoldersEx\SharpKit5", "", Path.Combine(ApplicationFolder, @"Assemblies\v4.0"));
-                SetMachineKeyRegistryValue(@"Software\Microsoft\Visual Studio\10.0\MSBuild\SafeImports", "SharpKit5", Path.Combine(WindowsFolder, @"Microsoft.NET\Framework\v3.5\SharpKit\5\SharpKit.Build.targets"));
-                SetMachineKeyRegistryValue(@"Software\Microsoft\Visual Studio\10.0\MSBuild\SafeImports", "SharpKit5", Path.Combine(WindowsFolder, @"Microsoft.NET\Framework\v4.0.30319\SharpKit\5\SharpKit.Build.targets"));
+                SetMachineKeyRegistryValue(@"Software\Microsoft\.NETFramework\AssemblyFolders\SharpKit5", "", ApplicationDefsFolder);
+                SetMachineKeyRegistryValue(@"Software\Microsoft\.NETFramework\v3.5\AssemblyFoldersEx\SharpKit5", "", ApplicationDefsFolder);
+                SetMachineKeyRegistryValue(@"Software\Microsoft\.NETFramework\v4.0.30319\AssemblyFoldersEx\SharpKit5", "", ApplicationDefsFolder);
+                SetMachineKeyRegistryValue(@"Software\Microsoft\Visual Studio\10.0\MSBuild\SafeImports", "SharpKit5", Path.Combine(ApplicationCompilerFolder, "SharpKit.CSharp.targets"));
 
                 Log("Creating shortcuts");
                 if (Utils.IsUnix)
                 {
-                    CreateShortcutUnix("sharpkit-activate", "Activate SharpKit", ApplicationFolder + @"/SharpKitActivation.exe", "", "Activate SharpKit");
+                    //CreateShortcutUnix("sharpkit-activate", "Activate SharpKit", ApplicationFolder + @"/SharpKitActivation.exe", "", "Activate SharpKit");
                     CreateShortcutUnix("sharpkit-modify", "Modify SharpKit installation", ApplicationFolder + @"/SharpKitSetup.exe", "", "Modify SharpKit installation");
-                    CreateShortcutUnix("sharpkit-update", "Check for Sharpkit updates", SharpKitNETFolder40 + @"/skc5.exe", "/CheckForNewVersion", "Check for Updates");
+                    CreateShortcutUnix("sharpkit-update", "Check for Sharpkit updates", ApplicationCompilerFolder + @"/skc5.exe", "/CheckForNewVersion", "Check for Updates");
                 }
                 else
                 {
-                    CreateShortcutWin("Activate SharpKit", ApplicationFolder + @"\SharpKitActivation.exe", "", "Activate SharpKit");
-                    CreateShortcutWin("Check for a New Version", SharpKitNETFolder40 + @"\skc5.exe", "/CheckForNewVersion", "Check for Updates");
+                    //CreateShortcutWin("Activate SharpKit", ApplicationFolder + @"\SharpKitActivation.exe", "", "Activate SharpKit");
+                    CreateShortcutWin("Check for a New Version", ApplicationCompilerFolder + @"\skc5.exe", "/CheckForNewVersion", "Check for Updates");
                     CreateShortcutWin("Modify installation", ApplicationFolder + @"\SharpKitSetup.exe", "", "Modify installation");
                 }
 
@@ -294,6 +300,26 @@ namespace SharpKit.Installer
             }
             if (OnFinished != null)
                 OnFinished();
+        }
+
+        void CreateNETSymbolicLink(string checkDir, string symbol, string target)
+        {
+            if (Directory.Exists(checkDir))
+            {
+                if (!Directory.Exists(Path.Combine(symbol, "..")))
+                    Directory.CreateDirectory(Path.Combine(symbol, ".."));
+
+                if (Directory.Exists(symbol))
+                {
+                    Log("Removing old symbolic link: " + symbol);
+                    Utils.UIDeleteDirectory(symbol, false); //target is maybe not correct, so remove it
+                }
+                Log("Creating symbolic link: " + symbol);
+                if (!CreateSymbolicLink(symbol, target, 1))
+                {
+                    Log("Error during creating symbolic link: " + GetLastError().ToString());
+                }
+            }
         }
 
         [DllImport("kernel32.dll")]
@@ -333,10 +359,10 @@ namespace SharpKit.Installer
                 EnsureInited();
                 UninstallService();
                 Log("Deleting files");
-                Utils.UIDeleteDirectory(VS2013MSBuildPathSharpKit);
+                Utils.UIDeleteDirectory(MSBuildSharpKitFolder45);
                 Utils.UIDeleteDirectory(ApplicationFolder);
-                Utils.UIDeleteDirectory(SharpKitNETFolder35);
-                Utils.UIDeleteDirectory(SharpKitNETFolder40);
+                Utils.UIDeleteDirectory(MSBuildSharpKitFolder35);
+                Utils.UIDeleteDirectory(MSBuildSharpKitFolder40);
                 if (!Utils.IsUnix)
                 {
                     Utils.UIDeleteDirectory(TemplateDirectoryVS2010);
@@ -513,7 +539,7 @@ namespace SharpKit.Installer
         {
             if (Utils.IsUnix)
                 return;
-            var skc = Path.Combine(SharpKitNETFolder40, "skc5.exe");
+            var skc = Path.Combine(ApplicationCompilerFolder, "skc5.exe");
             Execute("Install SharpKit Windows Service", skc, "/service:reinstall");
         }
 
@@ -522,7 +548,7 @@ namespace SharpKit.Installer
             if (Utils.IsUnix)
                 return;
             StopService();
-            var skc = Path.Combine(SharpKitNETFolder40, "skc5.exe");
+            var skc = Path.Combine(ApplicationCompilerFolder, "skc5.exe");
             Execute("Install SharpKit Windows Service", skc, "/service:uninstall");
 
         }
@@ -530,7 +556,7 @@ namespace SharpKit.Installer
         private void CreateNativeImage()
         {
             string ngen;
-            string skc = Path.Combine(SharpKitNETFolder40, "skc5.exe"); ;
+            string skc = Path.Combine(ApplicationCompilerFolder, "skc5.exe"); ;
             string args;
             if (Utils.IsUnix)
             {
@@ -549,7 +575,7 @@ namespace SharpKit.Installer
             else
             {
                 ngen = Path.Combine(Utils.GetFolderPath(Environment.SpecialFolder.Windows), @"Microsoft.NET\Framework\v4.0.30319", "ngen.exe");
-                args = "install " + skc;
+                args = "install " + "\"" + skc + "\"";
             }
             Execute("CreateNativeImage", ngen, args);
         }

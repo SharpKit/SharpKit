@@ -13,7 +13,7 @@ namespace SharpKit.Installer.Builder
     class SetupBuilder
     {
 
-        public string SkSlnFilename { get; set; }
+        public string GitRoot;
         public string InstallerProjectDir { get; set; }
         public string TempBinDir { get; set; }
         public string SourceFilesDir { get; set; }
@@ -25,9 +25,9 @@ namespace SharpKit.Installer.Builder
 
         public void build()
         {
-            ZipPath = Path.Combine(TempBinDir , "Files.zip");
-            ConfigPath = Path.Combine(TempBinDir , "Config.xml");
-            if (InstallerNeedsMinVersion.IsEmpty()) 
+            ZipPath = Path.Combine(TempBinDir, "Files.zip");
+            ConfigPath = Path.Combine(TempBinDir, "Config.xml");
+            if (InstallerNeedsMinVersion.IsEmpty())
                 InstallerNeedsMinVersion = ProductVersion;
 
             DirectoryHelper.VerifyDir(TempBinDir);
@@ -35,13 +35,13 @@ namespace SharpKit.Installer.Builder
             CreateZip();
             CreateExe();
 
-            Console.WriteLine("installer created");
+            Console.WriteLine("installer created at " + OutputFilename);
         }
 
         void CreateConfig()
         {
             Console.WriteLine("creating config file");
-            if (File.Exists(ConfigPath)) 
+            if (File.Exists(ConfigPath))
                 File.Delete(ConfigPath);
             var xdoc = new XDocument();
             var root = new XElement("config");
@@ -74,14 +74,14 @@ namespace SharpKit.Installer.Builder
 
         void CreateExe()
         {
-            File.Copy(ZipPath, Path.Combine(InstallerProjectDir, "res\\"+Path.GetFileName(ZipPath)), true);
+            File.Copy(ZipPath, Path.Combine(InstallerProjectDir, "res\\" + Path.GetFileName(ZipPath)), true);
             File.Copy(ConfigPath, Path.Combine(InstallerProjectDir, "res\\" + Path.GetFileName(ConfigPath)), true);
-            Program.BuildProject(SkSlnFilename, "Release", "Installer");
+            //Program.BuildProject(SkSlnFilename, "Release", "Installer");
+            System.Diagnostics.Process.Start(Path.Combine(InstallerProjectDir, "make"), "release");
             Console.WriteLine("creating executable");
             //var runner = new MSBuildRunner(InstallerProjectDir);
             //runner.Execute();
-            File.Copy(Path.Combine(InstallerProjectDir, "bin", "SharpKit.Installer.exe"), OutputFilename, true);
-            
+            File.Copy(Path.Combine(InstallerProjectDir, "bin", "SharpKitSetup.exe"), OutputFilename, true);
         }
         public string OutputFilename { get; set; }
 

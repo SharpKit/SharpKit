@@ -7,7 +7,7 @@ IF not "%1" == "release" (
 
 ) ELSE (
 
-%msbuild% /p:Configuration=Release skc5.csproj
+%msbuild% skc5.csproj /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None
 
 )
 

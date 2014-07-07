@@ -1,0 +1,8 @@
+since git cannot store empty directories, these directories should be here in the future:
+
+installer --> plattform indepentent .NET based installer
+deb --> Debian package
+rpm --> rpm based package
+nuget
+mac --> dmg based file
+arch --> pkgbuild file for Arch Linux

@@ -43,7 +43,8 @@ namespace SharpKit.Installer.Builder
     static class Utils
     {
 
-        public static string CorrectPathSeparator(string path){
+        public static string CorrectPathSeparator(string path)
+        {
             if (IsUnix)
                 return path.Replace("\\", "/");
             else

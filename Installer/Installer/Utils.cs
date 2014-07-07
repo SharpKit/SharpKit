@@ -30,7 +30,8 @@ namespace SharpKit.Installer
                     var args = new List<string>(Environment.GetCommandLineArgs());
                     if (!args[0].Contains("mono")) args.Insert(0, "mono");
                     var command = (IsConsole ? "sudo" : "gksudo");
-                    if (!File.Exists(command)) {
+                    if (!File.Exists(command))
+                    {
                         if (IsConsole)
                             Console.WriteLine(errorMessage);
                         else
@@ -52,16 +53,18 @@ namespace SharpKit.Installer
         [DllImport("libc")]
         public static extern uint getuid();
 
-        public static string CorrectPathSeparator(string path){
+        public static string CorrectPathSeparator(string path)
+        {
             if (IsUnix)
                 return path.Replace("\\", "/");
             else
                 return path.Replace("/", "\\");
         }
 
-        public static string GetParentDir(string dir){
+        public static string GetParentDir(string dir)
+        {
             dir = CorrectPathSeparator(dir);
-            if(dir.EndsWith(Path.DirectorySeparatorChar.ToString())) dir=dir.Substring(0,dir.Length-1);
+            if (dir.EndsWith(Path.DirectorySeparatorChar.ToString())) dir = dir.Substring(0, dir.Length - 1);
             var idx = dir.LastIndexOf(Path.DirectorySeparatorChar);
             if (idx <= 0)
                 throw new Exception("Could not get parent: " + dir);
@@ -219,7 +222,8 @@ namespace SharpKit.Installer
             }
         }
 
-        public static void UIDeleteDirectoryIfEmpty(string dir, bool recursive = true) {
+        public static void UIDeleteDirectoryIfEmpty(string dir, bool recursive = true)
+        {
             if (Directory.GetFiles(dir).Length == 0 && Directory.GetDirectories(dir).Length == 0)
                 UIDeleteDirectory(dir);
         }

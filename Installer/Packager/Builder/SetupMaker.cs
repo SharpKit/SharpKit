@@ -27,8 +27,8 @@ namespace SharpKit.Installer.Builder
                 if (Directory.Exists(TempDir)) Directory.Delete(TempDir, true);
             }
             catch { }
-            TempBinDir = TempDir + @"bin"+dsc;
-            TempZipDir = TempDir + @"zip"+dsc;
+            TempBinDir = TempDir + @"bin" + dsc;
+            TempZipDir = TempDir + @"zip" + dsc;
         }
 
         public void Run()
@@ -118,7 +118,7 @@ namespace SharpKit.Installer.Builder
             AddDirectory(GitRoot + @"Compiler\CSharp.Tasks\bin", @"Files\Application\");
             AddDirectory(GitRoot + @"SDK\Defs\bin", @"Files\Application\Defs\");
             AddDirectory(GitRoot + @"SDK\Frameworks\JsClr\bin", @"Files\Application\Frameworks\JsClr\bin\", "SharpKit.JsClr.*");
-            AddDirectory(GitRoot + @"SDK\Frameworks\JsClr\res", @"Files\Application\Frameworks\JsClr\res\","jsclr.*");
+            AddDirectory(GitRoot + @"SDK\Frameworks\JsClr\res", @"Files\Application\Frameworks\JsClr\res\", "jsclr.*");
             AddFile(GitRoot + @"Integration\VisualStudio\ProjectTemplates\SharpKit 5 Web Application.zip", @"Files\Application\Integration\VisualStudio\Templates\");
             AddDirectory(GitRoot + @"Integration\MonoDevelop\bin", @"Files\Application\Integration\MonoDevelop\");
 

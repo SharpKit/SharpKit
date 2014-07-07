@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Amazon;
-using Amazon.S3;
-using Amazon.S3.Util;
-using Amazon.S3.Model;
+//using Amazon;
+//using Amazon.S3;
+//using Amazon.S3.Util;
+//using Amazon.S3.Model;
 using System.Net;
 using System.Net.Security;
 using System.Diagnostics;
 using System.Xml.Linq;
-using Amazon.S3.Transfer;
+//using Amazon.S3.Transfer;
 using SharpKit.Release.Utils;
 using System.Xml;
 using SharpKit.Utils;
@@ -609,9 +609,9 @@ namespace SharpKit.Release
 
         private void S3Upload(string filename, string url)
         {
-            Console.WriteLine("Uploading to " + url);
-            S3Helper.Upload(filename, url, (s, e) => Console.WriteLine("{0}% {1}kb/{2}kb", e.PercentDone, e.TransferredBytes / 1024, e.TotalBytes / 1024));
-            Console.WriteLine("Finished uploading to " + url);
+            //Console.WriteLine("Uploading to " + url);
+            //S3Helper.Upload(filename, url, (s, e) => Console.WriteLine("{0}% {1}kb/{2}kb", e.PercentDone, e.TransferredBytes / 1024, e.TotalBytes / 1024));
+            //Console.WriteLine("Finished uploading to " + url);
         }
 
 

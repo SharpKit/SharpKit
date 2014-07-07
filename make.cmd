@@ -6,11 +6,7 @@ cd external
 call make %1
 cd ..
 
-cd Compiler/skc5
-call make %1
-cd ../..
-
-cd Compiler/CSharp.Tasks
+cd Compiler
 call make %1
 cd ../..
 

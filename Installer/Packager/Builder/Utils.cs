@@ -43,6 +43,21 @@ namespace SharpKit.Installer.Builder
     static class Utils
     {
 
+        public static string CorrectPathSeparator(string path){
+            if (IsUnix)
+                return path.Replace("\\", "/");
+            else
+                return path.Replace("/", "\\");
+        }
+
+        public static bool IsUnix
+        {
+            get
+            {
+                return Environment.OSVersion.Platform == PlatformID.Unix;
+            }
+        }
+
         public static ExecuteResult ExecuteProcess(string dir, string file, string args)
         {
             Console.WriteLine("Executing: {0} {1} {2}", dir, file, args);

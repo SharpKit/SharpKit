@@ -72,7 +72,7 @@ copy $(TargetDir)*.Tasks.dll $(ProjectDir)..\skc5\bin\</PostBuildEvent>
 mkdir -p $(ProjectDir)..\skc5\bin
 cp $(ProjectDir)*.targets $(ProjectDir)..\skc5\bin\
 cp $(ProjectDir)*.Tasks $(ProjectDir)..\skc5\bin\
-#cp $(ProjectDir)..\skc5\bin\SharpKit.CSharp.targets $(ProjectDir)..\skc5\bin\SharpKit.Build.targets
+cp $(ProjectDir)..\skc5\bin\SharpKit.CSharp.targets $(ProjectDir)..\skc5\bin\SharpKit.Build.targets
 cp $(TargetDir)*.Tasks.dll $(ProjectDir)..\skc5\bin\
     </PostBuildEvent>
   </PropertyGroup>

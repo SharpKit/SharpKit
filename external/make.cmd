@@ -7,7 +7,7 @@ IF not "%1" == "release" (
 %msbuild% NRefactory/NRefactory.sln
 %msbuild% corex/corex.sln
 %msbuild% AjaxMin/AjaxMinDll/AjaxMinDll.sln
-%msbuild% aws-sdk-net/AWSSDK_DotNet45/AWSSDK_DotNet45.sln
+rem %msbuild% aws-sdk-net/AWSSDK_DotNet35/AWSSDK_DotNet35.sln
 %msbuild% SharpZipLib/src/ICSharpCode.SharpZLib.csproj
 
 ) ELSE (
@@ -16,7 +16,7 @@ IF not "%1" == "release" (
 %msbuild% NRefactory/NRefactory.sln                       /p:Configuration=net_4_5_Release /p:DebugSymbols=false /p:DebugType=None
 %msbuild% corex/corex.sln                                 /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
 %msbuild% AjaxMin/AjaxMinDll/AjaxMinDll.sln               /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
-%msbuild% aws-sdk-net/AWSSDK_DotNet45/AWSSDK_DotNet45.sln /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
+rem %msbuild% aws-sdk-net/AWSSDK_DotNet35/AWSSDK_DotNet35.sln /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
 %msbuild% SharpZipLib/src/ICSharpCode.SharpZLib.csproj    /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
 
 )

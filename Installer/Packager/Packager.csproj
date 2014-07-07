@@ -35,10 +35,11 @@
     <StartupObject>SharpKit.Release.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <!--
     <Reference Include="AWSSDK">
-      <HintPath>..\..\lib\AWSSDK.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\external\aws-sdk-net\AWSSDK_DotNet35\bin\Release\AWSSDK.dll</HintPath>
     </Reference>
+-->
     <Reference Include="corex">
       <HintPath>..\..\external\corex\src\corex\bin\corex.dll</HintPath>
     </Reference>

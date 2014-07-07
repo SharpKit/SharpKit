@@ -86,6 +86,15 @@ namespace SharpKit.Installer
                 }
             }
 
+            #if UNIX
+            if (!Utils.IsUnix)
+            {
+                MessageBox.Show("This installer was compiled on an unix system. Installation on windows is not supported.", "Not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+            #endif
+
             //MessageBox.Show(string.Format("currProcessPath: {0}\nProgramFilesX86Path: {1}\nProgramFilesPath: {2}", Utils.CurrentProcessFile.ToLower(), Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86).ToLower(), Utils.GetFolderPath(Environment.SpecialFolder.ProgramFiles).ToLower()));
 
             if (Utils.CurrentProcessFile.ToLower().Contains(Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86).ToLower()))

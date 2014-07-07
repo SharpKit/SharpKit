@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Amazon;
+//using Amazon;
 using System.Net;
-using Amazon.S3.Transfer;
-using Amazon.S3.Model;
+//using Amazon.S3.Transfer;
+//using Amazon.S3.Model;
 using System.Diagnostics;
 using System.IO;
 
 namespace SharpKit.Utils
 {
-    class S3Helper
+    /*    class S3Helper
     {
         public static void Upload(string filename, string url, EventHandler<UploadProgressArgs> progressCallback)
         {
@@ -30,5 +30,5 @@ namespace SharpKit.Utils
             req.UploadProgressEvent += progressCallback;
             util.Upload(req);
         }
-    }
+    }*/
 }

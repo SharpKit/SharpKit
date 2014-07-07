@@ -1,0 +1,5 @@
+cd ../..
+make release
+cd Installer && make release
+
+cd contrib/installer

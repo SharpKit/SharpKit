@@ -52,6 +52,22 @@ namespace SharpKit.Installer
         [DllImport("libc")]
         public static extern uint getuid();
 
+        public static string CorrectPathSeparator(string path){
+            if (IsUnix)
+                return path.Replace("\\", "/");
+            else
+                return path.Replace("/", "\\");
+        }
+
+        public static string GetParentDir(string dir){
+            dir = CorrectPathSeparator(dir);
+            if(dir.EndsWith(Path.DirectorySeparatorChar.ToString())) dir=dir.Substring(0,dir.Length-1);
+            var idx = dir.LastIndexOf(Path.DirectorySeparatorChar);
+            if (idx <= 0)
+                throw new Exception("Could not get parent: " + dir);
+            return dir.Substring(0, idx);
+        }
+
         private static bool isUnixRoot
         {
             get
@@ -74,7 +90,7 @@ namespace SharpKit.Installer
 
         public static void GiveUnixFileReadPermission(string file)
         {
-            Process.Start("chmod", "+r " + file).WaitForExit();
+            Process.Start("chmod", "ugo+r " + file).WaitForExit();
         }
 
         private static string _CurrentProcessFile;

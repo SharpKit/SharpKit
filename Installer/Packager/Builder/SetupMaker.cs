@@ -17,6 +17,8 @@ namespace SharpKit.Installer.Builder
         public string TempDir { get; set; }
         public string InstallerProjectDir { get; set; }
 
+        private char dsc = Path.DirectorySeparatorChar;
+
         public SetupMaker()
         {
             TempDir = Path.Combine(Path.GetTempPath(), "SharpKitInstaller") + Path.DirectorySeparatorChar;
@@ -25,8 +27,8 @@ namespace SharpKit.Installer.Builder
                 if (Directory.Exists(TempDir)) Directory.Delete(TempDir, true);
             }
             catch { }
-            TempBinDir = TempDir + @"bin\";
-            TempZipDir = TempDir + @"zip\";
+            TempBinDir = TempDir + @"bin"+dsc;
+            TempZipDir = TempDir + @"zip"+dsc;
         }
 
         public void Run()
@@ -41,11 +43,15 @@ namespace SharpKit.Installer.Builder
 
         void AddFile(string source, string target)
         {
+            source = Utils.CorrectPathSeparator(source);
+            target = Utils.CorrectPathSeparator(target);
             Files.Add(new FileMapping { Source = source, Target = target });
         }
 
         void AddDirectory(string source, string target, string filter = "")
         {
+            source = Utils.CorrectPathSeparator(source);
+            target = Utils.CorrectPathSeparator(target);
             if (filter == "") filter = "*";
             foreach (var file in System.IO.Directory.GetFiles(source, filter))
             {
@@ -113,7 +119,8 @@ namespace SharpKit.Installer.Builder
             AddDirectory(GitRoot + @"SDK\Defs\bin", @"Files\Application\Defs\");
             AddDirectory(GitRoot + @"SDK\Frameworks\JsClr\bin", @"Files\Application\Frameworks\JsClr\bin\", "SharpKit.JsClr.*");
             AddDirectory(GitRoot + @"SDK\Frameworks\JsClr\res", @"Files\Application\Frameworks\JsClr\res\","jsclr.*");
-            AddFile(GitRoot + @"Integration\VisualStudio\ProjectTemplates\SharpKit 5 Web Application.zip", @"Files\Application\Templates\");
+            AddFile(GitRoot + @"Integration\VisualStudio\ProjectTemplates\SharpKit 5 Web Application.zip", @"Files\Application\Integration\VisualStudio\Templates\");
+            AddDirectory(GitRoot + @"Integration\MonoDevelop\bin", @"Files\Application\Integration\MonoDevelop\");
 
             foreach (var file in Files)
             {

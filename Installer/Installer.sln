@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{EA0675B5-6803-425C-97FE-3C257BC6B902}"
@@ -8,10 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Packager", "Packager\Packager.csproj", "{693DF473-3732-4845-BDDB-F441081FCB26}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -21,16 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|x86.ActiveCfg = Debug|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|x86.Build.0 = Debug|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|Any CPU.ActiveCfg = Release|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|Mixed Platforms.Build.0 = Release|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|x86.ActiveCfg = Release|x86
-		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|x86.Build.0 = Release|x86
 		{693DF473-3732-4845-BDDB-F441081FCB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{693DF473-3732-4845-BDDB-F441081FCB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{693DF473-3732-4845-BDDB-F441081FCB26}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -41,6 +27,23 @@ Global
 		{693DF473-3732-4845-BDDB-F441081FCB26}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{693DF473-3732-4845-BDDB-F441081FCB26}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{693DF473-3732-4845-BDDB-F441081FCB26}.Release|x86.ActiveCfg = Release|Any CPU
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|x86.ActiveCfg = Debug|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Debug|x86.Build.0 = Debug|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|Any CPU.ActiveCfg = Release|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|Mixed Platforms.Build.0 = Release|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|x86.ActiveCfg = Release|x86
+		{EA0675B5-6803-425C-97FE-3C257BC6B902}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Installer\Installer.csproj
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

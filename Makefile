@@ -7,5 +7,5 @@ debug:
 release:
 	cd external && $(MAKE) release
 	cd Compiler && $(MAKE) release
-	cd SDK && $(MAKE) relase
+	cd SDK && $(MAKE) release
 	cd Integration/MonoDevelop && $(MAKE) release

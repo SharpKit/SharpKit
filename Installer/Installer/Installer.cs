@@ -50,6 +50,7 @@ namespace SharpKit.Installer
         public string TemplateDirectoryVS2012 { get; set; }
         public string TemplateDirectoryVS2013 { get; set; }
         public string MonoDevelopPluginPath { get; set; }
+        public string MonoDevelopSharpKitPluginPath { get; set; }
 
         private string WindowsFolder = Utils.GetFolderPath(Environment.SpecialFolder.Windows);
         private Dictionary<string, string> ConfigHash;
@@ -66,7 +67,8 @@ namespace SharpKit.Installer
                 MSBuildFolder35 = "/usr/lib/mono/3.5";
                 MSBuildFolder40 = "/usr/lib/mono/4.0";
                 MSBuildFolder45 = "/usr/lib/mono/4.5";
-                MonoDevelopPluginPath = "/usr/lib/monodevelop/AddIns/MonoDevelop.SharpKit";
+                MonoDevelopPluginPath = "/usr/lib/monodevelop/AddIns";
+                    MonoDevelopSharpKitPluginPath = Path.Combine(MonoDevelopPluginPath,"MonoDevelop.SharpKit");
             }
             else
             {
@@ -224,7 +226,7 @@ namespace SharpKit.Installer
 
                     if (Utils.IsUnix)
                     {
-                        zip.ExtractDirectory(@"Files/MonoDevelopPlugin", MonoDevelopPluginPath, Log);
+                                //zip.ExtractDirectory(@"Files/MonoDevelopPlugin", MonoDevelopPluginPath, Log);
                         ////zip.ExtractDirectory(@"Files/NET_Unix", SharpKitNETFolder35, Log);
                         //TODO: zip.ExtractDirectory(@"Files/NET_Unix", SharpKitNETFolder40, Log);
                     }
@@ -234,9 +236,15 @@ namespace SharpKit.Installer
                 CreateNETSymbolicLink(MSBuildFolder40, MSBuildSharpKitFolder40, ApplicationCompilerFolder);
                 CreateNETSymbolicLink(MSBuildFolder45, MSBuildSharpKitFolder45, ApplicationCompilerFolder);
 
-                CreateNETSymbolicLink(Path.Combine(TemplateDirectoryVS2010, ".."), TemplateDirectoryVS2010, Path.Combine(ApplicationFolder, "Templates"));
-                CreateNETSymbolicLink(Path.Combine(TemplateDirectoryVS2012, ".."), TemplateDirectoryVS2012, Path.Combine(ApplicationFolder, "Templates"));
-                CreateNETSymbolicLink(Path.Combine(TemplateDirectoryVS2013, ".."), TemplateDirectoryVS2013, Path.Combine(ApplicationFolder, "Templates"));
+                if(!Utils.IsUnix){
+                CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2010), TemplateDirectoryVS2010, Path.Combine(ApplicationFolder, "Templates"));
+                CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2012), TemplateDirectoryVS2012, Path.Combine(ApplicationFolder, "Templates"));
+                CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2013), TemplateDirectoryVS2013, Path.Combine(ApplicationFolder, "Templates"));
+                    }
+
+                if(Utils.IsUnix){
+                   CreateNETSymbolicLink(MonoDevelopPluginPath, MonoDevelopSharpKitPluginPath, Path.Combine(ApplicationFolder,"Integration","MonoDevelop"));
+                }
 
                 File.Copy(Utils.CurrentProcessFile, ApplicationFolder + dsc + "SharpKitSetup.exe", true);
 
@@ -248,12 +256,17 @@ namespace SharpKit.Installer
                     //CreateBashScript("skc-activation", ApplicationFolder + "/SharpKitActivation.exe");
 
                     Log("Set unix read permission");
-                    Utils.GiveUnixDirectoryReadPermission(ApplicationFolder);
-                    Utils.GiveUnixDirectoryReadPermission(MonoDevelopPluginPath);
+                        //Utils.GiveUnixDirectoryReadPermission(ApplicationFolder);
+                        //Utils.GiveUnixDirectoryReadPermission(MonoDevelopSharpKitPluginPath);
+                        Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(ApplicationFolder)).WaitForExit();
+
+                        Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(MSBuildSharpKitFolder35))).WaitForExit();
+                        Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(MSBuildSharpKitFolder40))).WaitForExit();
+                        Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(MSBuildSharpKitFolder45))).WaitForExit();
 
                     Log("Set unix execution permission");
-                    Process.Start("chmod", "+x " + ApplicationCompilerFolder + "/skc5.exe").WaitForExit();
-                    Process.Start("chmod", "+x " + ApplicationFolder + "/SharpKitSetup.exe").WaitForExit();
+                        Process.Start("chmod", "ugo+x " + ApplicationCompilerFolder + "/skc5.exe").WaitForExit();
+                        Process.Start("chmod", "ugo+x " + ApplicationFolder + "/SharpKitSetup.exe").WaitForExit();
                     //Process.Start("chmod", "+x " + ApplicationFolder + "/SharpKitActivation.exe").WaitForExit();
                 }
 
@@ -279,9 +292,11 @@ namespace SharpKit.Installer
                 }
                 else
                 {
+                        #if WINNT
                     //CreateShortcutWin("Activate SharpKit", ApplicationFolder + @"\SharpKitActivation.exe", "", "Activate SharpKit");
                     CreateShortcutWin("Check for a New Version", ApplicationCompilerFolder + @"\skc5.exe", "/CheckForNewVersion", "Check for Updates");
                     CreateShortcutWin("Modify installation", ApplicationFolder + @"\SharpKitSetup.exe", "", "Modify installation");
+                        #endif
                 }
 
                 if (!Utils.IsUnix)
@@ -306,20 +321,36 @@ namespace SharpKit.Installer
         {
             if (Directory.Exists(checkDir))
             {
-                if (!Directory.Exists(Path.Combine(symbol, "..")))
-                    Directory.CreateDirectory(Path.Combine(symbol, ".."));
+                    if (!Directory.Exists(Utils.GetParentDir(symbol)))
+                        Directory.CreateDirectory(Utils.GetParentDir(symbol));
 
                 if (Directory.Exists(symbol))
                 {
                     Log("Removing old symbolic link: " + symbol);
                     Utils.UIDeleteDirectory(symbol, false); //target is maybe not correct, so remove it
                 }
-                Log("Creating symbolic link: " + symbol);
+                CreateLink(symbol, target);
+            }
+        }
+
+        void CreateLink(string symbol, string target){
+            Log("Creating symbolic link: " + symbol);
+            if (Utils.IsUnix)
+            {
+                    RunProcess("ln", "-s " + target + " " + symbol);
+            }
+            else
+            {
                 if (!CreateSymbolicLink(symbol, target, 1))
                 {
                     Log("Error during creating symbolic link: " + GetLastError().ToString());
                 }
             }
+        }
+
+        void RunProcess(string app, string args){
+            Log(String.Format("Running: {0}, Args: {1}",app, args));
+            Process.Start(app, args).WaitForExit();
         }
 
         [DllImport("kernel32.dll")]
@@ -371,7 +402,7 @@ namespace SharpKit.Installer
                 }
                 else
                 {
-                    Utils.UIDeleteDirectory(MonoDevelopPluginPath);
+                        Utils.UIDeleteDirectory(MonoDevelopSharpKitPluginPath);
                 }
 
                 if (Utils.IsUnix)
@@ -477,6 +508,7 @@ namespace SharpKit.Installer
             return new TZipArchive(ms);
         }
 
+        #if WINNT
         private void CreateShortcutWin(string name, string destFile, string arguments = "", string description = "")
         {
             var lnkFile = StartMenuDir + dsc + name + ".lnk";
@@ -492,6 +524,7 @@ namespace SharpKit.Installer
             shortcut.WorkingDirectory = Path.GetDirectoryName(destFile); ;
             shortcut.Save();
         }
+        #endif
 
         private void CreateShortcutUnix(string fileName, string name, string destFile, string arguments = "", string description = "")
         {

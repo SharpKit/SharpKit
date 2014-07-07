@@ -74,8 +74,8 @@ namespace SharpKit.Installer.Builder
 
         void CreateExe()
         {
-            File.Copy(ZipPath, Path.Combine(InstallerProjectDir, "res\\" + Path.GetFileName(ZipPath)), true);
-            File.Copy(ConfigPath, Path.Combine(InstallerProjectDir, "res\\" + Path.GetFileName(ConfigPath)), true);
+            File.Copy(ZipPath, Path.Combine(InstallerProjectDir, "res", Path.GetFileName(ZipPath)), true);
+            File.Copy(ConfigPath, Path.Combine(InstallerProjectDir, "res", Path.GetFileName(ConfigPath)), true);
             //Program.BuildProject(SkSlnFilename, "Release", "Installer");
             System.Diagnostics.Process.Start(Path.Combine(InstallerProjectDir, "make"), "release");
             Console.WriteLine("creating executable");

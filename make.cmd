@@ -8,7 +8,7 @@ cd ..
 
 cd Compiler
 call make %1
-cd ../..
+cd ..
 
 cd SDK
 call make %1

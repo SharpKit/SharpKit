@@ -6,4 +6,4 @@ cd ../..
 call make release
 call Installer/make release
 
-cd contrib/installer
+cd ../contrib/installer

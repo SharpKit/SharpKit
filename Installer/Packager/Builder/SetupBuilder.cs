@@ -77,8 +77,14 @@ namespace SharpKit.Installer.Builder
             File.Copy(ZipPath, Path.Combine(InstallerProjectDir, "res", Path.GetFileName(ZipPath)), true);
             File.Copy(ConfigPath, Path.Combine(InstallerProjectDir, "res", Path.GetFileName(ConfigPath)), true);
             //Program.BuildProject(SkSlnFilename, "Release", "Installer");
-            System.Diagnostics.Process.Start(Path.Combine(InstallerProjectDir, "make"), "release");
             Console.WriteLine("creating executable");
+            //System.Diagnostics.Process.Start(Path.Combine(InstallerProjectDir, "make"), "release");
+
+            if (Utils.IsUnix)
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("make", "release") { WorkingDirectory = InstallerProjectDir, UseShellExecute = true });
+            else
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd", "/c make release") { WorkingDirectory = InstallerProjectDir, UseShellExecute = true });
+
             //var runner = new MSBuildRunner(InstallerProjectDir);
             //runner.Execute();
             File.Copy(Path.Combine(InstallerProjectDir, "bin", "SharpKitSetup.exe"), OutputFilename, true);

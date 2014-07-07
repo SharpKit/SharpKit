@@ -81,9 +81,9 @@ namespace SharpKit.Installer.Builder
             //System.Diagnostics.Process.Start(Path.Combine(InstallerProjectDir, "make"), "release");
 
             if (Utils.IsUnix)
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("make", "release") { WorkingDirectory = InstallerProjectDir, UseShellExecute = true });
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("make", "release") { WorkingDirectory = InstallerProjectDir, UseShellExecute = true }).WaitForExit();
             else
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd", "/c make release") { WorkingDirectory = InstallerProjectDir, UseShellExecute = true });
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd", "/c make release") { WorkingDirectory = InstallerProjectDir, UseShellExecute = true }).WaitForExit();
 
             //var runner = new MSBuildRunner(InstallerProjectDir);
             //runner.Execute();

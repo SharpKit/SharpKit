@@ -9,3 +9,9 @@ release:
 	cd Compiler && $(MAKE) release
 	cd SDK && $(MAKE) release
 	cd Integration/MonoDevelop && $(MAKE) release
+
+clean:
+	rm -rf \
+		*/bin */*/bin */*/*/bin */*/*/*/bin */*/*/*/*/bin \
+		*/obj */*/obj */*/*/obj */*/*/*/obj */*/*/*/*/obj
+

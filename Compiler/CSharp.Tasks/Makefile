@@ -1,5 +1,5 @@
 debug:
-	xbuild MSBuild.csproj
+	xbuild
 
 release:
 	xbuild /p:Configuration=Release

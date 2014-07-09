@@ -1,5 +1,5 @@
 debug:
-	xbuild skc5.csproj
+	xbuild
 
 release:
 	xbuild /p:Configuration=Release

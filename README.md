@@ -40,4 +40,4 @@ Verify the VERSION-file in the root directory . Change the Version number if nee
 cd contrib/installer/
 create
 ```
-The installer will be created in the contrib directory and can be used for windows and linux. Note: If you create the installer on linux (because some windows-only libaries are missing), it cannot be used for windows. You should generate it on windows for better compatibility.
+The installer will be created in the contrib directory and can be used for windows and linux. Note: If you create the installer on linux, it cannot be used for windows (because some windows-only libaries are missing). You should generate it on windows for better compatibility.

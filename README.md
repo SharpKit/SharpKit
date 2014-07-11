@@ -33,3 +33,11 @@ chmod +x configure
 ./configure
 make
 ```
+
+###### Creating the installer
+Verify the VERSION-file in the root directory . Change the Version number if needed. Than:
+```
+cd contrib/installer/
+create
+```
+The installer will be created in the contrib directory and can be used for windows and linux. Note: If you create the installer on linux (because some windows-only libaries are missing), it cannot be used for windows. You should generate it on windows for better compatibility.

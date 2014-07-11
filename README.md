@@ -37,6 +37,7 @@ make
 ###### Creating the installer
 Verify the VERSION-file in the root directory . Change the Version number if needed. Than:
 ```
+configure # When you called this already, you do not need to call it again.
 cd contrib/installer/
 create
 ```

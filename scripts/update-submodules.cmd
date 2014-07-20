@@ -1,5 +1,5 @@
 @cd /D %~dp0
-@call set-variables.bat
+@call set-variables
 
 @cd ../external
 %git% submodule foreach git pull origin master

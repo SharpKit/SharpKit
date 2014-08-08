@@ -34,6 +34,8 @@ namespace SharpKit.Installer
         public string MSBuildSharpKitFolder40 { get; set; }
         public string MSBuildSharpKitFolder45 { get; set; }
 
+        //public string MSBuildExtensionPath { get; set; }
+
         public string DocumentsFolder { get; set; }
         public string ProductVersion { get; set; }
         public string ProductType { get; set; }
@@ -57,9 +59,13 @@ namespace SharpKit.Installer
 
         public Installer()
         {
-            ApplicationFolder = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "SharpKit" + dsc + "5";
-            //ApplicationCompilerFolder = ApplicationFolder + dsc + "Compiler";
-            ApplicationCompilerFolder = ApplicationFolder;
+            if (Utils.IsUnix)
+                ApplicationFolder = "/usr/lib/mono/xbuild/SharpKit/5";
+            else
+                ApplicationFolder = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "MSBuild" + dsc + "SharpKit" + dsc + "5";
+
+            ApplicationCompilerFolder = ApplicationFolder + dsc + "Compiler";
+            //ApplicationCompilerFolder = ApplicationFolder;
             ApplicationDefsFolder = ApplicationFolder + dsc + "Defs";
 
             if (Utils.IsUnix)
@@ -69,12 +75,14 @@ namespace SharpKit.Installer
                 MSBuildFolder45 = "/usr/lib/mono/4.5";
                 MonoDevelopPluginPath = "/usr/lib/monodevelop/AddIns";
                 MonoDevelopSharpKitPluginPath = Path.Combine(MonoDevelopPluginPath, "MonoDevelop.SharpKit");
+                //MSBuildExtensionPath = "/usr/lib/mono/xbuild";
             }
             else
             {
                 MSBuildFolder35 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v3.5";
                 MSBuildFolder40 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v4.0.30319";
-                MSBuildFolder45 = @"C:\Program Files (x86)\MSBuild\12.0\bin";
+                MSBuildFolder45 = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + @"\MSBuild\12.0\bin";
+                //MSBuildExtensionPath = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "MSBuild";
             }
             MSBuildSharpKitFolder35 = Path.Combine(MSBuildFolder35, "SharpKit", "5");
             MSBuildSharpKitFolder40 = Path.Combine(MSBuildFolder40, "SharpKit", "5");
@@ -398,6 +406,10 @@ namespace SharpKit.Installer
                 Utils.UIDeleteDirectory(ApplicationFolder);
                 Utils.UIDeleteDirectory(MSBuildSharpKitFolder35);
                 Utils.UIDeleteDirectory(MSBuildSharpKitFolder40);
+
+                //old program file dir from depricated setup location
+                Utils.UIDeleteDirectory(Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "SharpKit" + dsc + "5");
+
                 if (!Utils.IsUnix)
                 {
                     Utils.UIDeleteDirectory(TemplateDirectoryVS2010);

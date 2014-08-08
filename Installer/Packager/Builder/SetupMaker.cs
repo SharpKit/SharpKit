@@ -114,8 +114,8 @@ namespace SharpKit.Installer.Builder
             ////    file.Target = ParamHelper.Eval(file.Target, Vars);
             ////}
 
-            AddDirectory(GitRoot + @"Compiler\skc5\bin", @"Files\Application\");
-            AddDirectory(GitRoot + @"Compiler\CSharp.Tasks\bin", @"Files\Application\");
+            AddDirectory(GitRoot + @"Compiler\skc5\bin", @"Files\Application\Compiler\");
+            AddDirectory(GitRoot + @"Compiler\CSharp.Tasks\bin", @"Files\Application\Compiler\");
             AddDirectory(GitRoot + @"SDK\Defs\bin", @"Files\Application\Defs\");
             AddDirectory(GitRoot + @"SDK\Frameworks\JsClr\bin", @"Files\Application\Frameworks\JsClr\bin\", "SharpKit.JsClr.*");
             AddDirectory(GitRoot + @"SDK\Frameworks\JsClr\res", @"Files\Application\Frameworks\JsClr\res\", "jsclr.*");

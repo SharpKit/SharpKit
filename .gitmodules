@@ -26,6 +26,3 @@
 	path = external/AjaxMin
 	url = https://github.com/danelkhen/AjaxMin.git
 	ignore = dirty
-[submodule "external/octokit.net"]
-	path = external/octokit.net
-	url = https://github.com/octokit/octokit.net.git

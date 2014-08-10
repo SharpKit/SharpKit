@@ -733,6 +733,38 @@ namespace SharpKit.Release
             return defaultValue;
         }
 
+        public static string GitHubAccessToken
+        {
+            get
+            {
+                return GetValue("GitHubAccessToken", "");
+            }
+        }
+
+        public static string GitHubUser
+        {
+            get
+            {
+                return GetValue("GitHubUser", "Arakis");
+            }
+        }
+
+        public static string GitHubRepoCompiler
+        {
+            get
+            {
+                return GetValue("GitHubRepoCompiler", "test");
+            }
+        }
+
+        public static string GitHubRepoSDK
+        {
+            get
+            {
+                return GetValue("GitHubRepoSDK", "test");
+            }
+        }
+
         public static string SkRootDir
         {
             get

@@ -43,6 +43,14 @@ namespace SharpKit.Installer.Builder
     static class Utils
     {
 
+        public static void CallMake(string dir)
+        {
+            if (Utils.IsUnix)
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("make", "release") { WorkingDirectory = dir, UseShellExecute = true }).WaitForExit();
+            else
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd", "/c make release") { WorkingDirectory = dir, UseShellExecute = true }).WaitForExit();
+        }
+
         public static string CorrectPathSeparator(string path)
         {
             if (IsUnix)

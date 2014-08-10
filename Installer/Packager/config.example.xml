@@ -3,4 +3,9 @@
   <param key="SkRootDir" value="D:\sharpkit" />
   <param key="SkTrunkDir" value="D:\sharpkit\compiler\src" />
   <param key="SdkTrunkDir" value="D:\sharpkit\sdk\src" />
+
+  <param key="GitHubAccessToken" value="" />
+  <param key="GitHubUser" value="SharpKit" />
+  <param key="GitHubRepoCompiler" value="SharpKit" />
+  <param key="GitHubRepoSDK" value="SharpKit-SDK" />
 </config>

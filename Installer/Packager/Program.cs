@@ -18,6 +18,7 @@ using SharpKit.Utils;
 using SharpKit.Installer.Builder;
 using SharpKit.Installer;
 using Octokit;
+using System.Text.RegularExpressions;
 
 namespace SharpKit.Release
 {
@@ -49,7 +50,7 @@ namespace SharpKit.Release
                 return;
             }
 
-            Console.WriteLine("Note: you can automate all commands via packer.exe <command>");
+            Console.WriteLine("Note: you can automate all commands via packager.exe <command>");
 
             while (true)
             {
@@ -71,6 +72,7 @@ namespace SharpKit.Release
                 WriteCommand("create-installer");
                 WriteCommand("upload");
                 WriteCommand("rollback", "Reverts all changed version files to its original state. Assues, that they are not commited. Note: It's not fully implemented.");
+                WriteCommand("release", "runs create-version, create-installer, create-release and upload.");
                 WriteCommand("exit");
 
                 Console.WriteLine();
@@ -93,6 +95,19 @@ namespace SharpKit.Release
                 Console.WriteLine(": " + description);
         }
 
+        public void WriteLine(string text, ConsoleColor color)
+        {
+            Write(text + Environment.NewLine, color);
+        }
+
+        public void Write(string text, ConsoleColor color)
+        {
+            var old = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ForegroundColor = old;
+        }
+
         public void ReadVersion()
         {
             ProductVersion = File.ReadAllLines(Path.Combine(GitRoot, "VERSION"))[0];
@@ -100,19 +115,14 @@ namespace SharpKit.Release
 
         public void ProcessCommand(string cmd)
         {
+            ReadVersion();
+
             switch (cmd)
             {
 
                 case "create-version":
                     {
-                        Console.WriteLine("Enter new version (optional): ");
-                        var v = Console.ReadLine();
-                        if (v.IsNotNullOrEmpty())
-                        {
-                            ProductVersion = v;
-                            CreateNewVersion();
-                            return;
-                        }
+                        CreateNewVersion();
                         break;
                     }
 
@@ -140,14 +150,112 @@ namespace SharpKit.Release
                         break;
                     }
 
+                case "release":
+                    {
+                        Release();
+                        break;
+                    }
+
                 default:
                     Console.WriteLine("Unknown command / not implemented");
-                    break;
+                    return;
+            }
+            Console.WriteLine("Command finished");
+        }
+
+        public void Release()
+        {
+            CreateNewVersion();
+            CreateInstaller();
+            CreateGitHubRelease();
+            Upload();
+        }
+
+        #region "CreateNewVersion"
+
+        public void CreateNewVersion()
+        {
+            Console.WriteLine("Enter new version (optional): ");
+            var v = Console.ReadLine();
+            if (v.IsNotNullOrEmpty())
+            {
+                CreateNewVersion(v);
+                return;
             }
         }
 
+        public void CreateNewVersion(string version)
+        {
+            ProductVersion = version;
+            ReleaseLog = new ReleaseLog { Created = DateTime.Now, Filename = Path.Combine(ReleaseLogsDir, ProductVersion + ".xml"), Version = ProductVersion };
+            FillLog();
+            ReleaseLog.Save();
+
+            UpdateVersionFiles();
+
+            SharpKit.Installer.Builder.Utils.CallMake(Path.Combine(GitRoot, "Compiler"));
+            SharpKit.Installer.Builder.Utils.CallMake(Path.Combine(GitRoot, "SDK")); //Because the the js files contains the version in the header, the files need to be regenerated before commit
+
+            WriteLine("******************************************************************************", ConsoleColor.Green);
+            WriteLine("The new version is now changed in all files. Please commit and push it to git now BEFORE you create a github release/tag!", ConsoleColor.Green);
+            WriteLine("******************************************************************************", ConsoleColor.Green);
+
+            Console.WriteLine("Press enter key to continue...");
+            Console.ReadLine();
+
+            //CommitGit();
+        }
+
+        public void UpdateVersionFiles()
+        {
+            File.WriteAllText(Path.Combine(GitRoot, "VERSION"), ProductVersion);
+            //UpdateSharpKitVersionInfoSourceFiles(ReleaseLog);
+            UpdateAssemblyFileVersions(ProductVersion);
+        }
+
+        void UpdateAssemblyFileVersions(string version)
+        {
+            //foreach (var dir in Directory.GetDirectories(SdkSrcDir))
+            //{
+            //    var file = Path.Combine(dir, "Properties\\AssemblyInfo");
+            //    if (File.Exists(file))
+            //    {
+            //        UpdateAssemblyFileVersion(file, version);
+            //    }
+            //}
+
+            foreach (var project in SharpKitCompilerProjectNames)
+            {
+                var file = GitRoot + "\\Compiler\\" + project + "\\Properties\\AssemblyInfo.cs";
+                if (File.Exists(file))
+                    UpdateAssemblyFileVersion(file, version);
+            }
+            //UpdateAssemblyFileVersion(@"C:\Projects\SharpJs\lib\NRefactory\ICSharpCode.NRefactory\Properties\GlobalAssemblyInfo.cs", version);
+            //UpdateAssemblyFileVersion(@"C:\Projects\SharpJs\lib\Mono.Cecil\Mono.Cecil\AssemblyInfo.cs", version);
+
+        }
+
+        private void UpdateAssemblyFileVersion(string file, string version)
+        {
+            Console.WriteLine("Updating {0}", file);
+            var lines = File.ReadAllLines(file).ToList();
+            var index = lines.FindIndex(t => t.StartsWith("[assembly: AssemblyFileVersion("));
+            if (index < 0)
+            {
+                lines.Add("");
+                index = lines.Count - 1;
+            }
+            Console.WriteLine(lines[index]);
+            lines[index] = String.Format("[assembly: AssemblyFileVersion(\"{0}\")]", version);
+            Console.WriteLine(lines[index]);
+            File.WriteAllLines(file, lines);
+        }
+
+        #endregion
+
+        #region "ReleaseLog"
+
         ReleaseLog ReleaseLog;
-        //ReleaseLog LastReleaseLog;
 
         void UpdateSharpKitVersionInfoSourceFiles(ReleaseLog log)
         {
@@ -320,36 +428,8 @@ namespace SharpKit.Release
 
         public string ReleaseLogsDir;
 
-        public void CreateNewVersion()
-        {
-            ReleaseLog = new ReleaseLog { Created = DateTime.Now, Filename = Path.Combine(ReleaseLogsDir, ProductVersion + ".xml"), Version = ProductVersion };
-            FillLog();
-            ReleaseLog.Save();
+        #endregion
 
-            UpdateVersionFiles();
-
-            SharpKit.Installer.Builder.Utils.CallMake(Path.Combine(GitRoot, "Compiler"));
-            SharpKit.Installer.Builder.Utils.CallMake(Path.Combine(GitRoot, "SDK")); //Because the the js files contains the version in the header, the files need to be regenerated before commit
-
-            WriteLine("******************************************************************************", ConsoleColor.Green);
-            WriteLine("The new version is now changed in all files. Please commit and push it to git now BEFORE you create a github release/tag!", ConsoleColor.Green);
-            WriteLine("******************************************************************************", ConsoleColor.Green);
-
-            //CommitGit();
-        }
-
-        public void WriteLine(string text, ConsoleColor color)
-        {
-            Write(text + Environment.NewLine, color);
-        }
-
-        public void Write(string text, ConsoleColor color)
-        {
-            var old = Console.ForegroundColor;
-            Console.ForegroundColor = color;
-            Console.Write(text);
-            Console.ForegroundColor = old;
-        }
 
         public void CommitGit()
         {
@@ -361,13 +441,6 @@ namespace SharpKit.Release
         public void CallGit(string args)
         {
             //
-        }
-
-        public void UpdateVersionFiles()
-        {
-            File.WriteAllText(Path.Combine(GitRoot, "VERSION"), ProductVersion);
-            //UpdateSharpKitVersionInfoSourceFiles(ReleaseLog);
-            UpdateAssemblyFileVersions(ProductVersion);
         }
 
         //TODO
@@ -385,75 +458,7 @@ namespace SharpKit.Release
             "skc5",
         };
 
-        void UpdateAssemblyFileVersions(string version)
-        {
-            //foreach (var dir in Directory.GetDirectories(SdkSrcDir))
-            //{
-            //    var file = Path.Combine(dir, "Properties\\AssemblyInfo");
-            //    if (File.Exists(file))
-            //    {
-            //        UpdateAssemblyFileVersion(file, version);
-            //    }
-            //}
-
-            foreach (var project in SharpKitCompilerProjectNames)
-            {
-                var file = GitRoot + "\\Compiler\\" + project + "\\Properties\\AssemblyInfo.cs";
-                if (File.Exists(file))
-                    UpdateAssemblyFileVersion(file, version);
-            }
-            //UpdateAssemblyFileVersion(@"C:\Projects\SharpJs\lib\NRefactory\ICSharpCode.NRefactory\Properties\GlobalAssemblyInfo.cs", version);
-            //UpdateAssemblyFileVersion(@"C:\Projects\SharpJs\lib\Mono.Cecil\Mono.Cecil\AssemblyInfo.cs", version);
-
-        }
-
-        private void UpdateAssemblyFileVersion(string file, string version)
-        {
-            Console.WriteLine("Updating {0}", file);
-            var lines = File.ReadAllLines(file).ToList();
-            var index = lines.FindIndex(t => t.StartsWith("[assembly: AssemblyFileVersion("));
-            if (index < 0)
-            {
-                lines.Add("");
-                index = lines.Count - 1;
-            }
-            Console.WriteLine(lines[index]);
-            lines[index] = String.Format("[assembly: AssemblyFileVersion(\"{0}\")]", version);
-            Console.WriteLine(lines[index]);
-            File.WriteAllLines(file, lines);
-        }
-
-        public void CreateGitHubRelease()
-        {
-            GitHubClient.Release.Create(Config.GitHubUser, Config.GitHubRepoCompiler, new ReleaseUpdate(ProductVersion)).Wait();
-        }
-
-        public void Upload()
-        {
-            try
-            {
-                var rels = GitHubClient.Release.GetAll(Config.GitHubUser, Config.GitHubRepoCompiler);
-                rels.Wait();
-                foreach (var rel in rels.Result)
-                {
-                    if (rel.TagName == ProductVersion)
-                    {
-                        Octokit.Internal.Request.DefaultTimeout = TimeSpan.FromSeconds(1000);
-                        Stream str = new MemoryStream();
-                        var _bytes = File.ReadAllBytes(SetupFilename);
-                        str.Write(_bytes, 0, _bytes.Length);
-                        str.Seek(0, SeekOrigin.Begin);
-
-                        GitHubClient.Release.UploadAsset(rel, new ReleaseAssetUpload() { ContentType = "application/exe", FileName = Path.GetFileName(SetupFilename), RawData = str }).Wait();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-        }
+        #region "GitHubRelease"
 
         private GitHubClient _GitHubClient;
         public GitHubClient GitHubClient
@@ -479,6 +484,97 @@ namespace SharpKit.Release
             return rels.Result.Last().TagName;
         }
 
+        public void CreateGitHubRelease()
+        {
+            DeleteGitHubRelease(Config.GitHubRepoCompiler, ProductVersion);
+            DeleteGitHubRelease(Config.GitHubRepoSDK, ProductVersion);
+
+            GitHubClient.Release.Create(Config.GitHubUser, Config.GitHubRepoCompiler, new ReleaseUpdate(ProductVersion)
+            {
+                Name = ProductVersion,
+                Body = GenerateGitHubReleaseLogDescription()
+            }).Wait();
+
+            GitHubClient.Release.Create(Config.GitHubUser, Config.GitHubRepoSDK, new ReleaseUpdate(ProductVersion)
+            {
+                Name = ProductVersion
+            }).Wait();
+        }
+
+        public void DeleteGitHubRelease(string repo, string version)
+        {
+            var rels = GitHubClient.Release.GetAll(Config.GitHubUser, repo);
+            rels.Wait();
+            foreach (var rel in rels.Result)
+            {
+                if (rel.TagName == version)
+                {
+                    GitHubClient.Release.Delete(Config.GitHubUser, repo, rel.Id);
+                }
+            }
+        }
+
+        public string GenerateGitHubReleaseLogDescription()
+        {
+            ReleaseLog = ReleaseLog.Load(Path.Combine(ReleaseLogsDir, ProductVersion + ".xml"));
+            var sb = new StringBuilder();
+            GenerateGitHubReleaseLogDescription(sb, ReleaseLog.SharpKit5, "Compiler", "SharpKit");
+            GenerateGitHubReleaseLogDescription(sb, ReleaseLog.SharpKit_Sdk, "SDK", "SharpKit-SDK");
+            return sb.ToString();
+        }
+
+        public void GenerateGitHubReleaseLogDescription(StringBuilder sb, SolutionInfo info, string name, string repo)
+        {
+            sb.AppendLine();
+            sb.AppendLine("##### " + name + " changes");
+            foreach (var itm in info.SvnLogEntries)
+            {
+                var msg = itm.msg;
+                var reg = new System.Text.RegularExpressions.Regex(@"(\(|\s)(#[0-9]+)(\)\s|.|,)", RegexOptions.RightToLeft);
+                var msgSB = new StringBuilder(msg);
+                foreach (Match m in reg.Matches(msg))
+                {
+                    var hash = m.Groups[2].Value;
+                    var issue = "[" + hash + "](../../../../" + Config.GitHubUser + "/" + repo + "/issues/" + hash.Replace("#", "") + ")";
+                    msgSB.Replace(m.Groups[2].Value, issue, m.Groups[2].Index, m.Groups[2].Length);
+                }
+                msg = msgSB.ToString();
+
+                msg = "* " + msg + " ([view](../../commit/" + itm.revision + "))";
+                sb.AppendLine(msg);
+            }
+        }
+
+        public void Upload()
+        {
+            Console.WriteLine("Uploading setup file. This can take several minutes!");
+            try
+            {
+                var rels = GitHubClient.Release.GetAll(Config.GitHubUser, Config.GitHubRepoCompiler);
+                rels.Wait();
+                foreach (var rel in rels.Result)
+                {
+                    if (rel.TagName == ProductVersion)
+                    {
+                        Octokit.Internal.Request.DefaultTimeout = TimeSpan.FromSeconds(1000);
+                        Stream str = new MemoryStream();
+                        var _bytes = File.ReadAllBytes(SetupFilename);
+                        str.Write(_bytes, 0, _bytes.Length);
+                        str.Seek(0, SeekOrigin.Begin);
+
+                        GitHubClient.Release.UploadAsset(rel, new ReleaseAssetUpload() { ContentType = "application/exe", FileName = Path.GetFileName(SetupFilename), RawData = str }).Wait();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+        }
+
+        #endregion
+
         void CreateInstaller()
         {
             var maker = new SetupMaker
@@ -491,21 +587,6 @@ namespace SharpKit.Release
             SetupFilename = maker.SetupFilename;
         }
 
-        //public static void BuildProject(string slnFilename, string configuration, string projectName, string action = "build")
-        //{
-        //    Console.WriteLine("Building: {0} {1} {2}", slnFilename, configuration, projectName);
-        //    var args = String.Format("\"{0}\" /{1} \"{2}\"", Path.GetFileName(slnFilename), action, configuration);
-        //    if (projectName.IsNotNullOrEmpty())
-        //        args += String.Format(" /Project \"{0}\"", projectName);
-        //    //args += " /consoleloggerparameters:ErrorsOnly";
-        //    var outFile = @"C:\temp\BuildOutput.txt";
-        //    if (File.Exists(outFile)) File.Delete(outFile);
-        //    args += @" /Out " + outFile;
-        //    var res = Execute(Path.GetDirectoryName(slnFilename), Vs2013Exe, args);
-        //    if (res.ExitCode != 0)
-        //        throw new Exception(String.Format("Error during build, exit code={0}", res.ExitCode));
-        //    Console.WriteLine("Finished build.");
-        //}
 
     }
 }

@@ -55,18 +55,23 @@ namespace SharpKit.Release
             {
                 ReadVersion();
 
+                if (Config.GitHubAccessToken.IsNullOrEmpty())
+                {
+                    WriteLine("WARNING: GitHubAccessToken in config.xml not set!", ConsoleColor.White);
+                }
+
                 Console.WriteLine("CurrentVersion " + ProductVersion);
                 Console.WriteLine();
                 Console.WriteLine("Please choose a command:");
                 Console.WriteLine();
-                Console.WriteLine("create-version: Creates a new version. Note: Compiler and SDK will be recompiled, because js headers will change");
-                Console.WriteLine("commit: Commits the modified files with commit message containing the version. You can do this via external tool.");
-                Console.WriteLine("push: Pushes the changes to github. You can do this via external tool.");
-                Console.WriteLine("create-release: Creates a github release, with the changelog as description. Note: Before running this command, a push is requied!");
-                Console.WriteLine("create-installer");
-                Console.WriteLine("upload");
-                Console.WriteLine("rollback: Reverts all changed version files to its original state. Assues, that they are not commited. Note: It's not fully implemented.");
-                Console.WriteLine("exit");
+                WriteCommand("create-version", "Creates a new version. Note: Compiler and SDK will be recompiled, because js headers will change");
+                WriteCommand("commit", "Commits the modified files with commit message containing the version. You can do this via external tool. Note: Not implemented yet.");
+                WriteCommand("push", "Pushes the changes to github. You can do this via external tool. Note: Not implemented yet.");
+                WriteCommand("create-release", "Creates a github release, with the changelog as description. Note: Before running this command, a push is requied!");
+                WriteCommand("create-installer");
+                WriteCommand("upload");
+                WriteCommand("rollback", "Reverts all changed version files to its original state. Assues, that they are not commited. Note: It's not fully implemented.");
+                WriteCommand("exit");
 
                 Console.WriteLine();
                 Console.Write("Command: ");
@@ -77,6 +82,15 @@ namespace SharpKit.Release
                 Console.WriteLine();
             }
 
+        }
+
+        public void WriteCommand(string cmd, string description = "")
+        {
+            Write(cmd, ConsoleColor.Green);
+            if (description.IsNullOrEmpty())
+                Console.WriteLine();
+            else
+                Console.WriteLine(": " + description);
         }
 
         public void ReadVersion()
@@ -317,12 +331,24 @@ namespace SharpKit.Release
             SharpKit.Installer.Builder.Utils.CallMake(Path.Combine(GitRoot, "Compiler"));
             SharpKit.Installer.Builder.Utils.CallMake(Path.Combine(GitRoot, "SDK")); //Because the the js files contains the version in the header, the files need to be regenerated before commit
 
-            var old = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("The new version is now changed in all files. Please commit and push it to git now!");
-            Console.ForegroundColor = old;
+            WriteLine("******************************************************************************", ConsoleColor.Green);
+            WriteLine("The new version is now changed in all files. Please commit and push it to git now BEFORE you create a github release/tag!", ConsoleColor.Green);
+            WriteLine("******************************************************************************", ConsoleColor.Green);
 
             //CommitGit();
+        }
+
+        public void WriteLine(string text, ConsoleColor color)
+        {
+            Write(text + Environment.NewLine, color);
+        }
+
+        public void Write(string text, ConsoleColor color)
+        {
+            var old = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ForegroundColor = old;
         }
 
         public void CommitGit()
@@ -399,18 +425,14 @@ namespace SharpKit.Release
 
         public void CreateGitHubRelease()
         {
-            var github = new GitHubClient(new ProductHeaderValue("TestGitHutAPI"));
-            github.Credentials = new Credentials(Config.GitHubAccessToken);
-            github.Release.Create(Config.GitHubUser, Config.GitHubRepoCompiler, new ReleaseUpdate(ProductVersion)).Wait();
+            GitHubClient.Release.Create(Config.GitHubUser, Config.GitHubRepoCompiler, new ReleaseUpdate(ProductVersion)).Wait();
         }
 
         public void Upload()
         {
             try
             {
-                var github = new GitHubClient(new ProductHeaderValue("TestGitHutAPI"));
-                github.Credentials = new Credentials(Config.GitHubAccessToken);
-                var rels = github.Release.GetAll(Config.GitHubUser, Config.GitHubRepoCompiler);
+                var rels = GitHubClient.Release.GetAll(Config.GitHubUser, Config.GitHubRepoCompiler);
                 rels.Wait();
                 foreach (var rel in rels.Result)
                 {
@@ -422,7 +444,7 @@ namespace SharpKit.Release
                         str.Write(_bytes, 0, _bytes.Length);
                         str.Seek(0, SeekOrigin.Begin);
 
-                        github.Release.UploadAsset(rel, new ReleaseAssetUpload() { ContentType = "application/exe", FileName = Path.GetFileName(SetupFilename), RawData = str }).Wait();
+                        GitHubClient.Release.UploadAsset(rel, new ReleaseAssetUpload() { ContentType = "application/exe", FileName = Path.GetFileName(SetupFilename), RawData = str }).Wait();
                     }
                 }
             }
@@ -433,11 +455,26 @@ namespace SharpKit.Release
 
         }
 
+        private GitHubClient _GitHubClient;
+        public GitHubClient GitHubClient
+        {
+            get
+            {
+                if (_GitHubClient == null)
+                {
+                    if (Config.GitHubAccessToken.IsNullOrEmpty())
+                        throw new Exception("GitHubAccessToken not set!");
+
+                    _GitHubClient = new GitHubClient(new ProductHeaderValue("TestGitHutAPI"));
+                    _GitHubClient.Credentials = new Credentials(Config.GitHubAccessToken);
+                }
+                return _GitHubClient;
+            }
+        }
+
         public string GetLastVersion()
         {
-            var github = new GitHubClient(new ProductHeaderValue("TestGitHutAPI"));
-            github.Credentials = new Credentials(Config.GitHubAccessToken);
-            var rels = github.Release.GetAll(Config.GitHubUser, Config.GitHubRepoCompiler);
+            var rels = GitHubClient.Release.GetAll(Config.GitHubUser, Config.GitHubRepoCompiler);
             rels.Wait();
             return rels.Result.Last().TagName;
         }

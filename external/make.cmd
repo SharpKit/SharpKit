@@ -19,6 +19,6 @@ rem %msbuild% aws-sdk-net/AWSSDK_DotNet35/AWSSDK_DotNet35.sln
 %msbuild% AjaxMin/AjaxMinDll/AjaxMinDll.sln               /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
 rem %msbuild% aws-sdk-net/AWSSDK_DotNet35/AWSSDK_DotNet35.sln /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
 %msbuild% SharpZipLib/src/ICSharpCode.SharpZLib.csproj    /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
-%msbuild% octokit.net/Octokit/Octokit-netcore45.csproj	  /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
+%msbuild% octokit.net/Octokit/Octokit-Mono.csproj	  /p:Configuration=Release         /p:DebugSymbols=false /p:DebugType=None
 
 )

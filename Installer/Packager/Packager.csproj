@@ -48,7 +48,8 @@
       <HintPath>..\..\external\SharpZipLib\bin\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Octokit">
-      <HintPath>..\..\external\octokit.net\Octokit\bin\Debug\Mono\Octokit.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Debug'">..\..\external\octokit.net\Octokit\bin\Debug\Mono\Octokit.dll</HintPath>
+      <HintPath Condition=" '$(Configuration)' == 'Release'">..\..\external\octokit.net\Octokit\bin\Release\Mono\Octokit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

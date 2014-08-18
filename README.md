@@ -48,7 +48,7 @@ After you compiled all projects, run `Installer/Packager/bin/Packager.exe`. You 
 ```
 create-version
 ```
-Now, when this should be an official release, you *have to* commit and push the changes to Github! Do a commit and push via Github-Client or other git commandtools now. Then you call the other commands of `Packager.exe`
+Now, when this should be an official release, you *have to* commit and push the changes to Github! Do a commit and push via Github-Client or other git commandtools now. Please commit SDK changes before Compiler changes, so the subproject-references are up-to-date. Then you call the other commands of `Packager.exe`
 ```
 create-release
 create-installer

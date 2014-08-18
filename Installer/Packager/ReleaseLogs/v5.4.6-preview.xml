@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ReleaseLog Filename="D:\github\SharpKit\Installer\Packager\ReleaseLogs\v5.4.6-preview.xml" Version="v5.4.6-preview" Created="2014-08-19T00:50:35.4328593+02:00">
+  <SharpKit_Sdk HeadRevision="ba88c3789df2034e2f882caa16dba0b8720717fe">
+    <SvnLogEntries>
+      <VersionControlLogEntry revision="ba88c3789df2034e2f882caa16dba0b8720717fe" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-02T09:45:34+02:00" msg="Fixed StringBuilder.Length" />
+      <VersionControlLogEntry revision="726c6636dfc879baaaa49bc545c80b0cdf34d049" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-22T17:09:26+02:00" msg="fixed TimeSpan.TotalDays" />
+      <VersionControlLogEntry revision="7d6115980207a14ebba8c9fa2ab8f7c8f8427651" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-20T12:22:02+02:00" msg="Added Uri.Query" />
+      <VersionControlLogEntry revision="602e113ecaea6383d4e49a9155dcaec4ba8a749a" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-16T08:57:34+02:00" msg="Merge pull request #3 from hultqvist/master&#xD;&#xA;Project configuration cleanup" />
+      <VersionControlLogEntry revision="14d332efe6a261c30b79f2b29f276b20133e7e56" author="Peter Hultqvist &lt;phq@silentorbit.com&gt;" date="2014-07-15T22:55:49+02:00" msg="Single Debug/AnyCPU configuration for all Defs projects" />
+      <VersionControlLogEntry revision="bf81251a34975d8458d62bc3ac8313a4d5cc87b4" author="Peter Hultqvist &lt;phq@silentorbit.com&gt;" date="2014-07-15T22:55:11+02:00" msg="Fixed warnings mostly related to comments" />
+      <VersionControlLogEntry revision="999ec43c97ec1e2b35a27deee6bf65027d84dc69" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-13T00:26:06+02:00" msg="- Fixed Int32Array.GetEnumerator() Bug on Safari" />
+      <VersionControlLogEntry revision="6aced65c28ef8f0c3ea8fde84cc7b2cb46e2fa7a" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-08T16:57:35+02:00" msg="Merge pull request #1 from trustorm/master&#xD;&#xA;Added FabricJS 1.4+ support" />
+      <VersionControlLogEntry revision="5189b6d5ad653c24942b924999dc33abb2728414" author="Ben Martin &lt;ben@trustorm.com.au&gt;" date="2014-07-07T06:39:31+02:00" msg="Added FabricJS 1.4+ support" />
+      <VersionControlLogEntry revision="cb77220b49ae0faea5d86ae0291569a68a386a11" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-05T16:26:58+02:00" msg="set permissions" />
+      <VersionControlLogEntry revision="9b9490609895f390623c965c2453792b24749f4e" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-05T15:11:25+02:00" msg="Delete Frameworks.userprefs" />
+      <VersionControlLogEntry revision="9ef182e4f944ed7800a67914eb8324f5c730b7c3" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-05T13:42:06+02:00" msg="Update .gitignore" />
+      <VersionControlLogEntry revision="a2e3ab74e8dd1147e2a841b735d656358614c71e" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-05T11:24:45+02:00" msg="Fix invalid character in Frameworks/Common.targets" />
+      <VersionControlLogEntry revision="424a7a329d44144204ee13fc32eefe5075a2ceab" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-05T00:20:23+02:00" msg="Update Common.targets" />
+      <VersionControlLogEntry revision="0b5f02b1abb25fdb7d16ab94d82cacfc42ea79a9" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-04T23:57:37+02:00" msg="Updated Makefiles" />
+      <VersionControlLogEntry revision="39085a1015e286ea635e4d1b044d21d943b4633b" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-04T23:32:21+02:00" msg="sdk can now build on unix even when skc is not installed" />
+      <VersionControlLogEntry revision="7325091611d553d1a439d8490acc8b967cd94b14" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-04T15:02:18+02:00" msg="fixed csproj files" />
+      <VersionControlLogEntry revision="fb2ffd3cc52281decc204aa5af3ffeb7f32b84ca" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T14:24:06+02:00" msg="csproj fixes" />
+      <VersionControlLogEntry revision="f35dd06b6d3e29f070bb64552413addb48dfc724" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T11:37:03+02:00" msg="Add Frameworks/Common.targets file" />
+      <VersionControlLogEntry revision="89b4d2b28fa27663ba3592ae397f87b1a149d8df" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T11:26:00+02:00" msg="Remove Defs js files, enhance Common.targets" />
+      <VersionControlLogEntry revision="799827f7a168883a4024fa8a92d6885924874eb0" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T09:57:02+02:00" msg="Fix jQuery.filter with predicate function overload" />
+      <VersionControlLogEntry revision="26f1165699d40e62159130a32d94c60db7a0d0ce" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T09:30:32+02:00" msg="Add all defs projects to import Common.targets for centralized control" />
+      <VersionControlLogEntry revision="457f0f76f9da2f024bee1dd28364c89fcbd63514" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-02T20:37:35+02:00" msg="Add Defs/Common.targets to centralize all def projects" />
+      <VersionControlLogEntry revision="90909951ba052de202fbd06dd301bc0033aead70" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-30T18:29:07+02:00" msg="change warnings to TODOs" />
+      <VersionControlLogEntry revision="39056e791cbbe13a27643124179ffcb8112d9ec9" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-30T11:53:50+02:00" msg="Add some missing apis in jquery and javascript, fix gitignore, remove .ide folder" />
+      <VersionControlLogEntry revision="bd605ea5f30bbbff60a6d81afce0d54ffe22c291" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-26T10:39:33+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="41a1e23f18d2bf0025b8eb45ddeefb394ec7e599" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T17:26:43+02:00" msg="addd Frameworks.sln" />
+      <VersionControlLogEntry revision="075cad46011840ae39f33d4e15d535dce4091b21" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T12:58:55+02:00" msg="added build scripts" />
+      <VersionControlLogEntry revision="4ad0b6b1a578540cc7dffd69c64c7e014a3032bc" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-25T11:45:40+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="8fd9aaa422de449dc1c0fb5879948be5edb994be" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-25T11:45:11+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="86d78b2e4362affaa13a37c8de3ef8494d5e5a2f" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-25T11:35:14+02:00" msg="Initial commit" />
+    </SvnLogEntries>
+  </SharpKit_Sdk>
+  <SharpKit5 HeadRevision="e2a1857cac0323c7ea553fec5613d186c7483a76">
+    <SvnLogEntries>
+      <VersionControlLogEntry revision="e2a1857cac0323c7ea553fec5613d186c7483a76" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-13T01:10:47+02:00" msg="improved packager. Generation of release notes" />
+      <VersionControlLogEntry revision="15dae1571be5e450e6a9612a8cc48fc72a9afc1f" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-12T11:01:21+02:00" msg="packer implementation" />
+      <VersionControlLogEntry revision="c12d4e47800749d22c692be5837b01f1d478bea0" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-08-10T16:19:53+02:00" msg="updated octokit reference" />
+      <VersionControlLogEntry revision="b1f3dfad17ca1708559586d266dadeadb29a8062" author="sebastian.sharpkit &lt;sebastian.sharpkit@devserver.(none)&gt;" date="2014-08-10T16:14:11+02:00" msg="NA" />
+      <VersionControlLogEntry revision="a01a11db14e79b80dec794b89ebe6a70c7b6f19d" author="sebastian.sharpkit &lt;sebastian.sharpkit@devserver.(none)&gt;" date="2014-08-10T16:13:41+02:00" msg="NA" />
+      <VersionControlLogEntry revision="cd8cdf2d324f178a4ebb1d7af5dba860be4cc076" author="sebastian.sharpkit &lt;sebastian.sharpkit@devserver.(none)&gt;" date="2014-08-10T16:11:51+02:00" msg="new packer" />
+      <VersionControlLogEntry revision="6060319d09d6140742c2177bbd2a25222ec333da" author="sebastian.sharpkit &lt;sebastian.sharpkit@devserver.(none)&gt;" date="2014-08-10T16:08:53+02:00" msg="new packer" />
+      <VersionControlLogEntry revision="ce573c1d5037ff9f29ddbb9f9d76ae9bd30e49ba" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-08T13:42:41+02:00" msg="Moved installation to C:\Program Files (x86)\MSBuild" />
+      <VersionControlLogEntry revision="aff0fffa3deaaf350d75599d318afb7b07b1db67" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-07-23T11:43:21+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="19eabc71041a43bbc35f284a093cd4047580eaa8" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-22T14:09:10+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="8d3385e46ea83b9ddaa07b62c4300aaeca47afba" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-20T14:59:45+02:00" msg="added ngen script" />
+      <VersionControlLogEntry revision="3c03bdf5c883bc997956a34f5af29871058e63d0" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-11T14:25:09+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="f8b1143b385ec49fe2825b4caa0e16cd9fbfa13f" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-11T14:20:06+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="a667f2b3b427adabdc9e3e61f79ab023972dfb38" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-11T14:18:27+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="57bf300a32d2ccfd734b340b1a22f31e919961a2" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-07-11T14:15:33+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="90b6749798af380025b708d20b33e136c6fe94f6" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-07-10T17:14:59+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="08ee68b7661badb1acac3226cce91e85150cffa4" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-09T22:09:42+02:00" msg="Update configure.cmd" />
+      <VersionControlLogEntry revision="a9e7ecedd655d22615daf2e6951b1ba88beae588" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-09T16:17:08+02:00" msg="Merge pull request #2 from hultqvist/master&#xD;&#xA;Compiling under Linux" />
+      <VersionControlLogEntry revision="43e31873f8b04c9ea9a0f3d5cb08370c832818d2" author="Peter Hultqvist &lt;phq@silentorbit.com&gt;" date="2014-07-09T08:23:33+02:00" msg="Compiling under Linux" />
+      <VersionControlLogEntry revision="56a57cdaeaea468d991d9080cd701243e478879d" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-08T20:03:53+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="8026746d793f035d8b3870068a2109ac5e5bf4a0" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-07T05:18:29+02:00" msg="added WaitForExit when generating the installer" />
+      <VersionControlLogEntry revision="c9b7b2860d15e6ce1733eb322487bc7793280bef" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-07T05:12:08+02:00" msg="fixed git permission problem" />
+      <VersionControlLogEntry revision="094d17f8cf60e1d12ca644bcfbff22ca2fe1936d" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-07T04:08:19+02:00" msg="added directory structure" />
+      <VersionControlLogEntry revision="34dc816a17d8e6bb3657330f31d86107c0cd4a4a" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-07T03:53:11+02:00" msg="format text" />
+      <VersionControlLogEntry revision="76ef37860d50546f196950524e02daa9fce47491" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-07T03:47:15+02:00" msg="made installer unix compatible. Notice: When the installer was compiled on unix, it cannot used for windows" />
+      <VersionControlLogEntry revision="9c207d3d9bef92b2c155a9e81754d96bee2ea0f6" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-06T22:27:59+02:00" msg="NA" />
+      <VersionControlLogEntry revision="3093a5c2a2053003c83bbb6c34d71e1dd98824cf" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-06T22:25:51+02:00" msg="See below description&#xD;&#xA;* Compiler is now located at Program Files (x86)\SharpKit\5&#xD;&#xA;* .NET.Framework...\SharpKit\5 has a symbolic link to Program Files&#xD;&#xA;(x86)\SharpKit\5&#xD;&#xA;* Definition-Assemblies moved to Program Files (x86)\SharpKit\5\Defs&#xD;&#xA;* Because &quot;Defs&quot; are now at $(MSMSBuildBinPath)\SharpKit\5\Defs, you can&#xD;&#xA;use it as Reference hint path. So you can use the same assembly path for&#xD;&#xA;windows and unix.&#xD;&#xA;* To create the installer, simply call contrib/windows/create.cmd&#xD;&#xA;* VSTemplates in user document folder are using now a symbolic link to&#xD;&#xA;Program Files (x86)\SharpKit\5\Templates" />
+      <VersionControlLogEntry revision="9c1009fc1050da31f7bdf3ed5a7f857c16a9da2d" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-05T16:29:16+02:00" msg="set permissions" />
+      <VersionControlLogEntry revision="d6ba7499af9d81e22f47a4963c5718471bace7da" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-05T16:11:59+02:00" msg="NA" />
+      <VersionControlLogEntry revision="3197d78be4fab3295994cc8af68d60e9d4024ffc" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-05T16:11:24+02:00" msg="NA" />
+      <VersionControlLogEntry revision="a1bab77f26ccb5cf60951c11f551c0d2b42f0c54" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-05T16:02:58+02:00" msg="NA" />
+      <VersionControlLogEntry revision="7fd9a5521a88c754c4e9071747504f727fae6dbf" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-05T15:10:22+02:00" msg="Delete Compiler.userprefs" />
+      <VersionControlLogEntry revision="1c435984a002fc2bf84477067008b775f0262a43" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-05T15:09:07+02:00" msg="updated make scripts" />
+      <VersionControlLogEntry revision="b124ed050a607f55a0283e500a39340d8f7c243d" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-05T13:41:41+02:00" msg="Update .gitignore" />
+      <VersionControlLogEntry revision="72f8af8bfbf0052aa28c90cb88bc31faf62da06b" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-04T23:34:03+02:00" msg="Updated targets file, so that skctoolspath can be modified" />
+      <VersionControlLogEntry revision="78ee172d910b37a9b55ccb95760a558a4fccfc73" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-04T15:02:54+02:00" msg="Updated submodules" />
+      <VersionControlLogEntry revision="63ac4970f36536582635249dfc62ceb30dd35be8" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-04T14:33:01+02:00" msg="Updated makefile" />
+      <VersionControlLogEntry revision="df60d01688195a386298cb52e52e0686c430c3ae" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-04T13:59:43+02:00" msg="Updated submodules" />
+      <VersionControlLogEntry revision="2c65ea20a7603cdb2bac2407c53204d2e797e2d4" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-04T11:37:59+02:00" msg="Updated submodues" />
+      <VersionControlLogEntry revision="c830358685ba59de2814cc58a5967ea390acc4f7" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T13:58:33+02:00" msg="external" />
+      <VersionControlLogEntry revision="2ed75eea79270d7bd0d94bf236affe58f5b258c5" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T13:57:56+02:00" msg="release script" />
+      <VersionControlLogEntry revision="a2125597612f12bc65c2ea590947c3f0677ee20b" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-07-03T13:25:16+02:00" msg="Update .gitmodules" />
+      <VersionControlLogEntry revision="0601cd623f357d252e6ab4b48a7375a1b0ec2987" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-07-03T13:15:22+02:00" msg="updated ajaxmin reference" />
+      <VersionControlLogEntry revision="c1dbce81f94a2f35e851dad1ad2a86352753c48a" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T12:35:17+02:00" msg="external" />
+      <VersionControlLogEntry revision="48fc5a75cee7b7fa4ae0d822b04e63153def9726" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T12:28:13+02:00" msg="NA" />
+      <VersionControlLogEntry revision="89de284843a0ffb91552f2bddf60f6548504a79c" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-07-03T12:26:11+02:00" msg="update release script" />
+      <VersionControlLogEntry revision="540ccae171e0ff7ecda75a52d522c5cf9dbf2b17" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-30T23:28:52+02:00" msg="Updated submodules" />
+      <VersionControlLogEntry revision="f3c1a34230471cfd30daae3907ff18af11aec902" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-30T23:16:02+02:00" msg="modified targets" />
+      <VersionControlLogEntry revision="3fd99573cc80c291629f20d462ae8279408002dd" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-30T18:32:45+02:00" msg="submodules update" />
+      <VersionControlLogEntry revision="531698d8ba8f5aeacb8ad61a269dba674e379cad" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-30T15:15:29+02:00" msg="modified SharpZipLib proj-file to be compatible with mono" />
+      <VersionControlLogEntry revision="e9b960e3bc4dccb39d46aec656bbd981870055c2" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-30T12:00:23+02:00" msg="Change NRefactory to master" />
+      <VersionControlLogEntry revision="5a9c02186790c60ced37549469994c2af52b2ac3" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-30T11:58:59+02:00" msg="NA" />
+      <VersionControlLogEntry revision="8868660d8eb4bbe9bf4aea2ccbd8af3f820de576" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-30T09:16:04+02:00" msg="Change SDK to master" />
+      <VersionControlLogEntry revision="1c68c3cf42d6a725edd2ac24fce07c1f4b925269" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-30T09:07:08+02:00" msg="Begin creating release.bat script" />
+      <VersionControlLogEntry revision="6cd91e286b0b772e6e8aa7174e6faebe31d430ae" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-28T10:03:52+02:00" msg="Change skc5 nrefactory references to be conditional according to build configuration, change to nrefactory master" />
+      <VersionControlLogEntry revision="64bc3015d806554c4eb5e350338e0a99e22d6819" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-28T09:35:50+02:00" msg="Build" />
+      <VersionControlLogEntry revision="774ffb973e7fbcc7113b68e121205e78fd74d8a0" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-26T13:22:50+02:00" msg="updated nrefactory submodule" />
+      <VersionControlLogEntry revision="d9b253ff5558591450d6b70fc7d6bb4411912b02" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T18:25:16+02:00" msg="updated .gitmodules" />
+      <VersionControlLogEntry revision="c890b77dfcc695e7f77ac50c5ad5ab9592506c13" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T18:23:34+02:00" msg="added SharpZipLib" />
+      <VersionControlLogEntry revision="c5d7928dc3af0f58f1e6a424a4b4e8dbe1184454" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T17:28:34+02:00" msg="removed Solution.sln" />
+      <VersionControlLogEntry revision="0075f4a874b246f6d5b29813d6a999e234437e89" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T13:00:25+02:00" msg="update make files" />
+      <VersionControlLogEntry revision="aa154a07f73ecd24223a4bbf6f345648724f9ffb" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-06-25T12:28:34+02:00" msg="Delete configure.bat" />
+      <VersionControlLogEntry revision="f2b84bffbce880f2f1c1dfebc99817a6b622142b" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T12:26:31+02:00" msg="Update .gitignore" />
+      <VersionControlLogEntry revision="5798b376c3495c17a14bbf3a8aac7ee7e9fd35fb" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-06-25T12:24:02+02:00" msg="Delete make.bat" />
+      <VersionControlLogEntry revision="f3cee327ec9438bffbdc85d7c75c438eade47aae" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-25T12:22:20+02:00" msg="added sdk submodule" />
+      <VersionControlLogEntry revision="3ef6ede4f2d487b7bd646367a2c89ed0cc92837d" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-25T11:42:45+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="af0379ac4847a4162efbe659565b3e6b2463136d" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-25T11:42:12+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="ac0da8ea5b8cd11439464eb0913b12e04f5e569e" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-06-25T02:21:11+02:00" msg="Update MonoDevelop.SharpKit.addin.xml" />
+      <VersionControlLogEntry revision="f4303feeb3c68e8aeb3f9c5fb7aaa3152ae1e97f" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T01:40:59+02:00" msg="added IDE integration files" />
+      <VersionControlLogEntry revision="9ee57e5892d4a258222eb6f7944f46d47a973b3e" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-25T01:10:01+02:00" msg="optimized batch files" />
+      <VersionControlLogEntry revision="f02ecb6e4e2164232ee9db0055730637f24bee79" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-06-25T00:07:35+02:00" msg="Update .gitmodules" />
+      <VersionControlLogEntry revision="b4de4650d1b8ea3a07b786d74d8e88692d6931c8" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-24T23:42:19+02:00" msg="Merge branch 'master' of https://github.com/SharpKit/SharpKit" />
+      <VersionControlLogEntry revision="ab5e78a95873e312648171102b728f3016b3ba3b" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-24T23:41:37+02:00" msg="added linux variant of update-submodules" />
+      <VersionControlLogEntry revision="caf23e7d678e7ef5903145e1fb0f18bac2b48886" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-06-24T23:25:21+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="846fe64ca938bc6a116f06661f0322b4f84dadd3" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-06-24T23:23:24+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="0884bc46cbb3c1f05e056407338f180f84e3e398" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-06-24T23:22:36+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="5f44948871694270eb8e33e651257a5accb25513" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-24T23:01:51+02:00" msg="added helper script to update submodules." />
+      <VersionControlLogEntry revision="b9a559afacb5710b550e007b5958f6629b615970" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-06-24T22:10:30+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="ff5b7aa349f5c80eff8e1832b0327bbb0db06382" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-24T21:50:00+02:00" msg="removed lib folder. added windows make.bat&#xD;&#xA;All binaries in lib folder will now compiled from source" />
+      <VersionControlLogEntry revision="132358f245b30df186fb0d7ff88262f766ae6f72" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-24T21:33:02+02:00" msg="updated skc5 references" />
+      <VersionControlLogEntry revision="db8ee3e024e94273611dbc8d9772a0f6eb9edb4d" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-24T20:53:49+02:00" msg="update submodule revision" />
+      <VersionControlLogEntry revision="71bd96f03bc9c59e08e5234b7b041fea1beda08c" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-06-24T18:12:48+02:00" msg="added batch files" />
+      <VersionControlLogEntry revision="e678992d63029f7dc0fb98e51746819963a98b7b" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-23T02:09:00+02:00" msg="added awsdk to external Makefile" />
+      <VersionControlLogEntry revision="6f89a9b039e682700ddaf725972b6c627876b5a4" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-23T02:02:20+02:00" msg="added awsdk to externals" />
+      <VersionControlLogEntry revision="810fc78c559a50bfcb9d4773bc58090a766b4b5c" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-23T00:13:03+02:00" msg="added configure script" />
+      <VersionControlLogEntry revision="228ea2e4edbde381540cf1281b3f20bc9ca01bab" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-23T00:06:31+02:00" msg="modified global Makefile" />
+      <VersionControlLogEntry revision="cba72e5f28e8bc8bab2d75812efffcba545ecddb" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-22T23:50:51+02:00" msg="added Makefile for externals" />
+      <VersionControlLogEntry revision="ba86778f46106c27ac3ff448b40605fdeef69f2e" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-22T23:49:46+02:00" msg="added Makefile for externals" />
+      <VersionControlLogEntry revision="1cb22fd9f7c2ce7292a54e3a1357b0a9bf1d43a0" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-22T23:10:27+02:00" msg="added external repo AjaxMin" />
+      <VersionControlLogEntry revision="02349bf3d1c03d0313978e0e28d2f73337adf2db" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-22T22:11:41+02:00" msg="added externals" />
+      <VersionControlLogEntry revision="74ce0c00ab17ab9cd90cf4084e455978a4d13b2f" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-22T18:40:52+02:00" msg="added makefiles" />
+      <VersionControlLogEntry revision="6c2c21fc3f982026f88da4da2ade4b78d3d774e0" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-22T15:53:46+02:00" msg="* MSBuild.csproj: added conditional expression for windows&#xD;&#xA;removed unused assembly and (and non existent on unix)&#xD;&#xA;* skc5.csproj: added conditional expression for windows" />
+      <VersionControlLogEntry revision="3fcf1e835b73a5424494679817a304cf384e8bf6" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-06-22T15:35:51+02:00" msg="added hintpath" />
+      <VersionControlLogEntry revision="8225240880c6cd10dc859c9f6d592955caa52755" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-22T12:21:44+02:00" msg="fix s3helper" />
+      <VersionControlLogEntry revision="be66d52cbb808da27c1971702a784a89d9e29ded" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T22:12:29+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="547457d5441e6e1c2c6d674c78d7da3192b7770e" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T22:11:54+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="c4280a50f861c7caca864df314c00ef72a50a211" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T21:45:10+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="65d3ebadf3b09da68b6e5e7371fa3e1b694ce5dc" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T21:29:11+02:00" msg="csproj changes" />
+      <VersionControlLogEntry revision="edf2c7aaa728f19e4edea62d4315b0f47003131b" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T21:24:54+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="e0f7e388207a0c09dc2aeddca49087eb09250a66" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T20:52:22+02:00" msg="Initial checkin" />
+      <VersionControlLogEntry revision="50f55eb1a6bcdb8da564e81673edd076b4a922af" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T20:33:57+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="3e3d53588b4901caf0b3926b6ce40cbd2806f972" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T15:46:08+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="576cc0b97eb0f7aa60681cc57b67b7b6c431d5df" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T14:21:36+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="6015e7ab2be04b433cbe717fbe37533333fe6304" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-06-21T14:14:40+02:00" msg="Plan folder structure" />
+    </SvnLogEntries>
+  </SharpKit5>
+</ReleaseLog>

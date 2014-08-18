@@ -34,7 +34,7 @@ chmod +x configure
 make
 ```
 
-###### Creating the installer
+###### Creating the installer (without publishing a new version)
 Verify the VERSION-file in the root directory . Change the Version number if needed. Than:
 ```
 configure # When you called this already, you do not need to call it again.
@@ -42,6 +42,21 @@ cd contrib/installer/
 create
 ```
 The installer will be created in the contrib directory and can be used for windows and linux. Note: If you create the installer on linux, it cannot be used for windows (because some windows-only libaries are missing). You should generate it on windows for better compatibility.
+
+###### Publishing a new version
+After you compiled all projects, run `Installer/Packager/bin/Packager.exe`. You need to execute the following commands:
+```
+create-version
+```
+Now, when this should be an official release, you *have to* commit and push the changes to Github! Do a commit and push via Github-Client or other git commandtools now. Then you call the other commands of `Packager.exe`
+```
+create-release
+create-installer
+upload
+```
+You can use the `release` command as helper command.
+
+Notice: The upload of the binary installer to github can take several minutes!
 
 ##### Changes from previous versions
 [Path-changes](../../wiki/Path-changes) wiki page contains changes made to the file system installation of SharpKit from previous versions.

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ReleaseLog Filename="D:\github\SharpKit\Installer\Packager\ReleaseLogs\v5.4.6-preview.xml" Version="v5.4.6-preview" Created="2014-08-19T00:50:35.4328593+02:00">
-  <SharpKit_Sdk HeadRevision="ba88c3789df2034e2f882caa16dba0b8720717fe">
+<ReleaseLog Filename="D:\github\SharpKit\Installer\Packager\ReleaseLogs\5.4.6-preview.xml" Version="5.4.6-preview" Created="2014-08-20T17:45:59.7903306+02:00">
+  <SharpKit_Sdk HeadRevision="fa561019fcb227d6b2910e2d722e37b366492a8a">
     <SvnLogEntries>
+      <VersionControlLogEntry revision="fa561019fcb227d6b2910e2d722e37b366492a8a" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-19T00:54:36+02:00" msg="New Version v5.4.6-preview" />
       <VersionControlLogEntry revision="ba88c3789df2034e2f882caa16dba0b8720717fe" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-02T09:45:34+02:00" msg="Fixed StringBuilder.Length" />
       <VersionControlLogEntry revision="726c6636dfc879baaaa49bc545c80b0cdf34d049" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-22T17:09:26+02:00" msg="fixed TimeSpan.TotalDays" />
       <VersionControlLogEntry revision="7d6115980207a14ebba8c9fa2ab8f7c8f8427651" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-07-20T12:22:02+02:00" msg="Added Uri.Query" />
@@ -35,8 +36,13 @@
       <VersionControlLogEntry revision="86d78b2e4362affaa13a37c8de3ef8494d5e5a2f" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2014-06-25T11:35:14+02:00" msg="Initial commit" />
     </SvnLogEntries>
   </SharpKit_Sdk>
-  <SharpKit5 HeadRevision="e2a1857cac0323c7ea553fec5613d186c7483a76">
+  <SharpKit5 HeadRevision="181422569fdd9c942d018e4551fdb6b2ad66439e">
     <SvnLogEntries>
+      <VersionControlLogEntry revision="181422569fdd9c942d018e4551fdb6b2ad66439e" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-20T17:38:20+02:00" msg="improved packager" />
+      <VersionControlLogEntry revision="780383a5cca90f456bab8fb326a89b532df7b051" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-08-19T01:17:44+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="d16d5e126f1ec038de55075570aa5811d03bf4d0" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-08-19T01:15:28+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="d3ae530c030de79395b322d94245521c6f26c4ff" author="Sebastian Loncar &lt;Arakis@users.noreply.github.com&gt;" date="2014-08-19T01:13:54+02:00" msg="Update README.md" />
+      <VersionControlLogEntry revision="a3bfeec4bde1fdf15fa38821e98cf38dffd1705e" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-19T00:57:19+02:00" msg="New Version v5.4.6-preview" />
       <VersionControlLogEntry revision="e2a1857cac0323c7ea553fec5613d186c7483a76" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-13T01:10:47+02:00" msg="improved packager. Generation of release notes" />
       <VersionControlLogEntry revision="15dae1571be5e450e6a9612a8cc48fc72a9afc1f" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-08-12T11:01:21+02:00" msg="packer implementation" />
       <VersionControlLogEntry revision="c12d4e47800749d22c692be5837b01f1d478bea0" author="Sebatian Loncar &lt;sebastian.loncar@gmail.com&gt;" date="2014-08-10T16:19:53+02:00" msg="updated octokit reference" />

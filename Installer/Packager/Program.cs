@@ -211,6 +211,7 @@ namespace SharpKit.Release
             File.WriteAllText(Path.Combine(GitRoot, "VERSION"), ProductVersion);
             //UpdateSharpKitVersionInfoSourceFiles(ReleaseLog);
             UpdateAssemblyFileVersions(ProductVersion);
+            SetupBuilder.CreateConfig(Path.Combine(GitRoot, "Installer", "Installer", "res", "Config.xml"), ProductVersion);
         }
 
         void UpdateAssemblyFileVersions(string version)
@@ -527,8 +528,25 @@ namespace SharpKit.Release
         {
             sb.AppendLine();
             sb.AppendLine("##### " + name + " changes");
+
+            var dic = new Dictionary<string, List<VersionControlLogEntry>>();
+            var groups = new List<List<VersionControlLogEntry>>();
+
             foreach (var itm in info.SvnLogEntries)
             {
+                List<VersionControlLogEntry> childs;
+                if (!dic.TryGetValue(itm.msg.ToLower().Trim(), out childs))
+                {
+                    childs = new List<VersionControlLogEntry>();
+                    dic.Add(itm.msg.ToLower().Trim(), childs);
+                    groups.Add(childs);
+                }
+                childs.Add(itm);
+            }
+
+            foreach (var childs in groups)
+            {
+                var itm = childs[0];
                 var msg = itm.msg;
                 var reg = new System.Text.RegularExpressions.Regex(@"(\(|\s)(#[0-9]+)(\)\s|.|,)", RegexOptions.RightToLeft);
                 var msgSB = new StringBuilder(msg);
@@ -540,7 +558,17 @@ namespace SharpKit.Release
                 }
                 msg = msgSB.ToString();
 
-                msg = "* " + msg + " ([view](../../commit/" + itm.revision + "))";
+                //msg = "* " + msg + " ([view](../../commit/" + itm.revision + "))";
+
+                msg = "* " + msg + " (";
+                var revList = new List<string>();
+                foreach (var child in childs)
+                {
+                    revList.Add("[" + child.revision.Substring(0, 7) + "](../../commit/" + child.revision + ")");
+                }
+                msg += string.Join(", ", revList);
+                msg += ")";
+
                 sb.AppendLine(msg);
             }
         }

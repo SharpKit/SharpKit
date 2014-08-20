@@ -246,9 +246,9 @@ namespace SharpKit.Installer
 
                 if (!Utils.IsUnix)
                 {
-                    CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2010), TemplateDirectoryVS2010, Path.Combine(ApplicationFolder, "Templates"));
-                    CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2012), TemplateDirectoryVS2012, Path.Combine(ApplicationFolder, "Templates"));
-                    CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2013), TemplateDirectoryVS2013, Path.Combine(ApplicationFolder, "Templates"));
+                    CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2010), TemplateDirectoryVS2010, Path.Combine(ApplicationFolder, "Integration", "VisualStudio", "Templates"));
+                    CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2012), TemplateDirectoryVS2012, Path.Combine(ApplicationFolder, "Integration", "VisualStudio", "Templates"));
+                    CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2013), TemplateDirectoryVS2013, Path.Combine(ApplicationFolder, "Integration", "VisualStudio", "Templates"));
                 }
 
                 if (Utils.IsUnix)

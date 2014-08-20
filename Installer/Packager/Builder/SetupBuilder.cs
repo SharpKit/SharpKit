@@ -31,16 +31,18 @@ namespace SharpKit.Installer.Builder
                 InstallerNeedsMinVersion = ProductVersion;
 
             DirectoryHelper.VerifyDir(TempBinDir);
-            CreateConfig();
+            CreateConfig(ConfigPath, ProductVersion, InstallerNeedsMinVersion);
             CreateZip();
             CreateExe();
 
             Console.WriteLine("installer created at " + OutputFilename);
         }
 
-        void CreateConfig()
+        public static void CreateConfig(string ConfigPath, string ProductVersion, string InstallerNeedsMinVersion = null)
         {
             Console.WriteLine("creating config file");
+            if (InstallerNeedsMinVersion == null)
+                InstallerNeedsMinVersion = ProductVersion;
             if (File.Exists(ConfigPath))
                 File.Delete(ConfigPath);
             var xdoc = new XDocument();

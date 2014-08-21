@@ -186,6 +186,12 @@ namespace SharpKit.Release
 
         public void CreateNewVersion(string version)
         {
+            if (version[0] == 'v')
+            {
+                Console.WriteLine("Version should begin with a number, not with a 'v'");
+                return;
+            }
+
             ProductVersion = version;
             ReleaseLog = new ReleaseLog { Created = DateTime.Now, Filename = Path.Combine(ReleaseLogsDir, ProductVersion + ".xml"), Version = ProductVersion };
             FillLog();

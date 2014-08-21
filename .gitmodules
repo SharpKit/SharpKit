@@ -10,10 +10,6 @@
 	path = external/cecil
 	url = https://github.com/jbevain/cecil
 	ignore = dirty
-[submodule "external/aws-sdk-net"]
-	path = external/aws-sdk-net
-	url = https://github.com/aws/aws-sdk-net.git
-	ignore = dirty
 [submodule "SDK"]
 	path = SDK
 	url = https://github.com/SharpKit/SharpKit-SDK.git

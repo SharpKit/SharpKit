@@ -564,7 +564,7 @@ namespace SharpKit.Release
                 var revList = new List<string>();
                 foreach (var child in childs)
                 {
-                    revList.Add("[" + child.revision.Substring(0, 7) + "](../../commit/" + child.revision + ")");
+                    revList.Add("[" + child.revision.Substring(0, 7) + "](../../../../" + Config.GitHubUser + "/" + repo + "/commit/" + child.revision + ")");
                 }
                 msg += string.Join(", ", revList);
                 msg += ")";

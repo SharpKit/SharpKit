@@ -26,13 +26,16 @@ namespace SharpKit.Installer
         public string ApplicationCompilerFolder { get; set; } //Program Files (x86)/SharpKit/5/compiler
         public string ApplicationDefsFolder { get; set; } //Program Files (x86)/SharpKit/5/defs
 
-        public string MSBuildFolder35 { get; set; }
-        public string MSBuildFolder40 { get; set; }
-        public string MSBuildFolder45 { get; set; }
+        public string NETFolder35 { get; set; }
+        public string NETFolder40 { get; set; }
+        public string NETFolder45 { get; set; }
 
-        public string MSBuildSharpKitFolder35 { get; set; }
-        public string MSBuildSharpKitFolder40 { get; set; }
-        public string MSBuildSharpKitFolder45 { get; set; }
+        public string NETSharpKitFolder35 { get; set; }
+        public string NETSharpKitFolder40 { get; set; }
+        public string NETSharpKitFolder45 { get; set; }
+
+        public string MSBuildFolder { get; set; } //Program Files (x86)/MSBuild
+        public string MSBuildSharpKitFolder { get; set; } //Program Files (x86)/MSBuild/SharpKit/5
 
         //public string MSBuildExtensionPath { get; set; }
 
@@ -59,10 +62,14 @@ namespace SharpKit.Installer
 
         public Installer()
         {
+            ApplicationFolder = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "SharpKit" + dsc + "5";
+
             if (Utils.IsUnix)
-                ApplicationFolder = "/usr/lib/mono/xbuild/SharpKit/5";
+                MSBuildFolder = "/usr/lib/mono/xbuild";
             else
-                ApplicationFolder = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "MSBuild" + dsc + "SharpKit" + dsc + "5";
+                MSBuildFolder = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "MSBuild";
+
+            MSBuildSharpKitFolder = Path.Combine(MSBuildFolder, "SharpKit", "5");
 
             ApplicationCompilerFolder = ApplicationFolder + dsc + "Compiler";
             //ApplicationCompilerFolder = ApplicationFolder;
@@ -70,23 +77,23 @@ namespace SharpKit.Installer
 
             if (Utils.IsUnix)
             {
-                MSBuildFolder35 = "/usr/lib/mono/3.5";
-                MSBuildFolder40 = "/usr/lib/mono/4.0";
-                MSBuildFolder45 = "/usr/lib/mono/4.5";
+                NETFolder35 = "/usr/lib/mono/3.5";
+                NETFolder40 = "/usr/lib/mono/4.0";
+                NETFolder45 = "/usr/lib/mono/4.5";
                 MonoDevelopPluginPath = "/usr/lib/monodevelop/AddIns";
                 MonoDevelopSharpKitPluginPath = Path.Combine(MonoDevelopPluginPath, "MonoDevelop.SharpKit");
                 //MSBuildExtensionPath = "/usr/lib/mono/xbuild";
             }
             else
             {
-                MSBuildFolder35 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v3.5";
-                MSBuildFolder40 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v4.0.30319";
-                MSBuildFolder45 = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + @"\MSBuild\12.0\bin";
+                NETFolder35 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v3.5";
+                NETFolder40 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v4.0.30319";
+                NETFolder45 = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + @"\MSBuild\12.0\bin";
                 //MSBuildExtensionPath = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "MSBuild";
             }
-            MSBuildSharpKitFolder35 = Path.Combine(MSBuildFolder35, "SharpKit", "5");
-            MSBuildSharpKitFolder40 = Path.Combine(MSBuildFolder40, "SharpKit", "5");
-            MSBuildSharpKitFolder45 = Path.Combine(MSBuildFolder45, "SharpKit", "5");
+            NETSharpKitFolder35 = Path.Combine(NETFolder35, "SharpKit", "5");
+            NETSharpKitFolder40 = Path.Combine(NETFolder40, "SharpKit", "5");
+            NETSharpKitFolder45 = Path.Combine(NETFolder45, "SharpKit", "5");
 
             DocumentsFolder = Utils.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
@@ -240,9 +247,11 @@ namespace SharpKit.Installer
                     }
                 }
 
-                CreateNETSymbolicLink(MSBuildFolder35, MSBuildSharpKitFolder35, ApplicationCompilerFolder);
-                CreateNETSymbolicLink(MSBuildFolder40, MSBuildSharpKitFolder40, ApplicationCompilerFolder);
-                CreateNETSymbolicLink(MSBuildFolder45, MSBuildSharpKitFolder45, ApplicationCompilerFolder);
+                CreateNETSymbolicLink(NETFolder35, NETSharpKitFolder35, ApplicationCompilerFolder);
+                CreateNETSymbolicLink(NETFolder40, NETSharpKitFolder40, ApplicationCompilerFolder);
+                CreateNETSymbolicLink(NETFolder45, NETSharpKitFolder45, ApplicationCompilerFolder);
+
+                CreateNETSymbolicLink(MSBuildFolder, MSBuildSharpKitFolder, ApplicationFolder);
 
                 if (!Utils.IsUnix)
                 {
@@ -270,9 +279,9 @@ namespace SharpKit.Installer
                     //Utils.GiveUnixDirectoryReadPermission(MonoDevelopSharpKitPluginPath);
                     Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(ApplicationFolder)).WaitForExit();
 
-                    Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(MSBuildSharpKitFolder35))).WaitForExit();
-                    Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(MSBuildSharpKitFolder40))).WaitForExit();
-                    Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(MSBuildSharpKitFolder45))).WaitForExit();
+                    Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(NETSharpKitFolder35))).WaitForExit();
+                    Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(NETSharpKitFolder40))).WaitForExit();
+                    Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(NETSharpKitFolder45))).WaitForExit();
 
                     Log("Set unix execution permission");
                     Process.Start("chmod", "ugo+x " + ApplicationCompilerFolder + "/skc5.exe").WaitForExit();
@@ -402,10 +411,11 @@ namespace SharpKit.Installer
                 EnsureInited();
                 UninstallService();
                 Log("Deleting files");
-                Utils.UIDeleteDirectory(MSBuildSharpKitFolder45);
+                Utils.UIDeleteDirectory(NETSharpKitFolder45);
                 Utils.UIDeleteDirectory(ApplicationFolder);
-                Utils.UIDeleteDirectory(MSBuildSharpKitFolder35);
-                Utils.UIDeleteDirectory(MSBuildSharpKitFolder40);
+                Utils.UIDeleteDirectory(NETSharpKitFolder35);
+                Utils.UIDeleteDirectory(NETSharpKitFolder40);
+                Utils.UIDeleteDirectory(MSBuildSharpKitFolder);
 
                 //old program file dir from depricated setup location
                 Utils.UIDeleteDirectory(Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "SharpKit" + dsc + "5");

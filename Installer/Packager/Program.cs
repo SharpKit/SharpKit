@@ -71,7 +71,7 @@ namespace SharpKit.Release
                 WriteCommand("create-release", "Creates a github release, with the changelog as description. Note: Before running this command, a push is requied!");
                 WriteCommand("create-installer");
                 WriteCommand("upload");
-                WriteCommand("rollback", "Reverts all changed version files to its original state. Assues, that they are not commited. Note: It's not fully implemented.");
+                WriteCommand("rollback", "Reverts all changed version files to its original state. Assumes, that they are not commited. Note: It's not fully implemented.");
                 WriteCommand("release", "runs create-version, create-installer, create-release and upload.");
                 WriteCommand("exit");
 

@@ -1,9 +1,9 @@
 @cd /D %~dp0
 @call set-variables
 
-@cd ..
-%git% submodule foreach git pull origin master
-@cd scripts
+@cd ../SDK
+%git% pull origin master
+@cd ../scripts
 
 @echo.
 @echo submodules are now updated.

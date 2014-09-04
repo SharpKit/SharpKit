@@ -219,6 +219,8 @@ namespace Mirrored.SharpKit.JavaScript
 
         public string JsonTypeFieldName { get; set; }
 
+        public bool ForceMethodSuffix { get { return _ForceMethodSuffix.GetValueOrDefault(); } set { _ForceMethodSuffix = value; } } public bool? _ForceMethodSuffix;
+
         private void GoNative()
         {
             if (_NativeOverloads == null)
@@ -582,6 +584,8 @@ namespace Mirrored.SharpKit.JavaScript
         public string SharpKitVersion { get; set; }
 
         public string InlineCodeExpression { get; set; }
+
+        public bool ForceMethodSuffix { get { return _ForceMethodSuffix.GetValueOrDefault(); } set { _ForceMethodSuffix = value; } } public bool? _ForceMethodSuffix;
     }
     #endregion
 
@@ -651,7 +655,7 @@ namespace Mirrored.SharpKit.JavaScript
 
 
         public bool Export { get { return _Export.GetValueOrDefault(true); } set { _Export = value; } }
-        public bool? _Export;        
+        public bool? _Export;
 
     }
     #endregion

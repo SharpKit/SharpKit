@@ -230,6 +230,11 @@ namespace SharpKit.Compiler
 
         #endregion
 
+        public static bool ForceMethodSuffix(IMethod pe)
+        {
+            return pe.MD_JsMethodOrJsType(t => t._ForceMethodSuffix, t => t._ForceMethodSuffix).GetValueOrDefault();
+        }
+
         #region JsType
         public static JsMode? GetJsMode(ITypeDefinition ce)
         {

@@ -519,6 +519,9 @@ namespace SharpKit.Compiler
         }
         static bool NeedsJsOverloadSuffix(IMethod me)
         {
+            if (Sk.ForceMethodSuffix(me))
+                return true;
+
             if (me.IsIndexerAccessor()) //TODO: HACK: bug with metaspec - base_type is null in overridden indexer methods
             {
                 //var x = me.HasFlag(entity_flags.f_override);

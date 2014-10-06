@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ReleaseLog Filename="D:\github\SharpKit\Installer\Packager\ReleaseLogs\5.4.7.xml" Version="5.4.7" Created="2014-10-07T00:01:52.3266981+02:00">
+  <SharpKit_Sdk HeadRevision="2192485d57e189ef7cca1cfa1c7dc8c12e4987b1">
+    <SvnLogEntries />
+  </SharpKit_Sdk>
+  <SharpKit5 HeadRevision="ecea6d5f35d9b4272a76bba0d82724bcbbcca688">
+    <SvnLogEntries>
+      <VersionControlLogEntry revision="ecea6d5f35d9b4272a76bba0d82724bcbbcca688" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-06T23:32:51+02:00" msg="fixed installer" />
+      <VersionControlLogEntry revision="3139f2f927230315ef8f827aced97798bd091e78" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-09-04T15:04:51+02:00" msg="fixed compilation bug" />
+      <VersionControlLogEntry revision="170c37a394098f97fbfb61981d4233f60af59377" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-09-04T04:05:56+02:00" msg="fixed typo" />
+    </SvnLogEntries>
+  </SharpKit5>
+</ReleaseLog>

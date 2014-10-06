@@ -488,7 +488,7 @@ namespace SharpKit.Release
         {
             var rels = GitHubClient.Release.GetAll(Config.GitHubUser, Config.GitHubRepoCompiler);
             rels.Wait();
-            return rels.Result.Last().TagName;
+            return rels.Result.First().TagName;
         }
 
         public void CreateGitHubRelease()

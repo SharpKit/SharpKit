@@ -99,13 +99,13 @@ namespace SharpKit.Installer
 
         public void ExtractDirectory(string ArchiveDir, string DestDir, Action<string> logger = null)
         {
-            if (ArchiveDir.Last() != dsc) ArchiveDir += dsc;
+            if (ArchiveDir.Last() != '/') ArchiveDir += '/';
             if (DestDir.Last() != dsc) DestDir += dsc;
             foreach (var entry in GetFiles())
             {
-                if (entry.StartsWith(ArchiveDir) && !entry.EndsWith(dsc.ToString()))
+                if (entry.StartsWith(ArchiveDir) && !entry.EndsWith("/"))
                 {
-                    var DestFile = entry.Substring(ArchiveDir.Length);
+                    var DestFile = entry.Substring(ArchiveDir.Length).Replace('/', dsc);
                     if (logger != null)
                         logger(Path.Combine(DestDir, DestFile));
                     ExtractFile(entry, DestDir, DestFile);

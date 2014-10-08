@@ -710,14 +710,14 @@ namespace SharpKit.Compiler.CsToJs
             return new JsVariableDeclarator { Name = node.Name, Initializer = VisitExpression(node.Initializer) };
         }
 
+        public JsNode VisitUncheckedStatement(UncheckedStatement node)
+        {
+            return Visit(node.Body);
+        }
+
         #endregion
 
         #region NotImplemented
-
-        public JsNode VisitUncheckedStatement(UncheckedStatement node)
-        {
-            throw new NotImplementedException();
-        }
 
         public JsNode VisitUnsafeStatement(UnsafeStatement node)
         {

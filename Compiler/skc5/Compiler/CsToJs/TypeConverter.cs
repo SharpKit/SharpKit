@@ -131,20 +131,22 @@ namespace SharpKit.Compiler.CsToJs
         private List<ITypeDefinition> GetAllTypesToExport()
         {
             //Test();
-            var list = Project.Compilation.MainAssembly.GetTypes().Where(ShouldExportType).ToList();
-            var withNested = new List<ITypeDefinition>();
-            foreach (var ce in list)
-            {
-                withNested.Add(ce);
-                withNested.AddRange(ce.NestedTypes.Where(ShouldExportType));
-            }
-            list = withNested;
+            var list = GetAllTypesToExport(Project.Compilation.MainAssembly.GetTypes().ToList());
             var list2 = GetExternalTypesToExport();
             if (list2 != null)
                 list.AddRange(list2);
 
             var allTypesToExport = list;
             return allTypesToExport;
+        }
+
+        private List<ITypeDefinition> GetAllTypesToExport(IList<ITypeDefinition> list)
+        {
+            var result = list.Where(ShouldExportType).ToList();
+            foreach (var ce in list) {
+                result.AddRange(GetAllTypesToExport(ce.NestedTypes));
+            }
+            return result;
         }
 
         void ExportTypesInFile(KeyValuePair<JsFile, List<ITypeDefinition>> p)

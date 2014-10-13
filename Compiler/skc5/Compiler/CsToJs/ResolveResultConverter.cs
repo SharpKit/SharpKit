@@ -299,6 +299,11 @@ namespace SharpKit.Compiler.CsToJs
                 {
                     return ForceInteger(Visit(input));
                 }
+
+                //Skip enum casts
+                if ((conversionType.Kind == TypeKind.Enum && IsInteger(input.Type)) || (input.Type.Kind == TypeKind.Enum && IsInteger(conversionType)))
+                    return Visit(input);
+
                 var omitCasts = Sk.OmitCasts(conversionType);
                 if (omitCasts)
                     return Visit(input);
@@ -490,7 +495,7 @@ namespace SharpKit.Compiler.CsToJs
         #endregion
 
         #region ForceIntegers
-        
+
         bool? _ForceIntegers;
         public bool ForceIntegers
         {
@@ -634,8 +639,8 @@ namespace SharpKit.Compiler.CsToJs
 
             if (parentNode is ReturnStatement)
                 return true;
-            
-            
+
+
             var parentRes = parentNode.Resolve();
             if (parentRes is OperatorResolveResult)
             {
@@ -660,7 +665,7 @@ namespace SharpKit.Compiler.CsToJs
         {
             return IsNonStatic(res.GetCurrentMethod());
         }
- 
+
 
         JsExpression CreateJsDelegate(JsExpression instanceContext, JsExpression func)
         {

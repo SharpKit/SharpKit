@@ -1,0 +1,9 @@
+*.zip
+*.exe
+*.dll
+*.pdb
+*.nupgk
+output
+*.targets
+*.Tasks
+bin

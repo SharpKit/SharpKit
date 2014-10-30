@@ -72,7 +72,9 @@ namespace SharpKit.Release
                 WriteCommand("create-installer");
                 WriteCommand("upload");
                 WriteCommand("rollback", "Reverts all changed version files to its original state. Assumes, that they are not commited. Note: It's not fully implemented.");
-                WriteCommand("release", "runs create-version, create-installer, create-release and upload.");
+                WriteCommand("release", "runs create-version, create-installer, create-release, upload, create-nuget and upload-nuget");
+                WriteCommand("create-nuget", "Creates all nuget packages");
+                WriteCommand("upload-nuget", "Uploads the nuget packages. Note: Not implementes yet");
                 WriteCommand("exit");
 
                 Console.WriteLine();
@@ -156,6 +158,18 @@ namespace SharpKit.Release
                         break;
                     }
 
+                case "create-nuget":
+                    {
+                        CreateNuget();
+                        break;
+                    }
+
+                case "upload-nuget":
+                    {
+                        UploadNuget();
+                        break;
+                    }
+
                 default:
                     Console.WriteLine("Unknown command / not implemented");
                     return;
@@ -169,6 +183,8 @@ namespace SharpKit.Release
             CreateInstaller();
             CreateGitHubRelease();
             Upload();
+            CreateNuget();
+            UploadNuget();
         }
 
         #region "CreateNewVersion"
@@ -218,6 +234,7 @@ namespace SharpKit.Release
             //UpdateSharpKitVersionInfoSourceFiles(ReleaseLog);
             UpdateAssemblyFileVersions(ProductVersion);
             SetupBuilder.CreateConfig(Path.Combine(GitRoot, "Installer", "Installer", "res", "Config.xml"), ProductVersion);
+            UpdateNugetVersions();
         }
 
         void UpdateAssemblyFileVersions(string version)
@@ -621,6 +638,75 @@ namespace SharpKit.Release
             SetupFilename = maker.SetupFilename;
         }
 
+        #region NuGet
+
+        public void UpdateNugetVersions()
+        {
+            foreach (var folder in new string[] { "contrib", "SDK" })
+            {
+                foreach (var fileName in Directory.GetFiles(Path.Combine(Path.Combine(GitRoot, folder)), "*.nuspec", SearchOption.AllDirectories))
+                {
+                    var xdoc = XDocument.Load(fileName);
+                    var ns = xdoc.Root.Name.Namespace;
+                    xdoc.Root.Element(ns + "metadata").Element(ns + "version").Value = ProductVersion;
+                    foreach (var node in xdoc.Root.Element(ns + "metadata").Elements(ns + "dependencies").Elements(ns + "dependency"))
+                        if (node.Attribute("id").Value.StartsWith("SharpKit"))
+                            node.Attribute("version").Value = ProductVersion;
+                    xdoc.Save(fileName);
+                }
+            }
+        }
+
+        public void CreateNuget()
+        {
+            UpdateNugetVersions();
+
+            var nugetExe = Path.Combine(GitRoot, "contrib", "nuget", "nuget.exe");
+            var outDir = Path.Combine(GitRoot, "contrib", "nuget", "output");
+
+            if (!Directory.Exists(outDir))
+                Directory.CreateDirectory(outDir);
+
+            if (!File.Exists(nugetExe))
+                using (var wc = new WebClient())
+                    wc.DownloadFile("http://www.nuget.org/nuget.exe", nugetExe);
+
+            foreach (var folder in new string[] { "contrib", Path.Combine("Compiler", "skc5"), "SDK" })
+            {
+                foreach (var fileName in Directory.GetFiles(Path.Combine(Path.Combine(GitRoot, folder)), "*.nuspec", SearchOption.AllDirectories))
+                {
+                    Execute(Path.GetDirectoryName(fileName), nugetExe, "pack " + Path.GetFileName(fileName) + " -OutputDirectory " + outDir + " -NoPackageAnalysis -Verbosity detailed");
+                }
+            }
+        }
+
+        //public void CreateNugetDefs()
+        //{
+        //    var tmpDir = Path.Combine(Path.GetTempPath(), "SharpKit", "NuGet");
+
+        //    foreach (var fileName in Directory.GetFiles(Path.Combine(Path.Combine(GitRoot, "SDK", "Defs")), "*.nuspec", SearchOption.AllDirectories))
+        //    {
+        //        if (Directory.Exists(tmpDir)) Directory.Delete(tmpDir, true);
+        //        Directory.CreateDirectory(tmpDir);
+        //        Directory.CreateDirectory(Path.Combine(tmpDir, "lib"));
+
+        //        var projDir = Path.GetDirectoryName(fileName);
+        //        var projName = "SharpKit." + new DirectoryInfo(projDir).Name;
+
+        //        File.Copy(fileName, Path.Combine(tmpDir, Path.GetFileName(fileName)));
+        //        File.Copy(Path.Combine(GitRoot, "SDK", "Defs", "bin", projName + ".dll"), Path.Combine(tmpDir, "lib", projName + ".dll"));
+        //        File.Copy(Path.Combine(GitRoot, "SDK", "Defs", "bin", projName + ".xml"), Path.Combine(tmpDir, "lib", projName + ".xml"));
+        //        Execute(tmpDir, Path.Combine(GitRoot, "contrib", "nuget", "nuget.exe"), "pack " + Path.GetFileName(fileName));
+        //        var pkgFile = Directory.GetFiles(tmpDir, "*.nupkg").First();
+        //        File.Copy(pkgFile, Path.Combine(GitRoot, "contrib", "nuget", "output", Path.GetFileName(pkgFile)), true);
+        //    }
+        //}
+
+        public void UploadNuget()
+        {
+        }
+
+        #endregion
 
     }
 }

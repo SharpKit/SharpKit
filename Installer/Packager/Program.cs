@@ -666,8 +666,10 @@ namespace SharpKit.Release
             var nugetExe = Path.Combine(GitRoot, "contrib", "nuget", "nuget.exe");
             var outDir = Path.Combine(GitRoot, "contrib", "nuget", "output");
 
-            if (!Directory.Exists(outDir))
-                Directory.CreateDirectory(outDir);
+            if (Directory.Exists(outDir))
+                Directory.Delete(outDir, true);
+
+            Directory.CreateDirectory(outDir);
 
             if (!File.Exists(nugetExe))
                 using (var wc = new WebClient())

@@ -11,8 +11,6 @@
     <description>Sample for C# to JavaScript generation</description>
     <summary></summary>
     <dependencies>
-      <dependency id="SharpKit" version="5.4.7" />
-      <dependency id="SharpKit.JavaScript" version="5.4.7" />
       <dependency id="SharpKit.Html" version="5.4.7" />
     </dependencies>
   </metadata>

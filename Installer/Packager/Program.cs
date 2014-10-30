@@ -640,9 +640,11 @@ namespace SharpKit.Release
 
         #region NuGet
 
+        private string[] NuSpecDirs = new string[] { "contrib", Path.Combine("Compiler", "skc5"), "SDK" };
+
         public void UpdateNugetVersions()
         {
-            foreach (var folder in new string[] { "contrib", "SDK" })
+            foreach (var folder in NuSpecDirs)
             {
                 foreach (var fileName in Directory.GetFiles(Path.Combine(Path.Combine(GitRoot, folder)), "*.nuspec", SearchOption.AllDirectories))
                 {
@@ -671,7 +673,7 @@ namespace SharpKit.Release
                 using (var wc = new WebClient())
                     wc.DownloadFile("http://www.nuget.org/nuget.exe", nugetExe);
 
-            foreach (var folder in new string[] { "contrib", Path.Combine("Compiler", "skc5"), "SDK" })
+            foreach (var folder in NuSpecDirs)
             {
                 foreach (var fileName in Directory.GetFiles(Path.Combine(Path.Combine(GitRoot, folder)), "*.nuspec", SearchOption.AllDirectories))
                 {
@@ -680,30 +682,12 @@ namespace SharpKit.Release
             }
         }
 
-        //public void CreateNugetDefs()
-        //{
-        //    var tmpDir = Path.Combine(Path.GetTempPath(), "SharpKit", "NuGet");
-
-        //    foreach (var fileName in Directory.GetFiles(Path.Combine(Path.Combine(GitRoot, "SDK", "Defs")), "*.nuspec", SearchOption.AllDirectories))
-        //    {
-        //        if (Directory.Exists(tmpDir)) Directory.Delete(tmpDir, true);
-        //        Directory.CreateDirectory(tmpDir);
-        //        Directory.CreateDirectory(Path.Combine(tmpDir, "lib"));
-
-        //        var projDir = Path.GetDirectoryName(fileName);
-        //        var projName = "SharpKit." + new DirectoryInfo(projDir).Name;
-
-        //        File.Copy(fileName, Path.Combine(tmpDir, Path.GetFileName(fileName)));
-        //        File.Copy(Path.Combine(GitRoot, "SDK", "Defs", "bin", projName + ".dll"), Path.Combine(tmpDir, "lib", projName + ".dll"));
-        //        File.Copy(Path.Combine(GitRoot, "SDK", "Defs", "bin", projName + ".xml"), Path.Combine(tmpDir, "lib", projName + ".xml"));
-        //        Execute(tmpDir, Path.Combine(GitRoot, "contrib", "nuget", "nuget.exe"), "pack " + Path.GetFileName(fileName));
-        //        var pkgFile = Directory.GetFiles(tmpDir, "*.nupkg").First();
-        //        File.Copy(pkgFile, Path.Combine(GitRoot, "contrib", "nuget", "output", Path.GetFileName(pkgFile)), true);
-        //    }
-        //}
-
         public void UploadNuget()
         {
+            var nugetExe = Path.Combine(GitRoot, "contrib", "nuget", "nuget.exe");
+            var outDir = Path.Combine(GitRoot, "contrib", "nuget", "output");
+
+            Execute(outDir, nugetExe, "push *.nupkg " + Config.NuGetApiKey);
         }
 
         #endregion

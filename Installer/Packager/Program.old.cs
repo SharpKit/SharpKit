@@ -765,6 +765,14 @@ namespace SharpKit.Release
             }
         }
 
+        public static string NuGetApiKey
+        {
+            get
+            {
+                return GetValue("NuGetApiKey", "XXX");
+            }
+        }
+
         public static string SkRootDir
         {
             get

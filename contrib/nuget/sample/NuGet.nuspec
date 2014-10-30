@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SharpKit.Sample</id>
+    <version>5.4.7</version>
+    <title>SharpKit: Sample</title>
+    <authors>Sharpkit Ltd</authors>
+    <owners>Dan-el</owners>
+    <projectUrl>http://http://sharpkit.net/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Sample for C# to JavaScript generation</description>
+    <summary></summary>
+    <dependencies>
+      <dependency id="SharpKit" version="5.4.7" />
+      <dependency id="SharpKit.JavaScript" version="5.4.7" />
+      <dependency id="SharpKit.Html" version="5.4.7" />
+    </dependencies>
+  </metadata>
+</package>

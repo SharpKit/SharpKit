@@ -168,12 +168,13 @@
       <SubType>Designer</SubType>
     </None>
     <Compile Include="JavaScript\Ast\JsModel.Clone.cs" />
+    <None Include="NuGet.nuspec" />
     <None Include="SharpKit.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">rem xcopy $(TargetDir)*.* C:\Windows\Microsoft.NET\Framework\v4.0.30319\SharpKit\5\ /C /Y /d</PostBuildEvent>
-	<PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
+    <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
 	#cp $(TargetDir)*.* C:\Windows\Microsoft.NET\Framework\v4.0.30319\SharpKit\5\ /C /Y /d
 	</PostBuildEvent>
   </PropertyGroup>

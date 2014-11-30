@@ -29,10 +29,12 @@ namespace SharpKit.Installer
         public string NETFolder35 { get; set; }
         public string NETFolder40 { get; set; }
         public string NETFolder45 { get; set; }
+        public string NETFolder46 { get; set; }
 
         public string NETSharpKitFolder35 { get; set; }
         public string NETSharpKitFolder40 { get; set; }
         public string NETSharpKitFolder45 { get; set; }
+        public string NETSharpKitFolder46 { get; set; }
 
         public string MSBuildFolder { get; set; } //Program Files (x86)/MSBuild
         public string MSBuildSharpKitFolder { get; set; } //Program Files (x86)/MSBuild/SharpKit/5
@@ -54,6 +56,7 @@ namespace SharpKit.Installer
         public string TemplateDirectoryVS2010 { get; set; }
         public string TemplateDirectoryVS2012 { get; set; }
         public string TemplateDirectoryVS2013 { get; set; }
+        public string TemplateDirectoryVS2015 { get; set; }
         public string MonoDevelopPluginPath { get; set; }
         public string MonoDevelopSharpKitPluginPath { get; set; }
 
@@ -80,6 +83,7 @@ namespace SharpKit.Installer
                 NETFolder35 = "/usr/lib/mono/3.5";
                 NETFolder40 = "/usr/lib/mono/4.0";
                 NETFolder45 = "/usr/lib/mono/4.5";
+                NETFolder46 = "/usr/lib/mono/4.6";
                 MonoDevelopPluginPath = "/usr/lib/monodevelop/AddIns";
                 MonoDevelopSharpKitPluginPath = Path.Combine(MonoDevelopPluginPath, "MonoDevelop.SharpKit");
                 //MSBuildExtensionPath = "/usr/lib/mono/xbuild";
@@ -89,11 +93,13 @@ namespace SharpKit.Installer
                 NETFolder35 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v3.5";
                 NETFolder40 = Utils.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Microsoft.NET\Framework\v4.0.30319";
                 NETFolder45 = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + @"\MSBuild\12.0\bin";
+                NETFolder46 = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + @"\MSBuild\14.0\bin";
                 //MSBuildExtensionPath = Utils.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + dsc + "MSBuild";
             }
             NETSharpKitFolder35 = Path.Combine(NETFolder35, "SharpKit", "5");
             NETSharpKitFolder40 = Path.Combine(NETFolder40, "SharpKit", "5");
             NETSharpKitFolder45 = Path.Combine(NETFolder45, "SharpKit", "5");
+            NETSharpKitFolder46 = Path.Combine(NETFolder46, "SharpKit", "5");
 
             DocumentsFolder = Utils.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
@@ -102,6 +108,7 @@ namespace SharpKit.Installer
             TemplateDirectoryVS2010 = Path.Combine(DocumentsFolder, @"Visual Studio 2010\Templates\ProjectTemplates\Visual C#\SharpKit");
             TemplateDirectoryVS2012 = Path.Combine(DocumentsFolder, @"Visual Studio 2012\Templates\ProjectTemplates\Visual C#\SharpKit");
             TemplateDirectoryVS2013 = Path.Combine(DocumentsFolder, @"Visual Studio 2013\Templates\ProjectTemplates\Visual C#\SharpKit");
+            TemplateDirectoryVS2015 = Path.Combine(DocumentsFolder, @"Visual Studio 2015\Templates\ProjectTemplates\Visual C#\SharpKit");
 
             if (Utils.IsUnix)
             {
@@ -250,6 +257,7 @@ namespace SharpKit.Installer
                 CreateNETSymbolicLink(NETFolder35, NETSharpKitFolder35, ApplicationCompilerFolder);
                 CreateNETSymbolicLink(NETFolder40, NETSharpKitFolder40, ApplicationCompilerFolder);
                 CreateNETSymbolicLink(NETFolder45, NETSharpKitFolder45, ApplicationCompilerFolder);
+                CreateNETSymbolicLink(NETFolder46, NETSharpKitFolder46, ApplicationCompilerFolder);
 
                 CreateNETSymbolicLink(MSBuildFolder, MSBuildSharpKitFolder, ApplicationFolder);
 
@@ -258,6 +266,7 @@ namespace SharpKit.Installer
                     CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2010), TemplateDirectoryVS2010, Path.Combine(ApplicationFolder, "Integration", "VisualStudio", "Templates"));
                     CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2012), TemplateDirectoryVS2012, Path.Combine(ApplicationFolder, "Integration", "VisualStudio", "Templates"));
                     CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2013), TemplateDirectoryVS2013, Path.Combine(ApplicationFolder, "Integration", "VisualStudio", "Templates"));
+                    CreateNETSymbolicLink(Utils.GetParentDir(TemplateDirectoryVS2015), TemplateDirectoryVS2015, Path.Combine(ApplicationFolder, "Integration", "VisualStudio", "Templates"));
                 }
 
                 if (Utils.IsUnix)
@@ -282,6 +291,7 @@ namespace SharpKit.Installer
                     Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(NETSharpKitFolder35))).WaitForExit();
                     Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(NETSharpKitFolder40))).WaitForExit();
                     Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(NETSharpKitFolder45))).WaitForExit();
+                    Process.Start("chmod", "-R ugo+rX " + Utils.GetParentDir(Utils.GetParentDir(NETSharpKitFolder46))).WaitForExit();
 
                     Log("Set unix execution permission");
                     Process.Start("chmod", "ugo+x " + ApplicationCompilerFolder + "/skc5.exe").WaitForExit();
@@ -411,10 +421,11 @@ namespace SharpKit.Installer
                 EnsureInited();
                 UninstallService();
                 Log("Deleting files");
-                Utils.UIDeleteDirectory(NETSharpKitFolder45);
                 Utils.UIDeleteDirectory(ApplicationFolder);
                 Utils.UIDeleteDirectory(NETSharpKitFolder35);
                 Utils.UIDeleteDirectory(NETSharpKitFolder40);
+                Utils.UIDeleteDirectory(NETSharpKitFolder45);
+                Utils.UIDeleteDirectory(NETSharpKitFolder46);
                 Utils.UIDeleteDirectory(MSBuildSharpKitFolder);
 
                 //old program file dir from depricated setup location
@@ -425,6 +436,7 @@ namespace SharpKit.Installer
                     Utils.UIDeleteDirectory(TemplateDirectoryVS2010);
                     Utils.UIDeleteDirectory(TemplateDirectoryVS2012);
                     Utils.UIDeleteDirectory(TemplateDirectoryVS2013);
+                    Utils.UIDeleteDirectory(TemplateDirectoryVS2015);
                 }
                 else
                 {

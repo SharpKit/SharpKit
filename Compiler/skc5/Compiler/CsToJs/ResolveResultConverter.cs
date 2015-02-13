@@ -797,10 +797,55 @@ namespace SharpKit.Compiler.CsToJs
             return AstNodeConverter.Visit(node);
         }
 
-        #endregion
+		public JsNode VisitAwaitResolveResult(AwaitResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public JsNode VisitAmbiguousTypeResolveResult(AmbiguousTypeResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public JsNode VisitUnknownMethodResolveResult(UnknownMethodResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public JsNode VisitSizeOfResolveResult(SizeOfResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public JsNode VisitErrorResolveResult(ErrorResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public JsNode VisitForEachResolveResult(ForEachResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public JsNode VisitNamespaceResolveResult(NamespaceResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public JsNode VisitUnknownMemberResolveResult(UnknownMemberResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public JsNode VisitUnknownIdentifierResolveResult(UnknownIdentifierResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
 
 
-    }
+	}
 
 
 }

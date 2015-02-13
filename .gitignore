@@ -1,5 +1,6 @@
 bin
 obj
+.vs
 *.ide
 *.suo
 *.user
@@ -52,3 +53,4 @@ Icon
 *.so
 *.o
 *.obj
+

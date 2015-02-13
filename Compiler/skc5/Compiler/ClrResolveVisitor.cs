@@ -148,6 +148,51 @@ namespace SharpKit.Compiler
             throw new NotImplementedException();
         }
 
-        #endregion
-    }
+		public object VisitAwaitResolveResult(AwaitResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object VisitAmbiguousTypeResolveResult(AmbiguousTypeResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object VisitUnknownMethodResolveResult(UnknownMethodResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object VisitSizeOfResolveResult(SizeOfResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object VisitErrorResolveResult(ErrorResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object VisitForEachResolveResult(ForEachResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object VisitNamespaceResolveResult(NamespaceResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object VisitUnknownMemberResolveResult(UnknownMemberResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object VisitUnknownIdentifierResolveResult(UnknownIdentifierResolveResult res)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
+	}
 }

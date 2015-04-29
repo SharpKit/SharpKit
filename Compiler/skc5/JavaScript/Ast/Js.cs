@@ -43,9 +43,14 @@ namespace SharpKit.JavaScript.Ast
         }
         public static JsJsonObjectExpression Add(this JsJsonObjectExpression exp, string name, JsExpression value)
         {
+            exp.Add(JsonNameValue(name, value));
+            return exp;
+        }
+        public static JsJsonObjectExpression Add(this JsJsonObjectExpression exp, JsJsonNameValue nameValue)
+        {
             if (exp.NamesValues == null)
                 exp.NamesValues = new List<JsJsonNameValue>();
-            exp.NamesValues.Add(JsonNameValue(name, value));
+            exp.NamesValues.Add(nameValue);
             return exp;
         }
         public static JsJsonNameValue JsonNameValue(string name, JsExpression value)

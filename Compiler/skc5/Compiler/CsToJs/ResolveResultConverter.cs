@@ -569,7 +569,40 @@ namespace SharpKit.Compiler.CsToJs
                         var mrr = (MemberResolveResult)op.Operands[0];
                         var name = SkJs.GetEntityJsName(mrr.Member);
                         var value = VisitExpression(op.Operands[1]);
-                        json.Add(name, value);
+                        var pair = Js.JsonNameValue(name, value);
+                        if (mrr.TargetResult is MemberResolveResult)   //happens when using object initializers to set inner properties, e.g. new Parent { Child = { Name="ggg" } }
+                        {
+                            var targetMrr = (MemberResolveResult)mrr.TargetResult;
+                            var name2 = SkJs.GetEntityJsName(targetMrr.Member);
+                            var innerJson = Js.Json();
+                            innerJson.Add(pair);
+                            pair = Js.JsonNameValue(name2, innerJson);
+                        }
+                        json.Add(pair);
+                    }
+                    else if (st is InvocationResolveResult)
+                    {
+                        var irr = (InvocationResolveResult)st;
+                        var targetMrr = irr.TargetResult as MemberResolveResult;
+                        if (targetMrr == null)
+                            throw new CompilerException(st.GetFirstNode(), "Expected MemberResolveResult");
+                        var name = SkJs.GetEntityJsName(targetMrr.Member);
+                        if (irr.Arguments.Count != 1)
+                            throw new CompilerException(st.GetFirstNode(), "Expected one argument, not " + name + " " + irr.Arguments.Count);
+                        var value = VisitExpression(irr.Arguments[0]);
+                        var jsonMember = json.NamesValues.NotNull().FirstOrDefault(t => t.Name.Name == name);
+                        if (jsonMember == null)
+                        {
+                            json.Add(name, Js.NewJsonArray(value));
+                        }
+                        else
+                        {
+                            var array = jsonMember.Value as JsJsonArrayExpression;
+                            if (array == null)
+                                throw new CompilerException(st.GetFirstNode(), "json member value array not found " + name);
+                            array.Items.Add(value);
+                        }
+
                     }
                     else
                     {
@@ -797,55 +830,55 @@ namespace SharpKit.Compiler.CsToJs
             return AstNodeConverter.Visit(node);
         }
 
-		public JsNode VisitAwaitResolveResult(AwaitResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitAwaitResolveResult(AwaitResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		public JsNode VisitAmbiguousTypeResolveResult(AmbiguousTypeResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitAmbiguousTypeResolveResult(AmbiguousTypeResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		public JsNode VisitUnknownMethodResolveResult(UnknownMethodResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitUnknownMethodResolveResult(UnknownMethodResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		public JsNode VisitSizeOfResolveResult(SizeOfResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitSizeOfResolveResult(SizeOfResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		public JsNode VisitErrorResolveResult(ErrorResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitErrorResolveResult(ErrorResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		public JsNode VisitForEachResolveResult(ForEachResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitForEachResolveResult(ForEachResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		public JsNode VisitNamespaceResolveResult(NamespaceResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitNamespaceResolveResult(NamespaceResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		public JsNode VisitUnknownMemberResolveResult(UnknownMemberResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitUnknownMemberResolveResult(UnknownMemberResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		public JsNode VisitUnknownIdentifierResolveResult(UnknownIdentifierResolveResult res)
-		{
-			throw new NotImplementedException();
-		}
+        public JsNode VisitUnknownIdentifierResolveResult(UnknownIdentifierResolveResult res)
+        {
+            throw new NotImplementedException();
+        }
 
-		#endregion
+        #endregion
 
 
-	}
+    }
 
 
 }

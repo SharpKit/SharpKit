@@ -15,7 +15,7 @@ SharpKit is licensed under GPL. It has all features and has no restrictions. For
 
 
 ##### Building
-An installer is available here: http://sharpkit.net, to build from source code follow this:
+An installer is available here: https://github.com/SharpKit/SharpKit/releases, to build from source code follow this:
 
 ###### Windows
 ```
@@ -23,6 +23,11 @@ git clone https://github.com/SharpKit/SharpKit.git
 cd SharpKit
 configure
 make
+```
+
+This will build a debug version, to build a release version, please use:
+```
+make release
 ```
 
 ###### Linux

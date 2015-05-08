@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ReleaseLog Filename="U:\prj\github\SharpKit\Installer\Packager\ReleaseLogs\5.4.8.xml" Version="5.4.8" Created="2015-05-07T14:45:09.8143387+02:00">
+  <SharpKit_Sdk HeadRevision="f630174f101ffde4fa13892c7d2b2f9c4e89fe07">
+    <SvnLogEntries>
+      <VersionControlLogEntry revision="f630174f101ffde4fa13892c7d2b2f9c4e89fe07" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-03-13T09:03:13+01:00" msg="add in-out to JsAction and JsFunc generic type parameters" />
+      <VersionControlLogEntry revision="35e729fc07c78c9b48c10548a49fd5424c653218" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2015-03-04T11:57:17+01:00" msg="added List&lt;T&gt;(int Capacity)" />
+      <VersionControlLogEntry revision="251bd6dedbab19dbbf5d1088eac4151f667b6980" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-12-11T17:36:56+01:00" msg="using &quot;const&quot; instead of &quot;static&quot;" />
+      <VersionControlLogEntry revision="80c08f7f1b82ec954a771409bda2c3b0d4a6ffc6" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-12-01T01:04:03+01:00" msg="Updated Three.js" />
+      <VersionControlLogEntry revision="ddc3c2fc729687245574bef7eb0c3cc36b33c8bb" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-11-30T17:20:29+01:00" msg="IDL parser fix" />
+      <VersionControlLogEntry revision="edb0348e3634cde2984f51a8d3b318c5ebd612c2" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-11-30T17:19:59+01:00" msg="Updated Html5 from IDL definitions with fixed generator" />
+      <VersionControlLogEntry revision="8fdb2e9ac719dfdc90d7f63e02fd6876617094dd" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-11-30T16:28:29+01:00" msg="Regeneration of WebIDL-Definitions" />
+      <VersionControlLogEntry revision="e82a74e230b46e009df5b094f98ebf40e83dfe4b" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-11-30T15:55:18+01:00" msg="Added WebIDL definitions" />
+      <VersionControlLogEntry revision="c554e9b82d0d52e6e8a6d89ca7713acda37de050" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2014-11-19T13:02:25+01:00" msg="Merge pull request #6 from oleneveu/patch-1&#xD;&#xA;Bug suspected" />
+      <VersionControlLogEntry revision="17e67be312699808155a1e67dade0d1485c816d6" author="oleneveu &lt;oleneveu@gmail.com&gt;" date="2014-11-18T16:35:16+01:00" msg="Bug suspected&#xD;&#xA;Hello,&#xD;&#xA;I was looking for the descendant &quot;child-2&quot; of &quot;root-node&quot; and failed to find it.&#xD;&#xA;&lt;div id=&quot;root-node&quot;&gt;&#xD;&#xA;&lt;span id=&quot;child-1&quot;&gt;&lt;/span&gt;&#xD;&#xA;&lt;input type=text id=&quot;child-2&quot; /&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;I suspect a bug on line 101: I did not took the time to understand all the logic but '_Current' will never change its value and its seems more logical to check for the value of 'node'.&#xD;&#xA;Regards," />
+      <VersionControlLogEntry revision="27cfc94c6e7433855539c26382e45c05be52692f" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-30T17:31:05+01:00" msg="removed SharpKit.JavaScript nuget-package" />
+      <VersionControlLogEntry revision="122e44f8c428f87801f042d957d222da1af06434" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-30T16:56:05+01:00" msg="updated nuget packages" />
+      <VersionControlLogEntry revision="ee03ad86e01cabede773ab3715ca085c84d9c7dd" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-30T16:20:55+01:00" msg="added nuget files" />
+      <VersionControlLogEntry revision="88ae8eece3749656510b45265e59fa4f3b282307" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-08T19:23:18+02:00" msg="fixed String.GetEnumerator()" />
+      <VersionControlLogEntry revision="9738edb7bfdae4270a57258e540dda7a51b4949e" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-08T18:30:51+02:00" msg="fixed Enumerator.Concat() method" />
+      <VersionControlLogEntry revision="5954a1c50d1beaf31356fe9d0528a67863b0a229" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-08T13:07:42+02:00" msg="fixed Dictionary.Remove()" />
+    </SvnLogEntries>
+  </SharpKit_Sdk>
+  <SharpKit5 HeadRevision="79ce26358adcdd1859877bf359191e4a47342944">
+    <SvnLogEntries>
+      <VersionControlLogEntry revision="79ce26358adcdd1859877bf359191e4a47342944" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-05-02T12:52:18+02:00" msg="g" />
+      <VersionControlLogEntry revision="9e72dd4e3e65f379e9d1f612fe1b2be6d441589e" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-04-29T17:37:17+02:00" msg="Fix anonymous initializers when used without a 'new' keyword in json mode" />
+      <VersionControlLogEntry revision="8aa996a8ea84fb3d1c02b20dd1f6517dae37e744" author="unknown &lt;dkhen@AMS9-2242.booking.pcln.com&gt;" date="2015-02-13T11:38:44+01:00" msg="Minor adjustments to match NRefactory 5.5.0" />
+      <VersionControlLogEntry revision="17d1a777c0cd1d454814dd1a48961d6f00bbc7f7" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-11-30T13:23:57+01:00" msg="Added .NET 4.6 support" />
+      <VersionControlLogEntry revision="34fdf31bfc387037d34686f6d92b58e6a85d317e" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-30T17:32:41+01:00" msg="removed SharpKit.JavaScript nuget-package" />
+      <VersionControlLogEntry revision="7d447aede8c8d278cc0714aa79cedc3bc0ba0ea5" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-30T17:20:27+01:00" msg="added nuget upload" />
+      <VersionControlLogEntry revision="062b86dde060c944d29d4f186c344c47f660ed04" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-30T16:59:02+01:00" msg="updated nuget packages" />
+      <VersionControlLogEntry revision="c610427c124bf6554af5ecfd4602fb7ed18643d3" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-30T16:20:25+01:00" msg="updated nuget generation" />
+      <VersionControlLogEntry revision="e36959d435ec81d8ef74bfe25c439e7620443774" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-30T16:20:14+01:00" msg="updated nuget generation" />
+      <VersionControlLogEntry revision="af10e27ed1ad42c003017bb8ff6c23021f422124" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-27T13:18:39+01:00" msg="generation of nuget packages" />
+      <VersionControlLogEntry revision="95c4bb2719ca3360556600e249302434a8d28d44" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-13T16:46:58+02:00" msg="Skip enum casts" />
+      <VersionControlLogEntry revision="57dc8d92ea30fd6c4a133c4ec8b2ce036137851a" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-08T19:08:42+02:00" msg="Exporting of types nested deeper than the second level is now supported" />
+      <VersionControlLogEntry revision="ae916ebab47b146f293906a60b1fda2e3e8d5aa1" author="Sebastian Loncar &lt;arakis@stne.net&gt;" date="2014-10-08T12:26:24+02:00" msg="keyword &quot;unsafe&quot; will now be ignored" />
+    </SvnLogEntries>
+  </SharpKit5>
+</ReleaseLog>

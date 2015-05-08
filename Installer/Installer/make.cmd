@@ -10,4 +10,3 @@ IF not "%1" == "release" (
 %msbuild% Installer.csproj /p:Configuration=Release
 
 )
-

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SharpKit</id>
-    <version>5.4.8</version>
+    <version>5.4.9</version>
     <title>SharpKit: C# to JS compiler</title>
     <authors>Sharpkit Ltd</authors>
     <owners>Dan-el</owners>

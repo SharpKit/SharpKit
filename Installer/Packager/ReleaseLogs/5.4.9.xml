@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ReleaseLog Filename="C:\Projects\GitHub\SharpKit\Installer\Packager\ReleaseLogs\5.4.9.xml" Version="5.4.9" Created="2015-05-09T13:30:18.8644+02:00">
+  <SharpKit_Sdk HeadRevision="30078b75edb3bfeba391473dc261965642df407f">
+    <SvnLogEntries />
+  </SharpKit_Sdk>
+  <SharpKit5 HeadRevision="defb4fcf739461e3d4fc0bbf10759c2f6771e953">
+    <SvnLogEntries>
+      <VersionControlLogEntry revision="defb4fcf739461e3d4fc0bbf10759c2f6771e953" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-05-09T12:16:07+02:00" msg="Bugfix - null ast nodes get converted to code" />
+      <VersionControlLogEntry revision="1cb293001e6571b82fe15d7828b0957009bbd27c" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-05-09T12:11:47+02:00" msg="g" />
+    </SvnLogEntries>
+  </SharpKit5>
+</ReleaseLog>

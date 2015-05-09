@@ -42,7 +42,7 @@ namespace SharpKit.Compiler.CsToJs
 		[DebuggerStepThrough]
 		public JsNode Visit(AstNode node)
 		{
-			if (node == null)
+			if (node == null || node.IsNull)
 				return null;
 			VisitDepth++;
 			if (VisitDepth > MaxVisitDepth)

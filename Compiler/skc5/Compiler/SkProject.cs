@@ -39,9 +39,10 @@ namespace SharpKit.Compiler
         protected override void ParseCsFiles()
         {
             base.ParseCsFiles();
-            if (!CSharpParser.HasErrors)
+            var errors = NFiles.SelectMany(t => t.SyntaxTree.Errors).ToList();
+            if (errors.Count==0)
                 return;
-            foreach (var error in CSharpParser.ErrorsAndWarnings)
+            foreach (var error in errors)
             {
                 var item = new CompilerLogItem
                 {

@@ -58,6 +58,7 @@
       <HintPath Condition=" '$(Configuration)' == 'Release'">..\..\external\NRefactory\bin\net_4_5_Release\ICSharpCode.NRefactory.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath Condition=" '$(Configuration)' == 'Debug'">..\..\external\cecil\bin\net_4_0_Debug\Mono.Cecil.dll</HintPath>
       <HintPath Condition=" '$(Configuration)' == 'Release'">..\..\external\cecil\bin\net_4_0_Release\Mono.Cecil.dll</HintPath>
     </Reference>

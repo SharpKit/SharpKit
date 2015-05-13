@@ -7,6 +7,7 @@ obj
 *.userprefs
 lib/*.pdb
 Installer/Installer/res/Files.zip
+contrib/nuget/output/
 
 # Windows image file caches
 Thumbs.db

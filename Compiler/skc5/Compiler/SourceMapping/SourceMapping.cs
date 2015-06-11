@@ -11,7 +11,7 @@ namespace SharpKit.Compiler.SourceMapping
     [DataContract]
     class SourceMappingDocument
     {
-        public List<SourceMappingV3Document> GenerateV3MappingDocs()
+        public List<SourceMappingV3Document> GenerateV3MappingDocs(string sourceRoot)
         {
             var list = new List<SourceMappingV3Document>();
             var byGenFile = Mappings.GroupBy(t => t.GeneratedLocation.Filename).ToList();
@@ -25,7 +25,7 @@ namespace SharpKit.Compiler.SourceMapping
                 var sources = bySourceFile.Select(t => t.Key).ToList();
                 doc.sources = new List<string>();
                 foreach (var src in sources)
-                    doc.sources.Add(Path.GetFullPath(src).Replace("\\", "/"));
+                    doc.sources.Add(sourceRoot + Path.GetFullPath(src).Replace("\\", "/"));
                 var byGenLine = mappingsByGenFile.GroupBy(t => t.GeneratedLocation.Line).OrderBy(t => t.Key).ToList();
                 var prevSrcLine = 0;
                 var prevSrcColumn = 0;

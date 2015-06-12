@@ -92,14 +92,14 @@ namespace SharpKit.Compiler.SourceMapping
                     }
                 }
             }
-            var v3Doc = doc.GenerateV3MappingDocs().SingleOrDefault();
+            var v3Doc = doc.GenerateV3MappingDocs("SourceMaps.ashx/").SingleOrDefault();
             if (v3Doc == null)
             {
                 Compiler.Log.WriteLine("Cannot generate source mapping file: " + mappingFilename + " - document not found");
                 return false;
             }
-            v3Doc.sourceRoot = "SourceMaps.ashx/";
             var tmpFilename = mappingFilename + ".tmp";
+            //v3Doc.sourceRoot = "SourceMaps.ashx/";
             v3Doc.SaveAs(tmpFilename);
             FileUtils.CompareAndSaveFile(mappingFilename, tmpFilename);
             if (CompilerConfiguration.Current.GenerateSourceMapsDebugFiles)

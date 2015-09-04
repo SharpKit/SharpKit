@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ReleaseLog Filename="C:\Users\Dan-el\github\SharpKit\Installer\Packager\ReleaseLogs\5.5.0.xml" Version="5.5.0" Created="2015-09-04T12:06:20.4568365+02:00">
+  <SharpKit_Sdk HeadRevision="30078b75edb3bfeba391473dc261965642df407f">
+    <SvnLogEntries />
+  </SharpKit_Sdk>
+  <SharpKit5 HeadRevision="b41c64bf6c6cc18bd0b3de7be1a8b4f6f2cfd815">
+    <SvnLogEntries>
+      <VersionControlLogEntry revision="b41c64bf6c6cc18bd0b3de7be1a8b4f6f2cfd815" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-09-04T11:55:06+02:00" msg="Workaround nrefactory issue 501 - 'logical and' operator is resolved as 'bitwise and' when user defined 'bitwise and' exists" />
+      <VersionControlLogEntry revision="d29f7b61e9dda92bb527c9e6c50d9e6cff4a5126" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-06-18T10:54:03+02:00" msg="5.4.9" />
+      <VersionControlLogEntry revision="9ee4920115a48542160fe0975509f20254b63f18" author="Dan-el Khen &lt;danelkhen@gmail.com&gt;" date="2015-06-12T11:14:22+02:00" msg="Merge pull request #10 from oleneveu/master&#xD;&#xA;Provide compatibility with IE11 for source maps." />
+      <VersionControlLogEntry revision="18032be207cff0495bcab855bc57a6c5d5efaa6e" author="Olivier Leneveu &lt;oleneveu@jeanlutzsa.com&gt;" date="2015-06-11T17:17:56+02:00" msg="Provide compatibility with IE11 for source maps." />
+      <VersionControlLogEntry revision="e548a461981d0bffdb4d14d77b42933962dfa1ad" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-05-13T16:41:48+02:00" msg="Fix csharp parser error reporting" />
+      <VersionControlLogEntry revision="41c6b6533e469ecbe51cec925e5b506a1b54a6f7" author="danelkhen &lt;danelkhen@gmail.com&gt;" date="2015-05-13T14:59:51+02:00" msg="update gitignore" />
+    </SvnLogEntries>
+  </SharpKit5>
+</ReleaseLog>

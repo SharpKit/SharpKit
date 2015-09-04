@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SharpKit.Sample</id>
-    <version>5.4.9</version>
+    <version>5.5.0</version>
     <title>SharpKit: Sample</title>
     <authors>Sharpkit Ltd</authors>
     <owners>Dan-el</owners>
@@ -11,7 +11,7 @@
     <description>Sample for C# to JavaScript generation</description>
     <summary></summary>
     <dependencies>
-      <dependency id="SharpKit.Html" version="5.4.9" />
+      <dependency id="SharpKit.Html" version="5.5.0" />
     </dependencies>
   </metadata>
 </package>

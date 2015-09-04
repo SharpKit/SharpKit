@@ -18,12 +18,30 @@ namespace SharpKit.Compiler.CsToJs
     class ResolveResultVisitor_Operator
     {
 
+        /// <summary>
+        /// https://github.com/icsharpcode/NRefactory/issues/501
+        /// </summary>
+        OperatorResolveResult WorkaroundIssue501(OperatorResolveResult res)
+        {
+            if (res.UserDefinedOperatorMethod == null)
+                return res;
+            if ((res.OperatorType == ExpressionType.AndAlso && res.UserDefinedOperatorMethod.Name == "op_BitwiseAnd") ||
+                (res.OperatorType == ExpressionType.OrElse && res.UserDefinedOperatorMethod.Name == "op_BitwiseOr"))
+            {
+                var fake = new OperatorResolveResult(res.Type, res.OperatorType, null, res.IsLiftedOperator, res.Operands);
+                return fake;
+
+            }
+            return res;
+        }
+
         public JsNode VisitOperatorResolveResult(OperatorResolveResult res)
         {
             if (res.Operands.Count == 1)
                 return Unary(res);
             else if (res.Operands.Count == 2)
             {
+                res = WorkaroundIssue501(res);
                 var node2 = Binary(res);
                 if (Importer.ForceIntegers)
                 {
@@ -80,8 +98,8 @@ namespace SharpKit.Compiler.CsToJs
                 if (res.OperatorType.IsAny(ExpressionType.AddAssign, ExpressionType.SubtractAssign))
                 {
                     var accessor = res.OperatorType == ExpressionType.AddAssign ? pe.AddAccessor : pe.RemoveAccessor;
-                    var fake = new CSharpInvocationResolveResult(mrr.TargetResult, accessor, new List<ResolveResult> 
-                            { 
+                    var fake = new CSharpInvocationResolveResult(mrr.TargetResult, accessor, new List<ResolveResult>
+                            {
                                 res.Operands[1]
                             });
                     var node6 = Visit(fake);

@@ -1,5 +1,5 @@
 debug:
-	xbuild NRefactory/NRefactory.sln
+	xbuild /p:Configuration=net_4_5_Release NRefactory/NRefactory.sln
 	xbuild corex/corex.sln
 	xbuild AjaxMin/AjaxMinDll/AjaxMinDll.sln
 	xbuild SharpZipLib/src/ICSharpCode.SharpZLib.csproj

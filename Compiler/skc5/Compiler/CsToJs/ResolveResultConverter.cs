@@ -842,7 +842,7 @@ namespace SharpKit.Compiler.CsToJs
 
         public JsNode VisitUnknownMethodResolveResult(UnknownMethodResolveResult res)
         {
-            throw new NotImplementedException();
+            return Js.Member("UNKNOWN_METHOD");
         }
 
         public JsNode VisitSizeOfResolveResult(SizeOfResolveResult res)

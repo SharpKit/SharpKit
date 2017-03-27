@@ -10,10 +10,6 @@ Website: http://sharpkit.net
 Library definitions, JsClr framework and other useful libraries is at:
 https://github.com/SharpKit/SharpKit-SDK
 
-##### License
-SharpKit is licensed under GPL. It has all features and has no restrictions. For commercial licenses please refer to http://sharpkit.net 
-
-
 ##### Building
 An installer is available here: https://github.com/SharpKit/SharpKit/releases, to build from source code follow this:
 

@@ -11,6 +11,8 @@ https://github.com/SharpKit/SharpKit-SDK
 ##### Contributing
 Maybe you see there are less commits recently. But you can belive us, sharpkit is still activly used in lots of projects. If you want to contribute, feel free to send us a patch of request a project membership.
 
+Most important Task: Every help in replacing NRefactory with Roslyn is very welcome.
+
 ##### Documentation
 Link: https://sharpkit.github.io/
 

@@ -11,6 +11,9 @@ https://github.com/SharpKit/SharpKit-SDK
 ##### Contributing
 Maybe you see there are less commits recently. But you can belive us, sharpkit is still activly used in lots of projects. If you want to contribute, feel free to send us a patch of request a project membership.
 
+##### Documentation
+Link: https://sharpkit.github.io/
+
 ##### Building
 An installer is available here: https://github.com/SharpKit/SharpKit/releases, to build from source code follow this:
 

@@ -1,0 +1,254 @@
+﻿= Building a Client-Side Grid Control using SharpKit =
+== Introduction ==
+This sample code will show you how to write a client-side grid control using SharpKit. SharpKit is a tool that allows you to write C# code and convert it JavaScript during compilation. This process helps you write code much faster, and with less errors, it also helps you to document your code so other developers can use it more easily. So, to avoid confusion, all the code here will be shown in C#, but in fact, it is standard JavaScript code, and can be used with / without SharpKit afterwards.
+We'll start by learning how to implement the Grid, then move on to using the Grid, and finally, learn how to optimize DOM manipulation to support legacy browsers.
+
+== Implementing the Grid ==
+=== Grid Class ===
+Grid.cs
+{{{
+[JsType(JsMode.Prototype, Filename = "Grid.js")]
+public class Grid : HtmlContext
+{
+    public Grid()
+    {
+            Rows = new JsArray<GridRow>();
+    }
+    public HtmlElement Element { get; set; }
+    public HtmlElement GridBody { get; set; }
+    public JsArray<GridRow> Rows { get; set; }
+    public void Render()
+    {
+        if (Element == null)
+            return;
+        Element["_Grid"] = this;
+        if (GridBody == null || GridBody.nodeName != "TBODY")
+        {
+            GridBody = document.createElement("TBODY");
+            Element.appendChild(GridBody);
+        }
+    }
+}
+}}}
+This Grid class is designed to be used in the following pattern:
+GridDemo.cs
+{{{
+var grid = new Grid { Element = document.getElementById("MyGrid") };
+grid.Render();
+}}}
+=== GridRow Class ===
+The grid class has a collection of Rows where each row is of type GridRow. GridRow is a json class, which means that it's used only to contain data about the row, in our case we will contain a reference to the table row element (a TR element), and a Data property that associates the row with some data object.
+GridRow.cs
+{{{
+[JsType(JsMode.Json)]
+public class GridRow
+{
+    public HtmlElement Element { get; set; }
+    public object Data { get; set; }
+}
+}}}
+The GridRow class is designed to be used in the following pattern:
+GridDemo.cs
+{{{
+var row = new GridRow { Element = grid.CreateRow(document.getElementById("MyGridRowTemplate")) };
+grid.AddRow(row);
+}}}
+
+=== Adding a Row ===
+Now it's time to implement an AddRow method, that will add a GridRow to our Rows collection, and append it to the DOM.
+Grid.cs
+{{{
+public void AddRow(GridRow gr)
+{
+    var body = GridBody;
+    body.appendChild(gr.Element);
+    gr.Element["_GridRow"] = gr;
+    Rows.push(gr);
+}
+}}}
+=== Creating a Row element from template ===
+Grid.cs
+{{{
+public HtmlElement CreateRowElement(HtmlElement template)
+{
+    return template.cloneNode(true);
+}
+}}}
+This method simply clones an element, in our case this will be TR element to be cloned for each row in the grid.
+== Using the Grid ==
+Now, we're ready to use the grid:
+GridDemo.htm
+{{{
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Grid Demo - SharpKitSamples</title>
+    <link href="Grid.css" rel="stylesheet" type="text/css" />
+    <script src="res/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="Grid.js" type="text/javascript"></script>
+    <script src="GridDemo.js"></script>
+    <script>$(Load);</script>
+</head>
+<body>
+<h1>Grid Demo</h1>
+    <table id="MyGrid" class="Grid">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Phone Number</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody style="display: none">
+            <tr id="MyGridRowTemplate">
+                <td class="CellName"></td>
+                <td class="CellAge"></td>
+                <td class="CellPhoneNumber"></td>
+                <td class="CellDescription"></td>
+           </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+}}}
+This html file contains a TABLE element, for the grid, with some headers and a row template. We can clone this row to create new rows in the grid. You can also notice the $(Load) code which is in fact the jQuery ready event, this means that when the DOM is ready the Load() function will be invoked.
+GridDemo.cs
+{{{
+[JsType(JsMode.Global, Filename = "GridDemo.js")]
+public class GridDemoClient : jQueryContextBase
+{
+    public static void Load()
+    {
+        var list = new JsArray<Contact>();
+
+        for (var i = 0; i < 30; i++)
+        {
+            var c = new Contact { Name = "MyContact" + i, Age = i, PhoneNumber = "44557799" + i, Description="This is a contact "+i };
+            list.push(c);
+        }
+        var grid = new Grid { Element = document.getElementById("MyGrid") };
+        grid.Render();
+        foreach (var c in list)
+        {
+            var row = new GridRow { Element = grid.CreateRow(document.getElementById("MyGridRowTemplate")), Data = c };
+            var tr = J(row.Element);
+            tr.find(".CellName").text(c.Name);
+            tr.find(".CellPhoneNumber").text(c.PhoneNumber);
+            tr.find(".CellAge").text(c.Age.ToString());
+            tr.find(".CellDescription").text(c.Description);
+            grid.AddRow(row);
+
+        }
+    }
+}
+}}}
+In this code, we're generating 30 sample contacts, then we create GridRow objects for them, we also create TR elements cloned from our template and bind the data from the contact instance to each row.
+
+== Implementing Sorting ==
+With a solid grid API, it's easy to implement a feature like sorting, all we want to do is to clear the rows in the grid, sort them, and render them back to the grid.
+GridDemo.cs
+{{{
+public static void SortByName()
+{
+    var rows = Grid.Rows.OrderBy(t => t.Data.As<Contact>().Name);
+    Grid.DeleteAllRows();
+    foreach (var row in rows)
+        Grid.AddRow(row);
+}
+}}}
+OrderBy method is a custom extension method implemented in a small utility class:
+JsArrayExtensions.cs
+{{{
+[JsType(JsMode.Prototype, Filename = "GridDemo.js")]
+static class JsArrayExtensions
+{
+    public static JsArray<T> OrderBy<T>(this JsArray<T> array, JsFunc<T, object> selector, bool desc)
+    {
+        var array2 = array.slice(0);
+        if (!desc)
+            array2.sort((x, y) => Compare(selector(x), selector(y)));
+        else
+            array2.sort((x, y) => CompareDesc(selector(x), selector(y)));
+        return array2;
+    }
+    static JsNumber Compare(object x, object y)
+    {
+        var xx = x.As<int>();
+        var yy = y.As<int>();
+        if (xx > yy)
+            return 1;
+        if (xx < yy)
+            return -1;
+        return 0;
+    }
+}
+}}}
+This is a simplified LINQ sorting implementation on JavaScript arrays, it is implemented using extension methods, to make code usage easier and more readable. It is still converted to plain JavaScript by SharpKit.
+
+The next step is to support sorting by any property and remember the last sorting we've done, to toggle between Ascending and Descending sorting. We should also change the look of the currently sorted column, so the user will understand that the grid is sorted.
+Grid.cs
+{{{
+static Grid Grid;
+static HtmlTableCell LastSortHeader;
+static JsString LastSort;
+static bool IsLastSortDescending;
+public static void SortBy(HtmlTableCell header, JsString pe)
+{
+    J(LastSortHeader).removeClass("Sorted").removeClass("Descending");
+    IsLastSortDescending = LastSort == pe && !IsLastSortDescending;
+    LastSort = pe;
+    LastSortHeader = header;
+    J(LastSortHeader).addClass("Sorted");
+    J(LastSortHeader).toggleClass("Descending", IsLastSortDescending);
+
+    var rows = Grid.Rows.OrderBy(t => t.Data.As<JsObject>()[pe], IsLastSortDescending);
+    Grid.DeleteAllRows();
+    foreach (var row in rows)
+        Grid.AddRow(row);
+}
+}}}
+Now all that's missing is to call the SortBy method when clicking the grid headers:
+GridDemo.htm
+{{{
+<table id="MyGrid" class="Grid">
+    <thead>
+        <tr>
+            <th onclick="SortBy(this, 'Name');">Name</th>
+            <th onclick="SortBy(this, 'Age');">Age</th>
+            <th onclick="SortBy(this, 'PhoneNumber');">Phone Number</th>
+            <th onclick="SortBy(this, 'Description');">Description</th>
+        </tr>
+    </thead>
+    <tbody style="display: none">
+        <tr id="MyGridRowTemplate">
+            <td class="CellName"></td>
+            <td class="CellAge"></td>
+            <td class="CellPhoneNumber"></td>
+            <td class="CellDescription"></td>
+        </tr>
+    </tbody>
+</table>
+}}}
+That's it, simple, straightforward, fast and highly customizable.
+
+== Optimizing the Grid ==
+Legacy browsers can slow, sometimes a simple jQuery usage can result in hard performance penalties in browsers like IE7, sometimes you have to get your hands dirty and implement optimized DOM APIs of your own. SharpKit allows me to do this easily by implementing extension methods. It makes the code easy to read and easy to maintain.
+GridExtensions.cs
+{{{
+[JsType(JsMode.Prototype, Filename = "Grid.js")]
+static class Extensions
+{
+    public static void AppendChildFast(this HtmlElement el, HtmlElement newElement, HtmlElement lastChild)
+    {
+        if (lastChild != null && SupportsInsertAdjacentElement)
+            lastChild.insertAdjacentElement("afterEnd", newElement);
+        else
+            el.appendChild(newElement);
+    }
+}
+}}}
+Now, I can use el.AppendChildFast(), as if it was a method on HtmlElement, when in fact, it's a static extension method. About this method, in old browsers like IE7, appendChild() can be very slow, since the browser iterates over all the siblings until it reaches the end in order to add the element. This method gets a pointer to the lastChild and uses insertAdjacentElement method to add the element without this overhead.
+
+== Points of Interest ==
+In conclusion, writing JavaScript code can sometimes be complicated, using SharpKit allows us to focus on writing the code, and perform refactorings and cleanups afterwards. It's also possible to add xml documentation and generate a help file to allow other developers to easily integrate your component.

@@ -1,0 +1,14 @@
+﻿=SharpKit Help Guide=
+Welcome to SharpKit!
+This wiki will give you an overview on SharpKit, and explain the different concepts you need to start using it.
+=== [Book.wiki Read the entire guide] ===
+
+Or select a topic:
+=== [SharpKit_5.wiki] ===
+=== [Integrating_SharpKit.wiki] ===
+=== [Using_SharpKit.wiki] ===
+=== [Using_Web_Libraries.wiki] ===
+=== [Applying_Metadata.wiki] ===
+=== [Writing_Native_JavaScript.wiki] ===
+=== [Building_a_Grid_Control.wiki] ===
+=== [Extending_SharpKit.wiki] ===

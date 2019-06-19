@@ -1,0 +1,142 @@
+﻿= Guidelines =
+== General ==
+This document will provide guidelines and recommended best practices when developing for the web in HTML, CSS and JavaScript.
+MyPage.htm
+{{{
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Welcome to My Site</title>
+    </head>
+    <body>
+        <button id="btnHello" onclick="btnHello_click(event);">Hello World!</button>
+    </body>
+<html>
+}}}
+MyPage.js
+{{{
+function btnHello_click(e)
+{
+    alert("Hello World!");
+}
+}}}
+Site.css
+{{{
+BODY
+{
+    font-family:Arial;
+}
+}}}
+  * HTML, JavaScript and CSS pages should be written in seperate files - do not add inline styles and scripts in your HTML
+
+== HTML ==
+HTML should be used to express a page's layout and content:
+MyPage.htm
+{{{
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Welcome to My Page</title>
+    </head>
+    <body>
+        <div class="Panel">
+            <h1>Login</h1>
+            <table>
+                <tr>
+                    <td>Username:<td>
+                    <td><input type="text" /><td>
+                </tr>
+                <tr>
+                    <td>Password:<td>
+                    <td><input type="password" /><td>
+                </tr>
+                    <tr>
+                    <td><td>
+                    <td><button id="btnLogin" onclick="btnLogin_click(event);">Login</button><td>
+                </tr>
+            </table>
+       </div>
+    </body>
+<html>
+}}}
+
+  * Use Transitional DocType
+  * Center layout using {{{<div style="width=1000px;margin:auto"></div>}}}, or {{{<TD align="center">}}}
+  * Perform layout using HTML - {{{DIV, TABLE}}} elements
+  * Avoid using {{{float:left/right/clear}}} as a layout mechanism
+  * If layout is a table, use {{{TABLE}}} element
+  * Design Html controls using a master Css class on the root of the control's element with the same name: {{{<div class="Calendar></div>}}}
+  * Html elements naming: lowercase prefix of type, then C# style name: {{{<input type="text" id="tbUsername" />}}}
+  * Event handler naming: {{{[ElementId]_[eventname]}}}: {{{<button id="btnHelp" onclick="btnHelp_click(event);">Help</button>}}}
+
+== CSS ==
+CSS are used to apply default styles to default elements: {{{H1,P,INPUT}}}, and to create new styles for controls {{{.Calendar,.TreeView,.TabControl}}}.
+Site.css
+{{{
+BODY
+{
+    margin: 0px;
+    padding: 0px;
+    font-family: Verdana;
+    font-size: 13px;
+    background-color: #052230;
+    color: #444444;
+    min-width:985px;
+}
+H1
+{
+    color: #2C7898;
+    font-size: 24px;
+    font-weight: normal;
+    border-bottom: solid 1px #D6D6D6;
+    padding-bottom: 10px;
+}
+.Panel
+{
+    width: 950px;
+    margin: auto;
+}
+}}}
+  * Apply default style to {{{BODY}}}
+  * Customize {{{H1,H2,H3,P}}} where needed
+  * Do not use multiple CSS selectors with (',') - e.g.: {{{.A,.B,.C}}}
+  * Avoid creating multiple CSS files
+  * Custom CSS style names should be like C# class names: {{{.Calendar, .TreeView}}}
+  * Create custom CSS styles only for controls {{{.Calendar}}}
+  * If your control require custom nested css class, prefix your master control name: For {{{.Calendar}}} use {{{.CalendarDay}}}
+  * For control styles - never use global selectors: {{{.Calendar TD}}}.
+  * For control styles - use nested selectors: {{{.Calendar > INPUT}}} or {{{.Calendar > .CalendarDay}}}
+
+== Static Resources ==
+{{{
+   res/
+   res/js/TextBox.js
+   res/css/TextBox.css
+   res/img/TextBoxLeft.png
+   res/lib/jquery.js
+   res/pkg/Site.js
+   res/pkg/Site.min.js
+}}}
+  * Put all static resources under a single folder named 'res'
+  * Res folder can be devided into seperate folders - js, css and img
+  * External frameworks can be put in 'res/lib' folder
+  * Consolidated files can be put in res/pkg/ folder
+
+
+== ASP.NET ==
+ASP.NET pages should be used for html pages that require inline code (html manipulation), server side logic, or HTML parts manipulation (master pages/user controls).
+  * Use only Pages, MasterPages and UserControls
+  * Do not use any other runat="server" control
+  * Delete all runat='server' when creating a new page, including head tag, delete form tag
+  * Do not use App_Themes
+  * Do not use ClientScript, ScriptManager or any other ASP.NET UI feature
+  * Put all user controls under a single folder named Templates
+  * Encapsulate entire application in a single service class, use this service from server / client pages
+{{{
+    Site.master
+    Default.aspx
+    Client/SiteServiceProxy.cs
+    Server/SiteService.cs
+    Templates/MyEditor.ascx
+    Templates/MyTree.ascx
+}}}

@@ -1,0 +1,127 @@
+﻿= Using SharpKit =
+In this chapter you will learn about the different SharpKit C# to JavaScript conversion modes. Each mode has a unique set of rules designed to help you achieve any type of JavaScript code, while remaining in a fully typed, valid C#.
+== Writing your first class ==
+To convert a class into JavaScript, all you have to do is to decorate your class with a JsType attribute. There are several modes in which SharpKit can convert C# to JavaScript, by setting the JsMode parameter on the JsType attribute. 
+Create a new class and add the following code:
+Site.cs
+{{{
+[JsType(JsMode.Global, Filename="Site.js")]
+class Site : HtmlContext
+{
+    public static void btnHello_click(HtmlDomEventArgs e)
+    {
+           document.body.appendChild(document.createTextNode("Hello SharpKit!"));
+    }
+}
+}}}
+Site.js
+{{{
+function btnHello_click(e)
+{
+    document.body.appendChild(document.createTextNode("Hello SharpKit!"));
+}
+}}}
+Site.htm
+{{{
+<html>
+    <head>
+        <script src="Site.js"></script>
+    </head>
+    <body>
+        <button onclick="btnHello_click(event);">Click me</button>
+    </body>
+</html>
+}}}
+The JsType attribute will cause SharpKit to convert the class Site into the file Site.js, you can see the js file included in the htm file.
+
+== Global Mode ==
+A class decorated with a JsType(JsMode.Global) attribute will be converted in the following rules:
+Static methods are converted to global functions (named functions)Static fields are converted to global variablesStatic constructor is converted to global code
+Global.cs 
+{{{
+[JsType(JsMode.Global, Filename="Global.js")]
+class Global
+{
+    static JsNumber MyNumber = 0;
+    static Global()
+    {
+        HelloWorld();
+    }
+    public static void HelloWorld()
+    {
+        document.body.appendChild(document.createTextNode("Hello SharpKit!"));
+    }
+}
+}}}
+Global.js 
+{{{
+var MyNumber = 0;
+HelloWorld();
+function HelloWorld()
+{
+    document.body.appendChild(document.createTextNode("Hello SharpKit!"));
+}
+}}}
+Although it seems that the C# and JavaScript code is similiar, notice that it's fully typed. Write this code in a visual studio project, and hover with your mouse over the token 'document' or 'createTextNode' and see the documentation. Any attempt to modify the code to an unexisting method will result in compilation error.
+
+== Prototype Mode ==
+A class decorated with a JsType(JsMode.Prototype) attribute will be converted in the following rules:
+Constructor is converted into a JavaScript constructor functionInstance methods are converted into prototype functionsStatic methods are converted into functions on the constructor function
+Contact.cs 
+{{{
+[JsType(JsMode.Prototype, Filename="Contact.js")]
+class Contact
+{
+    public void Call()
+    {
+    }
+    public static Contact Load()
+    {
+         return null;
+    }
+}
+}}}
+Contact.js
+{{{
+Contact = function()
+{
+}
+Contact.prototype.Call = function()
+{
+}
+Contact.Load = function()
+{
+    return null;
+}
+}}}
+
+== Json Mode ==
+A class decorated with a JsType(JsMode.Json) attribute will not be exported at all, it will give you the ability to use JSON notation on typed classes.
+MyOptions.cs 
+{{{
+[JsType(JsMode.Json)]
+class MyOptions
+{
+    public JsString Name { get; set; }
+    public bool IsCool { get; set; }
+}
+}}}
+MyPage.cs
+{{{
+[JsType(JsMode.Global, Filename="MyPage.js")]
+class MyPage
+{
+    public static void Main()
+    {
+        var options = new MyOptions { Name="MyName", IsCool=true };
+    }
+}
+}}}
+MyPage.js 
+{{{
+function Main()
+{
+    var options = {Name:"MyName", IsCool:true};
+}
+}}}
+This technique is very useful on constructor Options class, for example, jQuery.ajax(options) function. It also gives you the ability to share web service data contracts between client and server. Simply mark your data contract classes with the JsType(JsMode.Json) and you'll be able to use them in a C# to JavaScript context.

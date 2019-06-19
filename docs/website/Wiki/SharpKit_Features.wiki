@@ -1,0 +1,63 @@
+﻿= SharpKit Features =
+== Supported C# 4 Features ==
+  * Classes
+  * Interfaces
+  * Delegates
+  * Generics
+  * Enums
+  * Methods
+  * Properties
+  * Fields
+  * Events
+  * Method overloading
+  * Extension methods
+  * Optional parameters
+  * Named parameters
+  * Inheritance
+  * Polymorphism
+  * Object initializers
+  * Collection initializers
+  * Array initializers
+  * Enumerators, enumerables, foreach syntax
+  * Lambda expressions
+  * LINQ
+  * Anonymous Objects
+
+=== C# 4 Features that are not Supported: ===
+You can still use those in your project, but not in client side code.
+  * ref and out parameters
+  * Operator overloading (in progress)
+  * Expression Trees
+  * Explicit interface implementations
+
+== Supported C# to JavaScript Features ==
+  * Global mode
+  * Prototype mode
+  * Json mode
+  * Clr mode
+  * ExtJs mode
+
+== JavaScript Features ==
+
+
+== JavaScript Export Features ==
+  * JavaScript and CSS code minification
+  * JavaScript and CSS file consolidation
+  * Custom order of classes in files
+  * Native js array enumerator: foreach() -> for()
+  * Native js object enumerator: foreach() -> for..in
+
+== JsClr Supported Features ==
+  * Classes, Interfaces, Events, Properties and Fields
+  * Standard Json export, can be interpreted by any runtime compiler
+  * No dependency between js files, order of included js files is not important
+  * Js runtime compiler
+  * Inheritance and polymorphism
+  * Reflection
+  * DateTime
+  * Exceptions
+  * EventArgs
+  * StringBuilder
+  * LINQ
+  * System.IO.Path
+  * 

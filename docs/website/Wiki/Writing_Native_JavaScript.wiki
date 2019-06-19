@@ -1,0 +1,54 @@
+﻿= Writing Native JavaScript =
+SharpKit allows you to write native JavaScript code, just as if you've written it yourself. Although C# and JavaScript share many similarities, there are differences as well. This section will explain you how to bridge the gap between the two worlds, and allow you to enjoy the freedom of JavaScript, while retaining the type-checking and validity of C#.
+== Primitive types ==
+Every JavaScript primitive type has an equivalent C# type. In order to avoid ambiguity with native C# types, a "Js" prefix is added to each JavaScript primitive type. For example the String object is named JsString in C#, Number is named JsNumber and so on...
+Although a class is named JsString in C#, when it is converted to JavaScript, it will be written as String. This is achieved by using the JsTypeAttribute.Name property: 
+JsString.cs 
+{{{
+[JsType(JsMode.Prototype, Name="String", Export=false)]
+public class JsString
+{
+}
+}}}
+  * JsObject
+  * JsArray
+  * JsString
+  * JsNumber
+  * JsDate
+
+== Keywords ==
+All of JavaScript keywords are located in a single class called JsContext, you can either call the methods on it by qualifying them with the class name, e.g.: JsContext.@typeof(obj); Or, you can simply inherit from the JsContext class and use the methods directly without any prefix.
+The verbatim (@) literal is used in C# to disambiguate between reserved C# keywords and other member / variable names. The 'typeof' method for example is a keyword in C#, so in order to disamibuate it with the JavaScript 'typeof' function, the verbatim (@) literal is needed.
+  * @this
+  * @typeof
+  * @return
+  * arguments
+  * eval
+  * delete
+  * instanceof
+
+== Casting between Types ==
+The As<T>() extension method, located in the SharpKit.JavaScript namespace, helps you to cast from one type to another without affecting the generated JavaScript code. for example:
+MyPage.cs 
+{{{
+using SharpKit.JavaScript;
+using SharpKit.Html;
+
+[JsType(JsMode.Global, Filename="MyPage.js")]
+class MyPage : HtmlContext
+{
+    public static void Main()
+    {
+        var input = document.getElementById("input1").As<HtmlInputElement>();
+        input.value = "MyValue";
+    }
+}
+}}}
+MyPage.js 
+{{{
+function Main()
+{
+    var input = document.getElementById("input1");
+    input.value = "MyValue";
+}
+}}}

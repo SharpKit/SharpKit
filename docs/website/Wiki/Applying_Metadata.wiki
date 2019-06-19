@@ -1,0 +1,69 @@
+﻿= Applying Metadata =
+SharpKit uses Custom Attributes to control and customize JavaScript code generation behavior. These attributes are located in the SharpKit.JavaScript namespace, every type and member in C# has its own attribute, like: JsTypeAttribute, JsMethodAttribute, JsPropertyAttribute and JsFieldAttribute. Attributes can be applied directly on a type / member like this:
+Grid.cs
+{{{
+[JsType(JsMode.Prototype)]
+public class Grid
+{
+    [JsMethod(Name="render")]
+    public void Render()
+    {
+    }
+    [JsProperty(Name="element")]
+    public HtmlElement Element { get;set; }
+}
+}}}
+Grid.js
+{{{
+Grid = function()
+{
+}
+Grid.prototype.render = function()
+{
+}
+}}}
+
+Attributes can also be applied externally, on types / members within a project, or even on external referenced types:
+AssemblyInfo.cs
+{{{
+[assembly: JsType  (TargetType = typeof(Grid),   Mode=JsMode.Prototype)]
+[assembly: JsMethod(TargetType = typeof(Grid),   TargetMethod="Render",      Name = "render")]
+[assembly: JsMethod(TargetType = typeof(string), TargetMethod = "Substring", Name = "substr", NativeOverloads = true)]
+}}}
+In the example above we can see that it is possible to mark external types such as System.String, and allow SharpKit to generate proper code when it is used. In this case, if anyone uses the Substring() method, it will be generated as substr() in JavaScript.
+== JsTypeAttribute ==
+JsTypeAttribute is the most basic and important attribute in SharpKit, it marks any type that should be exported to JavaScript in an "opt-in" style, just like DataMemberAttribute in WCF. JsTypeAttribute has many options that control code generation behavior, but in order to make things more simple, we have created 4 templates, or, modes, in which all options are set to a default value according to popular usage types. So, setting a JsType to Prototype mode:
+Tree.cs
+{{{
+[JsType(JsMode.Prototype)]
+public class Tree
+{
+}
+}}}
+Is the equivalent of setting all of these flags: 
+Tree.cs
+{{{
+[JsType(Native                        = true,
+        NativeOverloads               = true,
+        NativeDelegates               = true,
+        AutomaticPropertiesAsFields   = true,
+        NativeConstructors            = true,
+        NativeEnumerator              = true,
+        NativeFunctions               = true,
+        NativeJsons                   = true,
+        IgnoreGenericTypeArguments    = true,
+        IgnoreGenericMethodArguments  = true,
+        InlineFields                  = true)]
+public class Tree
+{
+}
+}}}
+Available modes are: Global, Prototype, Json and Clr. You can read more about these modes [Using_SharpKit.wiki here].
+== Performing Optimizations ==
+There are two very popular techniques for optimizing JavaScript and CSS files - consolidation and minification. The JsMergedFileAttribute allows you to do both:
+AssemblyInfo.cs
+{{{
+[assembly: JsMergedFile(Filename="MySite.js",     Sources = new string[] { "jQuery.js", "MyPage1.js", "MyPage2.js" })]
+[assembly: JsMergedFile(Filename="MySite.min.js", Sources = new string[] { "MySite.js" }, Minify = true)]
+}}}
+In this code example, a consolidated file named MySite.js will be created, containing all code from jQuery.js, MyPage1.js and MyPage2.js files. The second attribute, takes the previously consolidated file MySite.js, and generates a minified version of it in MySite.min.js. The same rules apply to css files, if the file extension is '.css' the file will be minified in CSS rules minification algorithm.

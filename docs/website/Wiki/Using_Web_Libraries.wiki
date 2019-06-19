@@ -1,0 +1,87 @@
+﻿= Using Web Libraries with SharpKit =
+SharpKit supports any JavaScript based library, in order to use a library with SharpKit, you must obtain a C# 'header' file of the library. A C# header file contains all the classes and methods that a certain library offers. The methods in this file have no implementation, and are not converted into JavaScript, they simply give you the ability use them from C#. You can use these files by adding them to your project, or by referencing compiled assembly version of them.
+To make things easy, we have created a googlecode project called SharpKit SDK, which contains open-source C# header files for all popular web libraries such as: jQuery, ASP.NET Ajax, ExtJS, jQTouch and more... These libraries are maintained by us and by members of the SharpKit community, if you'd like to contribute, let us know. You should know that all of these libraries are also included in the SharpKit installer, and are available on your SharpKit Program Files folder. 
+
+== Using jQuery ==
+In order to use jQuery, you'll need to add a reference to SharpKit.jQuery assembly, or include the SharpKit.jQuery cs file in your project. There's a header file and an assembly for each version of jQuery. You'll also have to add jQuery js file to pages that use it.
+HelloWorld.htm 
+{{{
+<html>
+    <head>
+        <title>Hello World</title>
+        <script src="res/jquery-1.4.4.min.js" type="text/javascript"></script>
+        <script src="res/HelloWorld.js" type="text/javascript"></script>
+        <script>            $(HelloWorldClient_Load);</script>
+    </head>
+    <body>
+        <button>Click me</button>
+    </body>
+</html>
+}}}
+HelloWorld.cs 
+{{{
+using SharpKit.JavaScript;
+using SharpKit.Html;
+using SharpKit.jQuery;
+
+namespace SharpKitWebApp
+{
+    [JsType(JsMode.Global, Filename = "~/res/HelloWorld.js")]
+    public class HelloWorldClient : jQueryContext
+    {
+        static void HelloWorldClient_Load()
+        {
+            //J() is instead of $() which is not allowed in C#
+            J("button").click(e => alert("Hello world"));
+        }
+    }
+}
+}}}
+HelloWorld.js 
+{{{
+function HelloWorld_Load()
+{
+    $("button").click(function(e){ return alert("Hello world")});
+}
+}}}
+
+== Writing your own Header Files ==
+There are situations in which you will have to write your own header files, this happens in two common scenarios:
+  * You use a custom library that is not available in SharpKit SDK
+  * You haven't converted all of your current JavaScript code into C#, but you still need to use this code from C#.
+In order to create a header file, all you have to do is to create empty implementation of the needed classes and members, decorate them with a JsTypeAttribute in the proper mode, and prevent these classes of being exported.
+To prevent C# class with JsTypeAttribute from being exported into JavaScript, use the JsTypeAttribute.Export property. 
+MyExternalLib.cs 
+{{{
+[JsType(JsMode.Prototype, Name="MyExternalLibrary", Export=false)]
+class MyExternalLibrary
+{
+    public static void DoSomething(){}
+}
+[JsType(JsMode.Global, Export=false)]
+class MyExternalFunctions
+{
+    public static void DoSomethingElse(){}
+}
+}}}
+MyPage.cs
+{{{
+[JsType(JsMode.Global, Filename="MyPage.js")]
+class MyPage
+{
+    public static void Main()
+    {
+        MyExternalLibrary.DoSomething();
+        MyExternalFunctions.DoSomethingElse();
+    }
+}
+}}}
+MyPage.js
+{{{
+function Main()
+{
+    MyExternalLibrary.DoSomething();
+    DoSomethingElse();
+}
+}}}
+Please note that the JsTypeAttribute.Mode and Name properties are very important, even if you're not exporting this code. These attributes are used by SharpKit compiler to generate the proper code when you refer to these classes. The JsType(Name="MyExternalLibrary") is very important, since it tells SharpKit to ignore this type's namespace and name, and use the specified name instead.

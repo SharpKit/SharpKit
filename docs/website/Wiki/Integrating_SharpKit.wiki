@@ -1,0 +1,43 @@
+﻿= Integrating SharpKit =
+This chapter will explain how to start using SharpKit in new or existing projects, SharpKit easily integrates into any project type, whether it's a web application, class library or even console application.
+
+== Creating a new project with SharpKit ==
+  * Open Visual Studio
+  * Click File -> New Project
+  * Select Visual C# -> SharpKit -> SharpKit Web Application and click Ok.
+SharpKit enabled ASP.NET web application will be created with an aspx page, and a C# code-behind with a class that is converted to JavaScript during compilation. 
+
+== Integrating SharpKit into an existing project ==
+Add the following line on your .csproj file: (add it right after all 'Import' sections in your project file)
+WebApp.csproj
+{{{
+<!--This line is in any .csproj file: -->
+<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+<!--Add this line after all Import sections: -->
+<Import Project="$(MSBuildBinPath)\SharpKit\5\SharpKit.Build.targets" />
+}}}
+Add the following references into your project:
+  * SharpKit.JavaScript.dll (you must add this reference)
+  * SharpKit.Html.dll
+SharpKit supports any C# type project, including web, console (.exe) and class library (.dll) project types.
+
+== Upgrading from SharpKit v2 to SharpKit v5 ==
+Edit your .csproj file, replace the SharpKit v2 import line, with the SharpKit v4 import line:
+WebApp.csproj
+{{{
+<!--Replace this line:-->
+<Import Project="$(MSBuildBinPath)\SharpKit\SharpKit.Build.targets" />
+<!--With this line:-->
+<Import Project="$(MSBuildBinPath)\SharpKit\5\SharpKit.Build.targets" />
+}}}
+Update assembly references, make sure to update SharpKit.JavaScript.dll, never reference both assemblies. SharpKit v4 assemblies are located in your Program Files\SharpKit\4\ folder.
+
+== Upgrading from SharpKit v4 to SharpKit v5 ==
+Edit your .csproj file, replace the SharpKit v4 import line, with the SharpKit v5 import line:
+WebApp.csproj
+{{{
+<!--Replace this line:-->
+<Import Project="$(MSBuildBinPath)\SharpKit\4\SharpKit.Build.targets" />
+<!--With this line:-->
+<Import Project="$(MSBuildBinPath)\SharpKit\5\SharpKit.Build.targets" />
+}}}

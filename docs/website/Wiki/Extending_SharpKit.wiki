@@ -1,0 +1,61 @@
+﻿= Extending SharpKit =
+SharpKit is an extensible compiler, with plugin support, this means that it is possible to implement a plugin and add new features.
+Compiler plugins can add and customize C# and JavaScript code, or even support conversion to a different target language.
+
+== Writing your first plugin ==
+In order to write a plugin, follow these steps:
+  * Create a new .NET 4 library project (dll)
+  * Add a refernece to skc5.exe (found in C:\Windows\Microsoft.NET\Framework\v4.0.30319\SharpKit\5\)
+  * Add the following code:
+
+MyPlugin.cs
+{{{
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using SharpKit.Compiler;
+
+namespace MySharpKitPlugin
+{
+    public class MyPlugin : ICompilerPlugin
+    {
+        public ICompiler Compiler { get; set; }
+        public void Init(ICompiler compiler)
+        {
+            Compiler = compiler;
+            Compiler.AfterParseCs += new Action(Compiler_AfterParseCs);
+            Compiler.BeforeSaveJsFiles += new Action(Compiler_BeforeSaveJsFiles);
+        }
+
+        void Compiler_AfterParseCs()
+        {
+            Console.WriteLine("MyPlugin: AfterParseCs: Hello");
+        }
+
+        void Compiler_BeforeSaveJsFiles()
+        {
+            Console.WriteLine("MyPlugin: BeforeSaveJsFiles: Hello again");
+        }
+
+
+    }
+}
+}}}
+  * Compile your plugin
+  * Copy the output dll file into the skc5.exe directory (create a post-build event for easier updates)
+
+Create a test project for your plugin:
+  * Create a new SharpKit 5 Web Application Project named MySharpKitPluginTest
+  * Install the plugin by editing the .csproj file, and add an ItemGroup element with your plugin fully qualified type name:
+MySharpKitPluginTest.csproj
+{{{
+  <ItemGroup>
+    <SkcPlugin Include="MySharpKitPlugin.MyPlugin, MySharpKitPlugin"><InProject>false</InProject></SkcPlugin>
+  </ItemGroup>
+}}}
+  * Reload your test project 
+  * Build your test project
+  * Look at the build output and verify that your plugin was loaded, and that the "Hello" output is written.
+
+You can use the 'Compiler' object to read and modify the C# and JavaScript in-memory model. In order to use the C# model, you'll need to add a reference to NRefactory assemblies as well.

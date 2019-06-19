@@ -1,0 +1,76 @@
+﻿= SharpKit 5 =
+== What's New ==
+  * C# debugging support in Google Chrome! (See instructions below)
+  * Brand new mono-based C# code and assembly parser ([http://wiki.sharpdevelop.net/NRefactory.ashx NRefactory] and [http://www.mono-project.com/Cecil Cecil])
+  * Basic yield support - using eager list addition (not using state machine yet)
+  * Automatic inlining of compile-time values - consts, string concatenations, etc...
+  * C# style params array support
+  * Parallel execution
+
+== Getting Started ==
+Create a new project by opening Visual Studio and create a new "SharpKit 5 Web Application" project.
+
+== Service Mode ==
+SharpKit can now run as a local HTTP service, inside a windows service container, or in console mode. You can find the windows service by running "services.msc" and finding a service named SharpKit. If this service is stopped, SharpKit will revert to command line execution mode.
+To start and stop the SharpKit Windows Service:
+Run: services.msc
+Find the service, click start / stop.
+It is also possible to run the service manually in console mode using the following command:
+{{{
+skc5.exe /service:console
+}}}
+SharpKit is hosted on port 7667 by default, it is possible to execute GET command on it, with the same command line arguments format:
+[http://localhost:7667/Compile?CommandLineArgs=/why]
+Any command line argument can be set in the CommandLineArgs query string parameter, this specific command may help you debug license validation issues.
+
+
+== Debugging ==
+Debugging of C# code from within the browser is currently supported in Google Chrome only.
+A demo of debugging is available in our open-source SVN repository, named: SharpKitSourceMappingSample
+[http://code.google.com/p/sharpkit/source/checkout]
+
+To enable debugging of C# code, please follow these steps:
+  * In your AssemblyInfo.cs file, add the following code:
+{{{
+[JsExport(GenerateSourceMaps = true)]
+}}}
+  * Add a reference to SharpKit.Web assembly (found in .NET references dialog, or in the SharpKit program files folder)
+  * Add the SourceMaps handler in your web.config file:
+{{{
+<add name="SourceMapsHandler" type="SharpKit.Web.Server.Handlers.SourceMapsHandler, SharpKit.Web" verb="*" path="SourceMaps.ashx" />
+}}}
+  * Enable source maps in chrome: show development bar, click options wheel, check enable source maps.
+  * Build your project
+  * View in Google Chrome browser
+  * Debug!
+
+== Upgrading from SharpKit v4 to SharpKit v5 ==
+Upgrading from SharpKit v4 to v5 is very simple, and can be easily reverted back. 
+Before upgrading, check-in / commit your code, after upgrade, build your project and compare your newly generated js files with your previous ones.
+
+Edit your .csproj file, replace the SharpKit v4 import line, with the SharpKit v5 import line:
+WebApp.csproj 
+{{{
+<!--Replace this line:-->
+<Import Project="$(MSBuildBinPath)\SharpKit\4\SharpKit.Build.targets" />
+<!--With this line:-->
+<Import Project="$(MSBuildBinPath)\SharpKit\5\SharpKit.Build.targets" />
+}}}
+
+== Troubleshooting ==
+
+=== Parallel Execution ===
+Parallel execution can be disabled in skc5.exe.config file, set appSettings "Parallel" to "false".
+
+=== License Validation Issues ===
+If you're running an activated version of SharpKit, but still getting license errors, run the following:
+{{{
+skc5.exe /why
+}}}
+Since SharpKit runs as a different user when in windows service, it's best to run it as an HTTP request while the service is running:
+[http://localhost:7667/Compile?CommandLineArgs=/why]
+Check the filename of the license, if it doesn't exist, run the /why in command line, and copy the file there.
+
+
+== Support ==
+If you run into any issues using SharpKit 5, please [mailto:support@sharpkit.net email us] or post in our [https://groups.google.com/forum/?fromgroups#!forum/sharpkit forum].

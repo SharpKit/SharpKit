@@ -1,0 +1,15 @@
+name: Tests
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build-windows:
+    name: Windows Test
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@master
+        with:
+          submodules: recursive
+          lfs: true
+      - name: Build
+        run: "./make.cmd"

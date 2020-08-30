@@ -20,7 +20,7 @@
 	ignore = dirty
 [submodule "external/AjaxMin"]
 	path = external/AjaxMin
-	url = https://github.com/danelkhen/AjaxMin.git
+	url = https://github.com/SharpKit/AjaxMin.git
 	ignore = dirty
 [submodule "external/octokit.net"]
 	path = external/octokit.net

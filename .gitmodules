@@ -4,7 +4,7 @@
 	ignore = dirty
 [submodule "external/corex"]
 	path = external/corex
-	url = https://github.com/danelkhen/corex.git
+	url = https://github.com/SharpKit/corex.git
 	ignore = dirty
 [submodule "external/cecil"]
 	path = external/cecil

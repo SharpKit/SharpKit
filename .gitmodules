@@ -1,6 +1,6 @@
 [submodule "external/NRefactory"]
 	path = external/NRefactory
-	url = https://github.com/danelkhen/NRefactory.git
+	url = https://github.com/SharpKit/NRefactory.git
 	ignore = dirty
 [submodule "external/corex"]
 	path = external/corex

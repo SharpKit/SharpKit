@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web.Script.Serialization;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace SharpKit.Compiler.SourceMapping
 {
@@ -43,7 +44,7 @@ namespace SharpKit.Compiler.SourceMapping
         {
             if (mappings == null)
                 GenerateMappings();
-            var s = new JavaScriptSerializer().Serialize(this);
+            var s = JsonSerializer.Serialize(this);
             File.WriteAllText(filename, s);
         }
         public int version { get; set; }
@@ -53,13 +54,12 @@ namespace SharpKit.Compiler.SourceMapping
         public List<string> sources { get; set; }
         public List<string> names { get; set; }
         public string mappings { get; set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         public List<List<SourceMappingV3Item>> ParsedMappings { get; set; }
 
         public static SourceMappingV3Document Load(string filename)
         {
-            var ser = new JavaScriptSerializer();
-            var doc = ser.Deserialize<SourceMappingV3Document>(File.ReadAllText(filename));
+            var doc = JsonSerializer.Deserialize<SourceMappingV3Document>(File.ReadAllText(filename));
             doc.ParseMappings();
             return doc;
         }

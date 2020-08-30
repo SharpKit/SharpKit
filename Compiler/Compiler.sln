@@ -1,17 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skc5", "skc5\skc5.csproj", "{6307BDF9-19E4-4925-99DC-29773D8F0AF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "skc5", "skc5\skc5.csproj", "{6307BDF9-19E4-4925-99DC-29773D8F0AF1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Tasks", "CSharp.Tasks\CSharp.Tasks.csproj", "{4D31FC05-54E2-48F7-9DEF-4FDB2179A872}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NRefactory", "NRefactory", "{E09479B2-B122-4FD9-B68E-8A863AC2587D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mono.Cecil", "..\external\cecil\Mono.Cecil.csproj", "{A305E28E-36BE-4E4D-9141-EFE5515506F9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSharpCode.NRefactory", "..\external\NRefactory\ICSharpCode.NRefactory\ICSharpCode.NRefactory.csproj", "{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSharpCode.NRefactory.CSharp", "..\external\NRefactory\ICSharpCode.NRefactory.CSharp\ICSharpCode.NRefactory.CSharp.csproj", "{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSharpCode.NRefactory.Cecil", "..\external\NRefactory\ICSharpCode.NRefactory.Cecil\ICSharpCode.NRefactory.Cecil.csproj", "{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -41,8 +47,69 @@ Global
 		{4D31FC05-54E2-48F7-9DEF-4FDB2179A872}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4D31FC05-54E2-48F7-9DEF-4FDB2179A872}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4D31FC05-54E2-48F7-9DEF-4FDB2179A872}.Release|x86.ActiveCfg = Release|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9}.Release|x86.Build.0 = Release|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Debug|x86.Build.0 = Debug|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Release|x86.ActiveCfg = Release|Any CPU
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9}.Release|x86.Build.0 = Release|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Debug|x86.Build.0 = Debug|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Release|Any CPU.Build.0 = Release|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Release|x86.ActiveCfg = Release|Any CPU
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563}.Release|x86.Build.0 = Release|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Debug|x86.Build.0 = Debug|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Release|x86.ActiveCfg = Release|Any CPU
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A305E28E-36BE-4E4D-9141-EFE5515506F9} = {E09479B2-B122-4FD9-B68E-8A863AC2587D}
+		{9C9FDE34-87E5-4257-A01C-FDA80EFC71D9} = {E09479B2-B122-4FD9-B68E-8A863AC2587D}
+		{880778E7-07E2-4F6C-A0A6-C7D6BAEAB563} = {E09479B2-B122-4FD9-B68E-8A863AC2587D}
+		{9FD870BF-C9EA-4D63-A180-1EB7EFD5E659} = {E09479B2-B122-4FD9-B68E-8A863AC2587D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0E115D7-0217-43FA-ACB0-82407F484C24}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

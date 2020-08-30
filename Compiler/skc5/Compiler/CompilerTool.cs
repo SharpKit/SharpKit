@@ -918,7 +918,7 @@ namespace SharpKit.Compiler
                     EmbeddedResourceFiles.Add(att.Filename);
                     var resName = att.ResourceName ?? att.Filename;
                     Log.WriteLine("Embedding {0} -> {1}", att.Filename, resName);
-                    var res = new EmbeddedResource(resName, ManifestResourceAttributes.Public, File.ReadAllBytes(att.Filename));
+                    var res = new EmbeddedResource(resName, Mono.Cecil.ManifestResourceAttributes.Public, File.ReadAllBytes(att.Filename));
                     var res2 = asm.Resources.Where(t => t.Name == res.Name).OfType<EmbeddedResource>().FirstOrDefault();
                     if (res2 == null)
                     {

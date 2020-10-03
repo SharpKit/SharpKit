@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Build.Utilities;
-using Microsoft.Build.Tasks;
-using System.IO;
+﻿
 using Microsoft.Build.Framework;
-using System.Diagnostics;
+using Microsoft.CodeAnalysis.BuildTasks;
+using System;
 using System.Globalization;
-using System.Collections.Specialized;
-using System.Collections;
-//using SharpKit.Build.Tasks.CsbService.Client;
-using System.Configuration;
-using System.ServiceProcess;
-//using System.ServiceModel.Configuration;
-//using System.ServiceModel;
+using System.IO;
+using System.Text;
 
 namespace SharpKit.Build.Tools
 {
@@ -25,10 +15,8 @@ namespace SharpKit.Build.Tools
         {
         }
 
-        protected override string GenerateFullPathToTool()
-        {
-            return Path.Combine(ToolPath, ToolExe);
-        }
+        protected override string ToolNameWithoutExtension => "skc";
+
         private static bool IsLegalIdentifier(string identifier)
         {
             if (identifier.Length == 0)
@@ -263,14 +251,6 @@ namespace SharpKit.Build.Tools
         {
             return base.CallHostObjectToExecute();
         }
-        protected override string ToolName
-        {
-            get
-            {
-                return "skc.exe";
-            }
-        }
-
 
     }
 

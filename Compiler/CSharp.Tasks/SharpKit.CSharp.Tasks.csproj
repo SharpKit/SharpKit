@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<ReferencePath>$(MSBuildProjectDirectory)..\..\lib\</ReferencePath>
+		<OutputPath>bin</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AssemblyVersion>5.5.0</AssemblyVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<Folder Include="Properties\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.CodeAnalysis.Build.Tasks" Version="3.8.0-1.20330.5" />
+	</ItemGroup>
+
+</Project>
+
+

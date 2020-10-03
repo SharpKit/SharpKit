@@ -1,4 +1,4 @@
-SharpKit:
+SharpKit
 ========
 
 C# to JavaScript Compiler
@@ -8,15 +8,15 @@ This repository contains the complete, fully functional source code for SharpKit
 Library definitions, JsClr framework and other useful libraries is at:
 https://github.com/SharpKit/SharpKit-SDK
 
-##### Contributing:
+##### Contributing
 Maybe you see there are less commits recently. But you can belive us, sharpkit is still activly used in lots of projects. If you want to contribute, feel free to send us a patch of request a project membership.
 
 Most important Task: Every help in replacing NRefactory with Roslyn is very welcome.
 
-##### Documentation:
+##### Documentation
 Link: https://sharpkit.github.io/
 
-##### Building:
+##### Building
 An installer is available here: https://github.com/SharpKit/SharpKit/releases, to build from source code follow this:
 
 ###### for Windows

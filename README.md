@@ -19,7 +19,7 @@ Link: https://sharpkit.github.io/
 ##### Building
 An installer is available here: https://github.com/SharpKit/SharpKit/releases, to build from source code follow this:
 
-###### for Windows
+###### Windows
 ```
 git clone https://github.com/SharpKit/SharpKit.git
 cd SharpKit
@@ -32,7 +32,7 @@ This will build a debug version, to build a release version, please use:
 make release
 ```
 
-###### for Linux
+###### Linux
 ```
 git clone https://github.com/SharpKit/SharpKit.git
 cd SharpKit

@@ -9,10 +9,16 @@ using System.Text;
 namespace SharpKit.Build.Tools
 {
 
-    public class Skc : ManagedCompiler
+    public class Skc : Csc
     {
         public Skc()
         {
+            Trace("Init");
+        }
+
+        private void Trace(string message)
+        {
+            Console.WriteLine("###############################: " + message);
         }
 
         protected override string ToolNameWithoutExtension => "skc";

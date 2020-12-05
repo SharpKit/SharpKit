@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "skc5", "skc5\skc5.csproj", "{6307BDF9-19E4-4925-99DC-29773D8F0AF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Tasks", "CSharp.Tasks\CSharp.Tasks.csproj", "{4D31FC05-54E2-48F7-9DEF-4FDB2179A872}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Tasks", "CSharp.Tasks\SharpKit.CSharp.Tasks.csproj", "{4D31FC05-54E2-48F7-9DEF-4FDB2179A872}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NRefactory", "NRefactory", "{E09479B2-B122-4FD9-B68E-8A863AC2587D}"
 EndProject

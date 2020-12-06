@@ -3,11 +3,11 @@
 
 IF not "%1" == "release" (
 
-dotnet msbuild skc5.csproj
+dotnet build
 
 ) ELSE (
 
-dotnet msbuild skc5.csproj /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None
+dotnet build /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None
 
 )
 

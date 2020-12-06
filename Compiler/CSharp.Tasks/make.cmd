@@ -3,11 +3,11 @@
 
 IF not "%1" == "release" (
 
-%msbuild% CSharp.Tasks.csproj
+dotnet build
 
 ) ELSE (
 
-%msbuild% /p:Configuration=Release CSharp.Tasks.csproj
+dotnet build /p:Configuration=Release CSharp.Tasks.csproj
 
 )
 

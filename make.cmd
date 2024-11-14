@@ -3,11 +3,11 @@ cd /D %~dp0
 call scripts/set-variables
 
 cd external
-call make %1
+call build.ps1 %1
 cd ..
 
 cd Compiler
-call make %1
+call build.ps1 %1
 cd ..
 
 cd SDK

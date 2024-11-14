@@ -8,7 +8,7 @@
 	ignore = dirty
 [submodule "external/cecil"]
 	path = external/cecil
-	url = https://github.com/jbevain/cecil
+	url = https://github.com/SharpKit/cecil
 	ignore = dirty
 [submodule "SDK"]
 	path = SDK

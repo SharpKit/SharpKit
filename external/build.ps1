@@ -6,6 +6,7 @@ Set-Location -Path (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 if ($IsLinux) {
 
     nuget restore corex/corex.sln
+    nuget restore AjaxMin/AjaxMinDll/AjaxMinDll.sln
 
     if ($args[0] -ne "release") {
         msbuild cecil/Mono.Cecil.csproj                         -p:Configuration=net_4_0_Release -verbosity:minimal
@@ -26,6 +27,7 @@ if ($IsLinux) {
 
 } else {
 
+    nuget restore corex/corex.sln
     nuget restore AjaxMin/AjaxMinDll/AjaxMinDll.sln
 
     if ($args[0] -ne "release") {
